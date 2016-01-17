@@ -24,6 +24,8 @@ class Clanpress_Form {
    *     The form element's id as defined by wordpress.
    *   - field_name:
    *     The form element's name as defined by wordpress.
+   *   - pattern: (optional)
+   *     Will be used for validation if defined. Should contain a valid regex.
    *   - label: (optional)
    *     Will create a label element with the given value as the content
    *     above the actual form element.
