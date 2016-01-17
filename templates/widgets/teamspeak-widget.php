@@ -10,7 +10,7 @@
       <?php if ($online): ?>
         <?php echo __( 'Online', 'clanpress' ); ?>
       <?php else: ?>
-        <?php echo __( 'Not online', 'clanpress' ); ?>
+        <?php echo __( 'Offline', 'clanpress' ); ?>
       <?php endif; ?>
     </div>
   <?php endif; ?>

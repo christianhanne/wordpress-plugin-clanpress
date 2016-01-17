@@ -5,6 +5,8 @@
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
+ *
+ * @link https://www.planetteamspeak.com/rest-api/
  */
 
 /**
@@ -14,7 +16,7 @@ class Clanpress_Teamspeak_Widget extends Clanpress_Widget {
   /**
    * TODO
    */
-  const TEAMSPEAK_API = 'http://api.planetteamspeak.com/serverstatus/';
+  const TEAMSPEAK_API = 'https://api.planetteamspeak.com/serverstatus/';
 
   /**
    * @inheritdoc
