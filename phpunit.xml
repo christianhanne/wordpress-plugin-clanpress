@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+  colors="true"
+  bootstrap="tests/bootstrap.php"
+  stopOnError="false"
+  stopOnFailure="false"
+  stopOnIncomplete="false"
+  stopOnSkipped="false"
+  stopOnRisky="false">
+  <testsuites>
+    <testsuite name="Widgets Test Suite">
+      <directory suffix="test.php">tests/</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <whitelist>
+      <directory>./classes</directory>
+      <directory>./post-types</directory>
+      <directory>./widgets</directory>
+    </whitelist>
+  </filter>
+  <logging>
+    <log type="coverage-html"
+      target="coverage/phpunit"
+      lowUpperBound="35"
+      highLowerBound="70" />
+  </logging>
+</phpunit>
