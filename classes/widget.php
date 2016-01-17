@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * TODO
+ * Contains the parent class of the plugin's custom widgets.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
@@ -11,9 +11,8 @@
  * @class Clanpress_Widget
  */
 class Clanpress_Widget extends WP_Widget {
-
   /**
-   * TODO
+   * Registers the custom plugin using the classes' id, name and description.
    */
   public function __construct() {
     parent::__construct( $this->id(), $this->name(), array(
@@ -93,10 +92,15 @@ class Clanpress_Widget extends WP_Widget {
   }
 
   /**
-   * TODO
+   * Returns an array of form elements.
+   *
+   * Should return an array of form elements for widget forms. The array
+   * should consist of the form element ids as key and the element settings
+   * as values. For details on element settings check the linked function.
    *
    * @return array
-   *   TODO
+   *   Array of form elements for widget forms.
+   *   Eg. array('title' => $element, 'num_items' => $element)
    *
    * @see Clanpress_Form::element()
    */
@@ -105,44 +109,63 @@ class Clanpress_Widget extends WP_Widget {
   }
 
   /**
-   * TODO
+   * Returns an array of template elements.
+   *
+   * Should return an associative array of template elements/variables. Every
+   * element in the array will be available in the widget's template through
+   * a variable with the same name as the array key.
    *
    * @param array $instance
+   *   Previously saved values from database.
    *
    * @return array
-   *   TODO
+   *   Array of template elements
    */
   protected function template_elements($instance = array()) {
     return array();
   }
 
   /**
-   * TODO
+   * Returns the widget's human-readable name.
+   *
+   * @return string
+   *   Name of the widget
    */
   protected function name() {
     return __( 'No name found.', 'clanpress' );
   }
 
   /**
-   * TODO
+  * Returns a description for the custom widget.
+  *
+  * @return string
+  *   Description of the widget
    */
   protected function description() {
     return __( 'No description found.', 'clanpress' );
   }
 
   /**
-   * TODO
+   * Returns the filename of the template of the custom widget.
+   *
+   * @return string
+   *   Filename of the widget's template
    */
-  private function template_name() {
+  final private function template_name() {
     $search = array( '_', 'clanpress-' );
     $replace = array( '-', '' );
     return str_replace( $search, $replace,  $this->id() ) . '.php';
   }
 
   /**
-   * TODO
+   * Loads the widget's template either from the theme or from the plugin.
+   *
+   * @param array $params
+   *   Array of template elements
+   *
+   * @see Clanpress_Widget::template_elements()
    */
-  private function load_template($params = array()) {
+  final private function load_template($params = array()) {
     foreach ($params as $key => $value) {
       set_query_var( $key, $value );
     }
@@ -156,9 +179,15 @@ class Clanpress_Widget extends WP_Widget {
   }
 
   /**
-   * TODO
+  * Returns the machine-readable id of the widget.
+  *
+  * The id is currently equivalent to the class name in lower case. Widgets
+  * extending this class should not overwrite this function.
+  *
+  * @return string
+  *   Machine-readable id of the widget
    */
-  private function id() {
+  final private function id() {
     return strtolower( get_class( $this ) );
   }
 }
