@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+  <parser>
+    <target>documentation/phpdoc</target>
+    <target>output</target>
+    <encoding>utf8</encoding>
+    <markers>
+      <item>TODO</item>
+      <item>FIXME</item>
+    </markers>
+  </parser>
+  <transformer>
+    <target>documentation/phpdoc</target>
+  </transformer>
+  <transformations>
+    <template name="responsive" />
+  </transformations>
+  <files>
+    <file>./clanpress.php</file>
+    <directory>./classes</directory>
+    <directory>./post-types</directory>
+    <directory>./widgets</directory>
+  </files>
+</phpdoc>
