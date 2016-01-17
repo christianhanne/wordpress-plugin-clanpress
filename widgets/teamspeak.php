@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * TODO
+ * Contains the class of the custom 'Teamspeak' widget.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
@@ -10,11 +10,12 @@
  */
 
 /**
- * TODO
+ * @class Clanpress_Teamspeak_Widget
  */
 class Clanpress_Teamspeak_Widget extends Clanpress_Widget {
   /**
-   * TODO
+   * @const string
+   * Url of the teamspeak API.
    */
   const TEAMSPEAK_API = 'https://api.planetteamspeak.com/serverstatus/';
 
@@ -70,23 +71,31 @@ class Clanpress_Teamspeak_Widget extends Clanpress_Widget {
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function name() {
     return __( 'TS Viewer', 'clanpress' );
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function description() {
     return __( 'Displays a visually appealing view of your TeamSpeak server.', 'clanpress' );
   }
 
   /**
-   * TODO
+   * Fetches & returns the server status as a standard object.
+   *
+   * @param string $address
+   *   IP address of the teamspeak server.
+   * @param int $port
+   *   Port of the teamspeak server.
+   *
+   * @return object|null
+   *   Server status object or null on error.
    */
-  private function server_status($address = '', $port = '') {
+  private function server_status($address = '', $port = 80) {
     if ( !class_exists( 'WP_Http' ) ) {
       include_once( ABSPATH . WPINC. '/class-http.php' );
     }

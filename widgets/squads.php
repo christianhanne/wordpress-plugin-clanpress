@@ -1,14 +1,14 @@
 <?php
 /**
  * @file
- * TODO
+ * Contains the class of the custom 'Squads' widget.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
  */
 
 /**
- * TODO
+ * @class Clanpress_Squads_Widget
  */
 class Clanpress_Squads_Widget extends Clanpress_Widget {
   /**
@@ -36,14 +36,14 @@ class Clanpress_Squads_Widget extends Clanpress_Widget {
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function name() {
     return __( 'Squads', 'clanpress' );
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function description() {
     return __( 'Displays a list of squads.', 'clanpress' );

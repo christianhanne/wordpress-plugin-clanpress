@@ -1,14 +1,14 @@
 <?php
 /**
  * @file
- * TODO
+ * Contains the class of the custom 'Top Match' widget.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
  */
 
 /**
- * TODO
+ * @class Clanpress_Top_Match_Widget
  */
 class Clanpress_Top_Match_Widget extends Clanpress_Widget {
   /**
@@ -30,14 +30,14 @@ class Clanpress_Top_Match_Widget extends Clanpress_Widget {
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function name() {
     return __( 'Top Match', 'clanpress' );
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function description() {
     return __( 'Displays the currently selected top match.', 'clanpress' );

@@ -1,14 +1,14 @@
 <?php
 /**
  * @file
- * TODO
+ * Contains the class of the custom 'Social Media' widget.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
  */
 
 /**
- * TODO
+ * @class Clanpress_Social_Media_Widget
  */
 class Clanpress_Social_Media_Widget extends Clanpress_Widget {
   /**
@@ -79,14 +79,14 @@ class Clanpress_Social_Media_Widget extends Clanpress_Widget {
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function name() {
     return __( 'Social Media', 'clanpress' );
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function description() {
     return __( 'Displays social media links.', 'clanpress' );

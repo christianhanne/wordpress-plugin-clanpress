@@ -1,14 +1,14 @@
 <?php
 /**
  * @file
- * TODO
+ * Contains the class of the custom 'Members' widget.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
  */
 
 /**
- * TODO
+ * @class Clanpress_Members_Widget
  */
 class Clanpress_Members_Widget extends Clanpress_Widget {
   /**
@@ -41,26 +41,28 @@ class Clanpress_Members_Widget extends Clanpress_Widget {
   }
 
   /**
-   * [squads_options description]
-   * @return [type] [description]
+   * Returns an array of options for the squads select.
+   *
+   * @return array
+   *   Array of squads options
+   *
+   * @todo Actually fetch squads from the database.
    */
   private function squads_options() {
     return array(
       0 => __( 'All squads', 'clanpress' ),
-      1 => 'TODO',
-      2 => 'TODO',
     );
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function name() {
     return __( 'Members', 'clanpress' );
   }
 
   /**
-   * TODO
+   * @inheritdoc
    */
   protected function description() {
     return __( 'Displays a list of members.', 'clanpress' );
