@@ -60,7 +60,7 @@ class Clanpress {
    *
    * @see Clanpress::register_post_type()
    */
-  private static function register_post_types() {
+  public static function register_post_types() {
     self::register_post_type( 'award' );
     self::register_post_type( 'match' );
     self::register_post_type( 'sponsor' );
