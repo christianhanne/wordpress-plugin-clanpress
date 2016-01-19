@@ -49,10 +49,81 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       'menu_icon'           => 'dashicons-admin-appearance',
       'capability_type'     => 'post',
       'hierarchical'        => false,
-      'supports'            => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+      'supports'            => array( 'title', 'editor', 'thumbnail' ),
       'has_archive'         => true,
       'rewrite'             => array( 'slug' => 'matches' ),
       'query_var'           => true
     );
+  }
+
+  /**
+  * @inheritdoc
+  */
+  protected function meta_boxes() {
+    $boxes['match'] = array(
+      'title' => __( 'Match', 'clanpress' ),
+      'context' => 'normal',
+      'priority' => 'default',
+      'form_elements' => array(
+        'opponent_name' => array(
+          'type' => 'text',
+          'label' => __( 'Opponent name', 'clanpress' ),
+          'default' => '',
+        ),
+        'opponent_link' => array(
+          'type' => 'text',
+          'label' => __( 'Opponent website', 'clanpress' ),
+          'default' => '',
+          'pattern' => '^http[s]?://.*$',
+        ),
+        'match_link' => array(
+          'type' => 'text',
+          'label' => __( 'Link to the match', 'clanpress' ),
+          'default' => '',
+          'pattern' => '^http[s]?://.*$',
+        ),
+      ),
+    );
+
+    $boxes['game'] = array(
+      'title' => __( 'Game', 'clanpress' ),
+      'context' => 'side',
+      'priority' => 'default',
+      'form_elements' => array(
+        'game' => array(
+          'type' => 'select',
+          'options' => array( 'TODO' => 'TODO' ),
+          'default' => 'TODO',
+        ),
+      ),
+    );
+
+    $boxes['match_type'] = array(
+      'title' => __( 'Match type', 'clanpress' ),
+      'context' => 'side',
+      'priority' => 'default',
+      'form_elements' => array(
+        'match_type' => array(
+          'type' => 'select',
+          'options' => array( 'TODO' => 'TODO' ),
+          'default' => 'TODO',
+        ),
+      ),
+    );
+
+    $boxes['squads'] = array(
+      'title' => __( 'Squads', 'clanpress' ),
+      'context' => 'side',
+      'priority' => 'default',
+      'form_elements' => array(
+        'squads' => array(
+          'type' => 'checkboxes',
+          'options' => array( 'TODO' => 'TODO' ),
+          'default' => array( 'TODO' ),
+        ),
+      ),
+    );
+
+    return $boxes;
   }
 }
