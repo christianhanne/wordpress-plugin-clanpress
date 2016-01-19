@@ -15,19 +15,25 @@ class Clanpress {
    * @const string
    * Holds the Clanpress' widgets directory path.
    */
-  const WIDGETS_PATH = CLANPRESS_PLUGIN_PATH . 'widgets/';
+  const WIDGETS_PATH = CLANPRESS_PLUGIN_PATH . 'includes/widgets/';
 
   /**
    * @const string
    * Holds the Clanpress' post types directory path.
    */
-  const POST_TYPES_PATH = CLANPRESS_PLUGIN_PATH . 'post-types/';
+  const POST_TYPES_PATH = CLANPRESS_PLUGIN_PATH . 'includes/post-types/';
 
   /**
    * @const string
    * Holds the Clanpress' taxonomies directory path.
    */
-  const TAXONOMIES_PATH = CLANPRESS_PLUGIN_PATH . 'taxonomies/';
+  const TAXONOMIES_PATH = CLANPRESS_PLUGIN_PATH . 'includes/taxonomies/';
+
+  /**
+   * @const string
+   * Holds the Clanpress' helper classes directory path.
+   */
+  const HELPER_PATH = CLANPRESS_PLUGIN_PATH . 'includes/helper/';
 
   /**
    * Initializes the plugin's behavior.
@@ -36,10 +42,10 @@ class Clanpress {
    * @see Clanpress::register_post_types()
    */
   public function __construct() {
-    require_once( CLANPRESS_PLUGIN_PATH . 'classes/form.php' );
-    require_once( CLANPRESS_PLUGIN_PATH . 'classes/widget.php' );
-    require_once( CLANPRESS_PLUGIN_PATH . 'classes/post-type.php' );
-    require_once( CLANPRESS_PLUGIN_PATH . 'classes/taxonomy.php' );
+    require_once( self::HELPER_PATH . 'form.php' );
+    require_once( self::HELPER_PATH . 'widget.php' );
+    require_once( self::HELPER_PATH . 'post-type.php' );
+    require_once( self::HELPER_PATH . 'taxonomy.php' );
 
     add_action( 'widgets_init', array( $this, 'register_widgets' ) );
     add_action( 'init', array( $this, 'register_post_types' ) );

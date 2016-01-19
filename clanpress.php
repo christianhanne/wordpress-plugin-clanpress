@@ -23,5 +23,5 @@ define( 'CLANPRESS_VERSION', '0.0.1' );
 define( 'CLANPRESS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'CLANPRESS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-require_once( CLANPRESS_PLUGIN_PATH . 'classes/clanpress.php' );
+require_once( CLANPRESS_PLUGIN_PATH . 'includes/clanpress.php' );
 $clanpress = new Clanpress();
