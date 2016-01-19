@@ -55,4 +55,38 @@ class Clanpress_Award_Post_Type extends Clanpress_Post_Type {
       'query_var'           => true
     );
   }
+
+  /**
+   * @inheritdoc
+   */
+  protected function meta_boxes() {
+    $boxes['placement'] = array(
+      'title' => __( 'Placement', 'clanpress' ),
+      'context' => 'side',
+      'priority' => 'default',
+      'form_elements' => array(
+        'placement' => array(
+          'type' => 'select',
+          'options' => Clanpress_Form::range(1, 10),
+          'default' => 1,
+        ),
+      ),
+    );
+
+    $boxes['squad'] = array(
+      'title' => __( 'Squad', 'clanpress' ),
+      'screen' => array( 'post', 'page' ),
+      'context' => 'side',
+      'priority' => 'default',
+      'form_elements' => array(
+        'squad' => array(
+          'type' => 'select',
+          'options' => array( 'TODO' => 'TODO' ),
+          'default' => 'TODO',
+        ),
+      ),
+    );
+
+    return $boxes;
+  }
 }
