@@ -85,6 +85,50 @@ class Clanpress_Form {
   }
 
   /**
+   * Returns an array with numbers with the given range.
+   *
+   * @param int $min
+   *   Minimum number in the array
+   * @param int $max
+   *   Maximum number in the array
+   *
+   * @return array
+   *   Array with numbers range
+   */
+  public static function range($min, $max) {
+     $options = array();
+     for ($i = $min; $i <= $max; $i++) {
+       $options[$i] = $i;
+     }
+
+     return $options;
+  }
+
+  /**
+   * Returns if the given value is valid for the given element.
+   *
+   * @param array $element
+   *   Form element
+   * @param mixed $value
+   *   Value of the form element
+   *
+   *  @return bool
+   *    True, if value is valid.
+   */
+  public static function is_valid($element, $value) {
+    $value = trim( strip_tags( $value ) );
+    if ( isset( $element['options'] ) ) {
+      return isset( $value, $element['options'] );
+    }
+    else if (!isset( $element['pattern'] )) {
+      return TRUE;
+    }
+    else {
+      return !!preg_match( "/$element[pattern]/", "$value" );
+    }
+  }
+
+  /**
    * Returns the html markup of an input form element.
    *
    * @param array $element
@@ -215,7 +259,7 @@ class Clanpress_Form {
       if (is_array($value)) {
         $opt_selected = in_array($opt_value, $value) ? ' selected="selected"' : '';
       } else {
-        $opt_selected = $opt_value === $value ? ' selected="selected"' : '';
+        $opt_selected = $opt_value == $value ? ' selected="selected"' : '';
       }
 
       $output .= vsprintf('<option value="%s"%s>%s</option>', array(
