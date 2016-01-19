@@ -71,6 +71,10 @@ class Clanpress_Form {
         $element['attributes']['class'] = 'widefat';
         return sprintf( '<p>%s%s</p>', self::checkbox($element), $label );
 
+      case 'checkboxes':
+        $element['attributes']['class'] = 'widefat';
+        return sprintf( '<div>%s%s</div>', $label, self::checkboxes($element) );
+
       case 'number':
         $element['attributes']['class'] = 'tiny-text';
         return sprintf( '<p>%s %s</p>', $label, self::input($element) );
@@ -186,7 +190,7 @@ class Clanpress_Form {
    */
   private static function select($element) {
     $element['attributes']['id'] = $element['field_id'];
-    $element['attributes']['name'] = $element['field_name'];;
+    $element['attributes']['name'] = $element['field_name'];
 
     if (is_array($element['value'])) {
       $element['attributes']['multiple'] = 'multiple';
@@ -196,6 +200,44 @@ class Clanpress_Form {
       self::attributes($element['attributes']),
       self::options($element['options'], $element['value']),
     ));
+  }
+
+  /**
+   * Returns the html markup of multiple checkboxes.
+   *
+   * @param array $element
+   *   Contains the form element definition as an associative array.
+   *   Please check the linked method for further details.
+   *
+   * @return string
+   *   Html markup of a checkboxes form element.
+   *
+   * @see Clanpress_Form::element()
+   */
+  private static function checkboxes($element) {
+    $value = isset( $element['value'] ) ? $element['value'] : $element['default'];
+
+    $element['attributes']['id'] = $element['field_id'];
+    $element['attributes']['name'] = $element['field_name'];
+
+    $output = '';
+    foreach ($element['options'] as $key => $label) {
+      $checkbox = $element;
+
+      $checkbox['label'] = $label;
+      $checkbox['type'] = 'checkbox';
+      $checkbox['value'] = isset( $value[ $key ] ) ?  $value[ $key ] : 0;
+      $checkbox['default'] = $checkbox['value'];
+
+      $checkbox['field_id'] = $checkbox['field_id'] . '[' . $key . ']';
+      $checkbox['field_name'] = $checkbox['field_id'];
+      $checkbox['attributes']['id'] = $checkbox['field_id'];
+      $checkbox['attributes']['name'] = $checkbox['field_id'];
+
+      $output .= self::element($checkbox);
+    }
+
+    return $output;
   }
 
   /**
@@ -210,7 +252,7 @@ class Clanpress_Form {
    *   Html markup of a label element.
    */
   private static function label($id, $title) {
-    return sprintf('<label for="%s">%s:</label>', $id, $title);
+    return sprintf('<label for="%s">%s</label>', $id, $title);
   }
 
   /**
