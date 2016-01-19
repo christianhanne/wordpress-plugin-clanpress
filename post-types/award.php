@@ -49,7 +49,7 @@ class Clanpress_Award_Post_Type extends Clanpress_Post_Type {
       'menu_icon'           => 'dashicons-admin-appearance',
       'capability_type'     => 'post',
       'hierarchical'        => false,
-      'supports'            => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+      'supports'            => array( 'title', 'editor', 'thumbnail' ),
       'has_archive'         => true,
       'rewrite'             => array( 'slug' => 'awards' ),
       'query_var'           => true
