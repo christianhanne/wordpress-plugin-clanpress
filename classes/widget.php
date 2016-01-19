@@ -21,7 +21,12 @@ class Clanpress_Widget extends WP_Widget {
   }
 
   /**
-   * TODO
+   * Displays the widget's template.
+   *
+   * @param array $args
+   *   TODO
+   * @param array $instance
+   *   Previously saved values from database.
    */
   public function widget( $args, $instance ) {
     extract ( $args );
@@ -75,11 +80,7 @@ class Clanpress_Widget extends WP_Widget {
     foreach( $this->form_elements() as $id => $element) {
       $instance[ $id ] = isset( $element['default'] ) ? $element['default'] : '';
       if (!empty( $new_instance[ $id ] )) {
-        $value = trim( strip_tags( $new_instance[ $id ] ) );
-        if (!isset( $element['pattern'] )) {
-          $instance[ $id ] = $value;
-        }
-        else if ( preg_match( "/$element[pattern]/", "$value" ) ) {
+        if ( Clanpress_Form::is_valid( $element, $new_instance[ $id ] ) ) {
           $instance[ $id ] = $value;
         }
         else {
