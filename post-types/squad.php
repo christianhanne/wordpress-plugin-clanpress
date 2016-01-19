@@ -12,6 +12,18 @@
  */
 class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
   /**
+   * @const string
+   * Defines squad as playing.
+   */
+  const SQUAD_TYPE_PLAYING = 'playing';
+
+  /**
+   * @const string
+   * Defines squad as not playing.
+   */
+  const SQUAD_TYPE_NOT_PLAYING = 'not_playing';
+
+  /**
    * @inheritdoc
    */
   protected function labels() {
@@ -49,10 +61,59 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
       'menu_icon'           => 'dashicons-admin-appearance',
       'capability_type'     => 'post',
       'hierarchical'        => false,
-      'supports'            => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+      'supports'            => array( 'title', 'editor', 'thumbnail' ),
       'has_archive'         => true,
       'rewrite'             => array( 'slug' => 'squads' ),
       'query_var'           => true
     );
+  }
+
+  /**
+   * @inheritdoc
+   */
+  protected function meta_boxes() {
+    $boxes['squad_type'] = array(
+      'title' => __( 'Squad type', 'clanpress' ),
+      'context' => 'side',
+      'priority' => 'default',
+      'form_elements' => array(
+        'placement' => array(
+          'type' => 'select',
+          'options' => array(
+            self::SQUAD_TYPE_PLAYING     => __( 'Playing', 'clanpress' ),
+            self::SQUAD_TYPE_NOT_PLAYING => __( 'Not playing', 'clanpress' ),
+          ),
+          'default' => self::SQUAD_TYPE_PLAYING,
+        ),
+      ),
+    );
+
+    $boxes['games'] = array(
+      'title' => __( 'Games', 'clanpress' ),
+      'context' => 'side',
+      'priority' => 'default',
+      'form_elements' => array(
+        'squads' => array(
+          'type' => 'checkboxes',
+          'options' => array( 'TODO' => 'TODO' ),
+          'default' => array( 'TODO' ),
+        ),
+      ),
+    );
+
+    $boxes['members'] = array(
+      'title' => __( 'Members', 'clanpress' ),
+      'context' => 'normal',
+      'priority' => 'default',
+      'form_elements' => array(
+        'squads' => array(
+          'type' => 'checkboxes',
+          'options' => array( 'TODO' => 'TODO' ),
+          'default' => array( 'TODO' ),
+        ),
+      ),
+    );
+
+    return $boxes;
   }
 }
