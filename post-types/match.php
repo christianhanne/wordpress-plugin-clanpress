@@ -12,6 +12,18 @@
  */
 class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
   /**
+   * @const string
+   * Defines match type fun war.
+   */
+  const MATCH_TYPE_FUN = 'fun';
+
+  /**
+   * @const string
+   * Defines match type official war.
+   */
+  const MATCH_TYPE_OFFICIAL = 'official';
+
+  /**
    * @inheritdoc
    */
   protected function labels() {
@@ -105,8 +117,11 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       'form_elements' => array(
         'match_type' => array(
           'type' => 'select',
-          'options' => array( 'TODO' => 'TODO' ),
-          'default' => 'TODO',
+          'options' => array(
+            self::MATCH_TYPE_OFFICIAL => __( 'Official war', 'clanpress' ),
+            self::MATCH_TYPE_FUN      => __( 'Fun war', 'clanpress' ),
+          ),
+          'default' => self::MATCH_TYPE_OFFICIAL,
         ),
       ),
     );
