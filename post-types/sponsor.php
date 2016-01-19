@@ -49,10 +49,31 @@ class Clanpress_Sponsor_Post_Type extends Clanpress_Post_Type {
       'menu_icon'           => 'dashicons-admin-appearance',
       'capability_type'     => 'post',
       'hierarchical'        => false,
-      'supports'            => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+      'supports'            => array( 'title', 'editor', 'thumbnail' ),
       'has_archive'         => true,
       'rewrite'             => array( 'slug' => 'sponsors' ),
       'query_var'           => true
     );
+  }
+
+  /**
+   * @inheritdoc
+   */
+  protected function meta_boxes() {
+    $boxes['sponsor'] = array(
+      'title' => __( 'Sponsor', 'clanpress' ),
+      'context' => 'normal',
+      'priority' => 'default',
+      'form_elements' => array(
+        'website' => array(
+          'type' => 'text',
+          'label' => __( 'Website', 'clanpress' ),
+          'default' => '',
+          'pattern' => '^http[s]?://.*$',
+        ),
+      ),
+    );
+
+    return $boxes;
   }
 }
