@@ -24,6 +24,12 @@ class Clanpress {
   const POST_TYPES_PATH = CLANPRESS_PLUGIN_PATH . 'post-types/';
 
   /**
+   * @const string
+   * Holds the Clanpress' taxonomies directory path.
+   */
+  const TAXONOMIES_PATH = CLANPRESS_PLUGIN_PATH . 'taxonomies/';
+
+  /**
    * Initializes the plugin's behavior.
    *
    * @see Clanpress::register_widgets()
@@ -33,9 +39,11 @@ class Clanpress {
     require_once( CLANPRESS_PLUGIN_PATH . 'classes/form.php' );
     require_once( CLANPRESS_PLUGIN_PATH . 'classes/widget.php' );
     require_once( CLANPRESS_PLUGIN_PATH . 'classes/post-type.php' );
+    require_once( CLANPRESS_PLUGIN_PATH . 'classes/taxonomy.php' );
 
     add_action( 'widgets_init', array( $this, 'register_widgets' ) );
     add_action( 'init', array( $this, 'register_post_types' ) );
+    add_action( 'init', array( $this, 'register_taxonomies' ) );
   }
 
   /**
@@ -65,6 +73,15 @@ class Clanpress {
     self::register_post_type( 'match' );
     self::register_post_type( 'sponsor' );
     self::register_post_type( 'squad' );
+  }
+
+  /**
+   * Registers all custom taxonomies of the plugin.
+   *
+   * @see Clanpress::register_taxonomy()
+   */
+  public static function register_taxonomies() {
+    self::register_taxonomy( 'game' );
   }
 
   /**
@@ -108,5 +125,27 @@ class Clanpress {
   private static function register_widget( $widget ) {
     require_once( self::WIDGETS_PATH . $widget . '.php' );
     register_widget( 'Clanpress_' . ucwords( $widget ) . '_Widget' );
+  }
+
+  /**
+   * Registers a new taxonomy with the given name.
+   *
+   * This function includes a file with the taxonomy's name. This file has
+   * to contain a function named "Clanpress_[Taxonomy]_Taxonomy.
+   * [Taxonomy] should be replaced by the actual name of the taxonomy in
+   * upper camelcase. This class has to extend the Clanpress_Taxonomy class.
+   *
+   * Please note that this function does no sanitization nor checks on
+   * the widget name, so it should stay private and be used with caution.
+   *
+   * @param string $taxonomy
+   *   Machine-readable name of taxonomy
+   *
+   * @see Clanpress_Taxonomy
+   */
+  private static function register_taxonomy( $taxonomy ) {
+    require_once( self::TAXONOMIES_PATH . $taxonomy . '.php' );
+    $taxonomy_class = 'Clanpress_' . ucwords( $taxonomy ) . '_Taxonomy';
+    new $taxonomy_class();
   }
 }
