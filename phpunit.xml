@@ -14,9 +14,7 @@
   </testsuites>
   <filter>
     <whitelist>
-      <directory>./classes</directory>
-      <directory>./post-types</directory>
-      <directory>./widgets</directory>
+      <directory>./includes</directory>
     </whitelist>
   </filter>
   <logging>

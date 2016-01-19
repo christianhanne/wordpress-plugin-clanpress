@@ -17,8 +17,6 @@
   </transformations>
   <files>
     <file>./clanpress.php</file>
-    <directory>./classes</directory>
-    <directory>./post-types</directory>
-    <directory>./widgets</directory>
+    <directory>./includes</directory>
   </files>
 </phpdoc>
