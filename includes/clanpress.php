@@ -50,6 +50,19 @@ class Clanpress {
     add_action( 'widgets_init', array( $this, 'register_widgets' ) );
     add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
+    add_action( 'admin_menu', array( $this, 'register_menu_pages' ) );
+  }
+
+  /**
+   * Registers all main admin menu pages.
+   */
+  public static function register_menu_pages() {
+    add_menu_page(
+      __( 'Clanpress', 'clanpress' ),
+      __( 'Clanpress', 'clanpress' ),
+      'manage_options', // TODO: Add correct capability_type.
+      'clanpress'
+    );
   }
 
   /**
