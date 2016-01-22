@@ -29,6 +29,9 @@ class Clanpress_Form {
    *   - label: (optional)
    *     Will create a label element with the given value as the content
    *     above the actual form element.
+   *   - description: (optional)
+   *     Will create a description which will be displayed below the form
+   *     element.  
    *   - options:
    *     This is only required for elements with options (like select). Should
    *     contain an array of option values and labels. Eg. foo => bar will
