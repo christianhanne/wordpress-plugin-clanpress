@@ -97,6 +97,20 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       ),
     );
 
+    $boxes['top_match'] = array(
+      'title' => __( 'Top match', 'clanpress' ),
+      'context' => 'side',
+      'priority' => 'default',
+      'form_elements' => array(
+        'match_type' => array(
+          'type' => 'checkbox',
+          'label' => __( 'Mark as top match', 'clanpress' ),
+          'description' => __( 'The most recent top match will be displayed in the top match widget.', 'clanpress' ),
+          'default' => FALSE,
+        ),
+      ),
+    );
+
     $boxes['match_type'] = array(
       'title' => __( 'Match type', 'clanpress' ),
       'context' => 'side',

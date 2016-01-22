@@ -65,27 +65,38 @@ class Clanpress_Form {
     switch ($element['type']) {
       case 'select':
         $element['attributes']['class'] = 'widefat';
-        return sprintf( '<p>%s%s</p>', $label, self::select($element) );
+        $output = sprintf('%s%s', $label, self::select($element) );
+        break;
 
       case 'checkbox':
         $element['attributes']['class'] = 'widefat';
-        return sprintf( '<p>%s%s</p>', self::checkbox($element), $label );
+        $output = sprintf( '%s%s', self::checkbox($element), $label );
+        break;
 
       case 'checkboxes':
         $element['attributes']['class'] = 'widefat';
-        return sprintf( '<div>%s%s</div>', $label, self::checkboxes($element) );
+        $output = sprintf( '%s%s', $label, self::checkboxes($element) );
+        break;
 
       case 'number':
         $element['attributes']['class'] = 'tiny-text';
-        return sprintf( '<p>%s %s</p>', $label, self::input($element) );
+        $output = sprintf( '%s %s', $label, self::input($element) );
+        break;
 
       case 'text':
         $element['attributes']['class'] = 'widefat';
-        return sprintf( '<p>%s%s</p>', $label, self::input($element) );
+        $output = sprintf( '%s%s', $label, self::input($element) );
+        break;
 
       default:
         return '';
     }
+
+    if ( !empty( $element['description'] ) ) {
+      $output .= sprintf( '<br /><small>%s</small>', $element['description'] );
+    }
+
+    return '<p>' . $output . '</p>';
   }
 
   /**
