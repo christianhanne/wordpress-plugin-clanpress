@@ -95,12 +95,30 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
       'form_elements' => array(
         'squads' => array(
           'type' => 'checkboxes',
-          'options' => array( 'TODO' => 'TODO' ),
-          'default' => array( 'TODO' ),
+          'options' => $this->get_user_options(),
+          'default' => array(),
         ),
       ),
     );
 
     return $boxes;
+  }
+
+  /**
+   * Returns an array of user ids associated with their user names.
+   *
+   * @return array
+   *   Array of user names & ids.
+   */
+  private function get_user_options() {
+    static $options;
+    if ( !isset( $options ) ) {
+      $options = array();
+      foreach (get_users() as $user) {
+        $options[ $user->ID ] = esc_html( $user->display_name );
+      }
+    }
+
+    return $options;
   }
 }

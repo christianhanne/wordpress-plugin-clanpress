@@ -54,7 +54,7 @@ class Clanpress_Post_Type {
    */
   public function render_meta_boxes( $post, $metabox ) {
     $id = $this->extract_meta_box_id( $metabox['id'] );
-    $this->render_meta_box( $id, $this->meta_boxes()[ $id ], $post );
+    $this->render_meta_box( $id, $this->meta_boxes( $post )[ $id ], $post );
   }
 
   /**
