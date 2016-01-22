@@ -120,35 +120,12 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       'form_elements' => array(
         'squads' => array(
           'type' => 'checkboxes',
-          'options' => $this->get_squad_options(),
+          'options' => Clanpress_Helper::get_squad_options(),
           'default' => array(),
         ),
       ),
     );
 
     return $boxes;
-  }
-
-  /**
-   * Returns an array of squad options.
-   *
-   * @return array
-   *   Array of squad post ids & titles.
-   */
-  protected function get_squad_options() {
-    static $options;
-    if ( !isset( $options ) ) {
-      $args = array(
-        'orderby' => 'title',
-        'order' => 'ASC',
-        'post_type' => 'clanpress_squad',
-      );
-
-      foreach ( get_posts( $args ) as $post ) {
-        $options[ $post->ID ] = esc_html( $post->post_title );
-      }
-    }
-
-    return $options;
   }
 }

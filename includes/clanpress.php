@@ -42,6 +42,7 @@ class Clanpress {
    * @see Clanpress::register_post_types()
    */
   public function __construct() {
+    require_once( self::HELPER_PATH . 'helper.php' );
     require_once( self::HELPER_PATH . 'form.php' );
     require_once( self::HELPER_PATH . 'widget.php' );
     require_once( self::HELPER_PATH . 'post-type.php' );

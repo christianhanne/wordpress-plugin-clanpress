@@ -74,15 +74,15 @@ class Clanpress_Award_Post_Type extends Clanpress_Post_Type {
     );
 
     $boxes['squad'] = array(
-      'title' => __( 'Squad', 'clanpress' ),
+      'title' => __( 'Squads', 'clanpress' ),
       'screen' => array( 'post', 'page' ),
       'context' => 'side',
       'priority' => 'default',
       'form_elements' => array(
         'squad' => array(
-          'type' => 'select',
-          'options' => array( 'TODO' => 'TODO' ),
-          'default' => 'TODO',
+          'type' => 'checkboxes',
+          'options' => Clanpress_Helper::get_squad_options(),
+          'default' => array(),
         ),
       ),
     );
