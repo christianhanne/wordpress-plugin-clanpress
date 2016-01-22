@@ -88,19 +88,6 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
       ),
     );
 
-    $boxes['games'] = array(
-      'title' => __( 'Games', 'clanpress' ),
-      'context' => 'side',
-      'priority' => 'default',
-      'form_elements' => array(
-        'squads' => array(
-          'type' => 'checkboxes',
-          'options' => array( 'TODO' => 'TODO' ),
-          'default' => array( 'TODO' ),
-        ),
-      ),
-    );
-
     $boxes['members'] = array(
       'title' => __( 'Members', 'clanpress' ),
       'context' => 'normal',

@@ -97,19 +97,6 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       ),
     );
 
-    $boxes['game'] = array(
-      'title' => __( 'Game', 'clanpress' ),
-      'context' => 'side',
-      'priority' => 'default',
-      'form_elements' => array(
-        'game' => array(
-          'type' => 'select',
-          'options' => array( 'TODO' => 'TODO' ),
-          'default' => 'TODO',
-        ),
-      ),
-    );
-
     $boxes['match_type'] = array(
       'title' => __( 'Match type', 'clanpress' ),
       'context' => 'side',

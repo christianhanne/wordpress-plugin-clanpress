@@ -55,6 +55,8 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   protected function post_types() {
     return array(
       'clanpress_award',
+      'clanpress_match',
+      'clanpress_squad',
     );
   }
 }
