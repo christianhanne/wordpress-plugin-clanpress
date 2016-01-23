@@ -79,7 +79,7 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
       'context' => 'side',
       'priority' => 'default',
       'form_elements' => array(
-        'placement' => array(
+        'squad_type' => array(
           'type' => 'select',
           'options' => array(
             self::SQUAD_TYPE_PLAYING     => __( 'Playing', 'clanpress' ),
@@ -95,7 +95,7 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
       'context' => 'normal',
       'priority' => 'default',
       'form_elements' => array(
-        'squads' => array(
+        'members' => array(
           'type' => 'checkboxes',
           'options' => $this->get_user_options(),
           'default' => array(),
