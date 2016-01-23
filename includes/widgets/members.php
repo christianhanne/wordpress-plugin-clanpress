@@ -16,6 +16,37 @@ class Clanpress_Members_Widget extends Clanpress_Widget {
   /**
    * @inheritdoc
    */
+  protected function template_elements( $instance = array() ) {
+    $elements = array();
+
+    $args = array(
+      'number' => (int) $instance['num_items'],
+      'offset' => 0,
+      'orderby' => 'name',
+      'order' => 'ASC',
+    );
+
+    $squad_id = (int) $instance['squads'];
+    if ( $squad_id !== 0) {
+      $key = 'clanpress_squad_members[members]';
+      $args['include'] = get_post_meta( $squad_id, $key );
+    }
+
+    $elements['members'] = array();
+    $user_query = new WP_User_Query( $args );
+    foreach ( $user_query->results as $user ) {
+      array_push($elements['members'], array(
+        'id' => $user->ID,
+        'name' => esc_html( $user->display_name ),
+      ));
+    }
+
+    return $elements;
+  }
+
+  /**
+   * @inheritdoc
+   */
   protected function form_elements() {
     return array(
       'title' => array(
@@ -47,13 +78,11 @@ class Clanpress_Members_Widget extends Clanpress_Widget {
    *
    * @return array
    *   Array of squads options
-   *
-   * @todo Actually fetch squads from the database.
    */
   private function squads_options() {
-    return array(
-      0 => __( 'All squads', 'clanpress' ),
-    );
+    $options = array( __( 'All squads', 'clanpress' ) );
+    $options += Clanpress_Helper::get_squad_options();
+    return $options;
   }
 
   /**
