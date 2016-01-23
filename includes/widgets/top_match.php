@@ -16,6 +16,36 @@ class Clanpress_Top_Match_Widget extends Clanpress_Widget {
   /**
    * @inheritdoc
    */
+  protected function template_elements( $instance = array() ) {
+    $elements = array();
+
+    $args = array(
+      'posts_per_page' => 1,
+      'offset' => 0,
+      'post_type' => 'clanpress_match',
+      'meta_query' => array(
+    		array(
+    			'key' => 'clanpress_match_top_match[match_type]',
+    			'value' => '1',
+    		),
+    	)
+    );
+
+    $elements['links'] = array();
+    foreach ( get_posts( $args ) as $post ) {
+      array_push($elements['links'], array(
+        'id' => $post->ID,
+        'title' => esc_html( $post->post_title ),
+        'href' =>  get_permalink( $post->ID ),
+      ));
+    }
+
+    return $elements;
+  }
+
+  /**
+   * @inheritdoc
+   */
   protected function form_elements() {
     return array(
       'title' => array(
