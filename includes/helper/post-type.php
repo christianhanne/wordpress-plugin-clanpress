@@ -117,7 +117,6 @@ class Clanpress_Post_Type {
       return;
     }
 
-
     add_meta_box(
   		$this->get_meta_box_id( $id ),
   		$meta_box['title'],
@@ -145,7 +144,8 @@ class Clanpress_Post_Type {
       if ( Clanpress_Form::is_valid( $element, $instance[ $key ] ) ) {
         $field_id = $this->get_meta_box_id( $id ) . '[' . $key . ']';
         $value = sanitize_text_field( $instance[ $key ] );
-        update_post_meta( $post_id, $field_id, $instance[ $key ] );
+
+        update_post_meta( $post_id, $field_id, $value );
       }
     }
   }
@@ -164,6 +164,7 @@ class Clanpress_Post_Type {
     $field_id = $this->get_meta_box_id( $id ) . '[nonce]';
     wp_nonce_field($this->get_meta_box_id( $id ), $field_id );
 
+    $output = '';
     foreach ( $meta_box['form_elements'] as $key => $element ) {
       $field_id = $this->get_meta_box_id( $id ) . '[' . $key . ']';
 
@@ -171,8 +172,10 @@ class Clanpress_Post_Type {
       $element['field_name'] = $field_id;
       $element['value'] = get_post_meta( $post->ID, $field_id, true );
 
-      echo Clanpress_Form::element( $element );
+      $output .= Clanpress_Form::element( $element );
     }
+
+    echo $output;
   }
 
   /**

@@ -88,13 +88,13 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
           'type' => 'text',
           'label' => __( 'Opponent website', 'clanpress' ),
           'default' => '',
-          'pattern' => '^http[s]?://.*$',
+          'pattern' => '^http[s]?:\/\/.*$',
         ),
         'match_link' => array(
           'type' => 'text',
           'label' => __( 'Link to the match', 'clanpress' ),
           'default' => '',
-          'pattern' => '^http[s]?://.*$',
+          'pattern' => '^http[s]?:\/\/.*$',
         ),
       ),
     );

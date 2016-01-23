@@ -71,7 +71,7 @@ class Clanpress_Sponsor_Post_Type extends Clanpress_Post_Type {
           'type' => 'text',
           'label' => __( 'Website', 'clanpress' ),
           'default' => '',
-          'pattern' => '^http[s]?://.*$',
+          'pattern' => '^http[s]?:\/\/.*$',
         ),
       ),
     );
