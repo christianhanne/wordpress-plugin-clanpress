@@ -36,8 +36,6 @@ class Clanpress_Latest_Awards_Widget extends Clanpress_Widget {
       ));
     }
 
-    wp_reset_postdata();
-
     return $elements;
   }
 

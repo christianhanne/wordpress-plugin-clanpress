@@ -23,8 +23,11 @@ class Clanpress_Latest_Matches_Widget extends Clanpress_Widget {
       'posts_per_page' => (int) $instance['num_items'],
       'offset' => 0,
       'orderby' => 'date',
-      'order' => 'DESC',
+      'order' => 'ASC',
       'post_type' => 'clanpress_match',
+      'date_query' => array(
+        'before' => date('Y-m-d'),
+      ),
     );
 
     $elements['links'] = array();
@@ -35,8 +38,6 @@ class Clanpress_Latest_Matches_Widget extends Clanpress_Widget {
         'href' =>  get_permalink( $post->ID ),
       ));
     }
-
-    wp_reset_postdata();
 
     return $elements;
   }
