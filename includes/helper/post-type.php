@@ -23,6 +23,7 @@ class Clanpress_Post_Type {
 
     add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
     add_action( 'save_post', array( $this, 'save_meta_boxes' ) );
+    add_filter( 'single_template', array( $this, 'single_template' ) );
   }
 
   /**
@@ -57,6 +58,28 @@ class Clanpress_Post_Type {
   public function render_meta_boxes( $post, $metabox ) {
     $id = $this->extract_meta_box_id( $metabox['id'] );
     $this->render_meta_box( $id, $this->meta_boxes( $post )[ $id ], $post );
+  }
+
+  /**
+   * TODO
+   *
+   * @param string $template
+   *   TODO
+   *
+   * @return string
+   *   TODO
+   */
+  public static function single_template( $template ) {
+    global $post;
+    if ( $post->post_type == self::id() ) {
+      $template_name = self::template_name();
+      $template_dir = CLANPRESS_PLUGIN_PATH . 'templates/post-types/';
+      if ( $template !== get_stylesheet_directory() . '/' . $template_name ) {
+        return $template_dir . $template_name;
+      }
+    }
+
+    return $template;
   }
 
   /**
@@ -217,6 +240,17 @@ class Clanpress_Post_Type {
   }
 
   /**
+   * Returns the template's file name for this post type.
+   *
+   * @return string
+   *   Template's file name.
+   */
+  final private static function template_name() {
+    $template_name = 'single-' . str_replace( '_', '-', self::id() ) . '.php';
+    return $template_name;
+  }
+
+  /**
    * Returns the machine-readable id of the post type.
    *
    * The id is currently equivalent to the class name in lower case.
@@ -227,8 +261,8 @@ class Clanpress_Post_Type {
    * @return string
    *   Machine-readable id of the post type
    */
-  final private function id() {
-    $id = strtolower( get_class( $this ) );
+  final private static function id() {
+    $id = strtolower( get_called_class() );
     $id = str_replace( '_post_type', '', $id );
     return $id;
   }

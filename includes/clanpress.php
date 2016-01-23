@@ -93,6 +93,9 @@ class Clanpress {
     self::register_post_type( 'match' );
     self::register_post_type( 'sponsor' );
     self::register_post_type( 'squad' );
+
+    // For some reason this is necessary to get the plugin's slugs to work.
+    flush_rewrite_rules();
   }
 
   /**
