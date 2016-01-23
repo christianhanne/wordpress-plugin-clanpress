@@ -9,6 +9,8 @@
  * @link https://www.planetteamspeak.com/rest-api/
  */
 
+defined( 'ABSPATH' ) or die( 'Access restricted.' );
+
 /**
  * @class Clanpress_Teamspeak_Widget
  */

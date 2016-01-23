@@ -7,6 +7,8 @@
  * @package Clanpress
  */
 
+defined( 'ABSPATH' ) or die( 'Access restricted.' );
+
 /**
  * @class Clanpress_Form
  */
@@ -31,7 +33,7 @@ class Clanpress_Form {
    *     above the actual form element.
    *   - description: (optional)
    *     Will create a description which will be displayed below the form
-   *     element.  
+   *     element.
    *   - options:
    *     This is only required for elements with options (like select). Should
    *     contain an array of option values and labels. Eg. foo => bar will
