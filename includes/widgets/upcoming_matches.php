@@ -16,6 +16,36 @@ class Clanpress_Upcoming_Matches_Widget extends Clanpress_Widget {
   /**
    * @inheritdoc
    */
+  protected function template_elements( $instance = array() ) {
+    $elements = array();
+
+    $args = array(
+      'posts_per_page' => (int) $instance['num_items'],
+      'offset' => 0,
+      'orderby' => 'date',
+      'order' => 'DESC',
+      'post_type' => 'clanpress_match',
+      'date_query' => array(
+        'after' => date('Y-m-d'),
+      ),
+      'post_status' => 'future',
+    );
+
+    $elements['links'] = array();
+    foreach ( get_posts( $args ) as $post ) {
+      array_push($elements['links'], array(
+        'id' => $post->ID,
+        'title' => esc_html( $post->post_title ),
+        'href' =>  get_permalink( $post->ID ),
+      ));
+    }
+
+    return $elements;
+  }
+
+  /**
+   * @inheritdoc
+   */
   protected function form_elements() {
     return array(
       'title' => array(
