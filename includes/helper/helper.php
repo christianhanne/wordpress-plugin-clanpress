@@ -28,7 +28,7 @@ class Clanpress_Helper {
         );
 
         foreach ( get_posts( $args ) as $post ) {
-          $options[ $post->ID ] = esc_html( $post->post_title );
+          $options[ $post->ID ] = $post->post_title;
         }
       }
 

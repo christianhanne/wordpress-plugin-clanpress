@@ -55,6 +55,10 @@ class Clanpress_Form {
     if ( empty( $element['value'] ) ) {
       $element['value'] = isset( $element['default'] ) ? $element['default'] : '';
     }
+
+    if ( is_array( $element['value'] ) ) {
+      array_walk( $element['value'], 'esc_attr' );
+    }
     else {
       $element['value'] = esc_attr( $element['value'] );
     }
@@ -146,6 +150,19 @@ class Clanpress_Form {
     else {
       return !!preg_match( "/$element[pattern]/", "$value" );
     }
+  }
+
+  /**
+   * TODO
+   *
+   * @param array $element
+   *   TODO
+   *
+   * @return bool
+   *   TODO
+   */
+  public static function is_multi_value($element) {
+    return $element['type'] === 'checkboxes' || is_array( $element['default'] );
   }
 
   /**

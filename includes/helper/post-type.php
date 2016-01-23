@@ -143,7 +143,13 @@ class Clanpress_Post_Type {
     foreach ( $meta_box['form_elements'] as $key => $element ) {
       if ( Clanpress_Form::is_valid( $element, $instance[ $key ] ) ) {
         $field_id = $this->get_meta_box_id( $id ) . '[' . $key . ']';
-        $value = sanitize_text_field( $instance[ $key ] );
+
+        if ( Clanpress_Form::is_multi_value( $element ) ) {
+          array_walk( $instance[ $key ], 'sanitize_text_field' );
+          $value = json_encode( $instance[ $key ] );
+        } else {
+          $value = sanitize_text_field( $instance[ $key ] );
+        }
 
         update_post_meta( $post_id, $field_id, $value );
       }
@@ -170,7 +176,13 @@ class Clanpress_Post_Type {
 
       $element['field_id'] = $field_id;
       $element['field_name'] = $field_id;
-      $element['value'] = get_post_meta( $post->ID, $field_id, true );
+
+      $value_raw = get_post_meta( $post->ID, $field_id, true );
+      if ( Clanpress_Form::is_multi_value( $element ) ) {
+        $element['value'] = json_decode( $value_raw, true );
+      } else {
+        $element['value'] = $value_raw;
+      }
 
       $output .= Clanpress_Form::element( $element );
     }
