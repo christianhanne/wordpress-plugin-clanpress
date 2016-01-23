@@ -153,13 +153,13 @@ class Clanpress_Form {
   }
 
   /**
-   * TODO
+   * Returns if the given element is a multi-value element.
    *
    * @param array $element
-   *   TODO
+   *   Form element
    *
    * @return bool
-   *   TODO
+   *   True, if this is a multi-value element.
    */
   public static function is_multi_value($element) {
     return $element['type'] === 'checkboxes' || is_array( $element['default'] );

@@ -29,7 +29,9 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Registers all defined meta boxes for this post type.
+   *
+   * @see Clanpress_Post_Type::add_meta_box()
    */
   public function add_meta_boxes() {
     $meta_boxes = $this->meta_boxes();
@@ -39,7 +41,9 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Handles storage logic for all defined meta boxes.
+   *
+   * @see Clanpress_Post_Type::save_meta_box()
    */
   public function save_meta_boxes( $post_id ) {
     // TODO: Check user permissions.
@@ -55,7 +59,9 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Handles rendering logic for all defined meta boxes.
+   *
+   * @see Clanpress_Post_Type::render_meta_box()
    */
   public function render_meta_boxes( $post, $metabox ) {
     $id = $this->extract_meta_box_id( $metabox['id'] );
@@ -63,26 +69,26 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Returns the correct path for a single post template.
    *
    * @param string $template
-   *   TODO
+   *   Original template path.
    *
    * @return string
-   *   TODO
+   *   Updated template path.
    */
   public static function single_template( $template ) {
     return self::get_template( $template, 'single');
   }
 
   /**
-   * TODO
+   * Returns the correct path for an archive template.
    *
    * @param string $template
-   *   TODO
+   *   Original template path.
    *
    * @return string
-   *   TODO
+   *   Updated template path.
    */
   public static function archive_template( $template ) {
     return self::get_template( $template, 'archive');
@@ -134,12 +140,12 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Registers the given metabox for the custom post type.
    *
    * @param string $id
-   *   TODO
+   *   Metabox id.
    * @param array $meta_box
-   *   TODO
+   *   Metabox settings array.
    */
   final private function add_meta_box($id, $meta_box) {
     if ( !isset( $meta_box['title'] ) || !isset( $meta_box['form_elements'] ) ) {
@@ -157,16 +163,16 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Handles storage logic for the given metabox.
    *
    * @param int $post_id
    *   The ID of the post being saved.
    * @param string $id
-   *   TODO
+   *   Metabox id.
    * @param array $meta_box
-   *   TODO
+   *   Metabox settings array.
    * @param array $instance
-   *   TODO
+   *   POST values specific to this metabox.
    */
   final private function save_meta_box( $post_id, $id, $meta_box, $instance ) {
     foreach ( $meta_box['form_elements'] as $key => $element ) {
@@ -186,12 +192,12 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Handles rendering logic for the given metabox.
    *
    * @param string $id
-   *   TODO
+   *   Metabox id.
    * @param array $meta_box
-   *   TODO
+   *   Metabox settings array.
    * @param WP_Post $post
    *   The post object.
    */
@@ -220,41 +226,41 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Returns a metabox id for this post type.
    *
    * @param string $id
-   *   TODO
+   *   Metabox id.
    *
    * @return string
-   *   TODO
+   *   Metabox id for this post type.
    */
   final private function get_meta_box_id($id) {
     return $this->id() . '_' . $id;
   }
 
   /**
-   * TODO
+   * Extracts the original metabox id from the customized one.
    *
-   * @param string $id
-   *   TODO
+   * @param string $meta_box_id
+   *   Metabox id for this post type.
    *
    * @return string
-   *   TODO
+   *   Metabox id.
    */
   final private function extract_meta_box_id($meta_box_id) {
     return  str_replace( $this->id() . '_', '', $meta_box_id );
   }
 
   /**
-   * TODO
+   * Returns the correct template for the given template type.
    *
    * @param string $template
-   *   TODO
+   *   Original template path.
    * @param string $type
-   *   TODO
+   *   Template type.
    *
    * @return string
-   *   TODO
+   *   Updated template path.
    */
   final private static function get_template( $template, $type ) {
     global $post;

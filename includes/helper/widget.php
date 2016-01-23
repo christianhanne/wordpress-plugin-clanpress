@@ -26,7 +26,7 @@ class Clanpress_Widget extends WP_Widget {
    * Displays the widget's template.
    *
    * @param array $args
-   *   TODO
+   *   Array of widget arguments.
    * @param array $instance
    *   Previously saved values from database.
    */
