@@ -155,9 +155,8 @@ class Clanpress_Widget extends WP_Widget {
    *   Filename of the widget's template
    */
   final private function template_name() {
-    $search = array( '_', 'clanpress-' );
-    $replace = array( '-', '' );
-    return str_replace( $search, $replace,  $this->id() ) . '.php';
+    $template_name = str_replace( array( '_', '-widget' ), array( '-', '' ),  $this->id() );
+    return 'widget-' . $template_name . '.php';
   }
 
   /**
