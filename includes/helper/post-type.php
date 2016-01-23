@@ -23,7 +23,9 @@ class Clanpress_Post_Type {
 
     add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
     add_action( 'save_post', array( $this, 'save_meta_boxes' ) );
+
     add_filter( 'single_template', array( $this, 'single_template' ) );
+    add_filter( 'archive_template', array( $this, 'archive_template' ) );
   }
 
   /**
@@ -70,16 +72,20 @@ class Clanpress_Post_Type {
    *   TODO
    */
   public static function single_template( $template ) {
-    global $post;
-    if ( $post->post_type == self::id() ) {
-      $template_name = self::template_name();
-      $template_dir = CLANPRESS_PLUGIN_PATH . 'templates/post-types/';
-      if ( $template !== get_stylesheet_directory() . '/' . $template_name ) {
-        return $template_dir . $template_name;
-      }
-    }
+    return self::get_template( $template, 'single');
+  }
 
-    return $template;
+  /**
+   * TODO
+   *
+   * @param string $template
+   *   TODO
+   *
+   * @return string
+   *   TODO
+   */
+  public static function archive_template( $template ) {
+    return self::get_template( $template, 'archive');
   }
 
   /**
@@ -240,13 +246,40 @@ class Clanpress_Post_Type {
   }
 
   /**
+   * TODO
+   *
+   * @param string $template
+   *   TODO
+   * @param string $type
+   *   TODO
+   *
+   * @return string
+   *   TODO
+   */
+  final private static function get_template( $template, $type ) {
+    global $post;
+    if ( $post->post_type == self::id() ) {
+      $template_name = self::template_name( $type );
+      $template_dir = CLANPRESS_PLUGIN_PATH . 'templates/post-types/';
+      if ( $template !== get_stylesheet_directory() . '/' . $template_name ) {
+        return $template_dir . $template_name;
+      }
+    }
+
+    return $template;
+  }
+
+  /**
    * Returns the template's file name for this post type.
+   *
+   * @param string $type
+   *   Template type.
    *
    * @return string
    *   Template's file name.
    */
-  final private static function template_name() {
-    $template_name = 'single-' . str_replace( '_', '-', self::id() ) . '.php';
+  final private static function template_name( $type ) {
+    $template_name = $type . '-' . str_replace( '_', '-', self::id() ) . '.php';
     return $template_name;
   }
 
