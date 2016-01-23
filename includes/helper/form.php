@@ -165,7 +165,11 @@ class Clanpress_Form {
     $attributes['id'] = $element['field_id'];
     $attributes['name'] = $element['field_name'];
     $attributes['type'] = $element['type'];
-    $attributes['value'] = $element['value'];
+
+    if ( !isset( $attributes['value'] ) ) {
+      $attributes['value'] = $element['value'];
+    }
+
     return sprintf('<input%s />', self::attributes($attributes));
   }
 
@@ -242,7 +246,7 @@ class Clanpress_Form {
 
       $checkbox['label'] = $label;
       $checkbox['type'] = 'checkbox';
-      $checkbox['value'] = isset( $value[ $key ] ) ?  $value[ $key ] : 0;
+      $checkbox['value'] = isset( $value[ $key ] ) ?  $value[ $key ] : NULL;
       $checkbox['default'] = $checkbox['value'];
 
       $checkbox['field_id'] = $checkbox['field_id'] . '[' . $key . ']';
@@ -284,8 +288,8 @@ class Clanpress_Form {
    */
   private static function attributes($attributes = array()) {
     $output = '';
-    foreach ($attributes as $attr_name => $attr_value) {
-      if ($attr_value === TRUE) {
+    foreach ( $attributes as $attr_name => $attr_value ) {
+      if ( $attr_value === true ) {
         $output .= ' ' . $attr_name;
       }
       else {
