@@ -9,6 +9,12 @@
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
+// TODO: Find a better workaround for the syntax error in php <= 5.5.
+define( 'CLANPRESS_WIDGETS_PATH', CLANPRESS_PLUGIN_PATH . 'includes/widgets/' );
+define( 'CLANPRESS_POST_TYPES_PATH', CLANPRESS_PLUGIN_PATH . 'includes/post-types/' );
+define( 'CLANPRESS_TAXONOMIES_PATH', CLANPRESS_PLUGIN_PATH . 'includes/taxonomies/' );
+define( 'CLANPRESS_HELPER_PATH', CLANPRESS_PLUGIN_PATH . 'includes/helper/' );
+
 /**
  * @class Clanpress
  */
@@ -17,25 +23,25 @@ class Clanpress {
    * @const string
    * Holds the Clanpress' widgets directory path.
    */
-  const WIDGETS_PATH = CLANPRESS_PLUGIN_PATH . 'includes/widgets/';
+  const WIDGETS_PATH = CLANPRESS_WIDGETS_PATH;
 
   /**
    * @const string
    * Holds the Clanpress' post types directory path.
    */
-  const POST_TYPES_PATH = CLANPRESS_PLUGIN_PATH . 'includes/post-types/';
+  const POST_TYPES_PATH = CLANPRESS_POST_TYPES_PATH;
 
   /**
    * @const string
    * Holds the Clanpress' taxonomies directory path.
    */
-  const TAXONOMIES_PATH = CLANPRESS_PLUGIN_PATH . 'includes/taxonomies/';
+  const TAXONOMIES_PATH = CLANPRESS_TAXONOMIES_PATH;
 
   /**
    * @const string
    * Holds the Clanpress' helper classes directory path.
    */
-  const HELPER_PATH = CLANPRESS_PLUGIN_PATH . 'includes/helper/';
+  const HELPER_PATH = CLANPRESS_HELPER_PATH;
 
   /**
    * Initializes the plugin's behavior.
