@@ -83,7 +83,7 @@ class Clanpress_Widget extends WP_Widget {
       $instance[ $id ] = isset( $element['default'] ) ? $element['default'] : '';
       if (!empty( $new_instance[ $id ] )) {
         if ( Clanpress_Form::is_valid( $element, $new_instance[ $id ] ) ) {
-          $instance[ $id ] = $value;
+          $instance[ $id ] = strip_tags( trim( $new_instance[ $id ] ));
         }
         else {
           $instance[ $id ] = $old_instance[ $id ];
