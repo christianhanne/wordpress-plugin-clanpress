@@ -1,18 +1,23 @@
 <?php
 /**
  * @file
- * Loads all files necessary to initialize the plugin's test cases.
+ * Bootstrap file for unit tests.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
  */
 
-define('TEST_DIR', '/tmp/wordpress-develop/tests/phpunit');
-require_once TEST_DIR . '/includes/functions.php';
+$directory = getenv( 'WP_TESTS_DIR' );
+if ( ! $directory ) {
+	$directory = '/tmp/wordpress-tests-lib';
+}
 
-function load_clanpress() {
+require_once $directory . '/includes/functions.php';
+
+function _manually_load_plugin() {
 	require dirname( dirname( __FILE__ ) ) . '/clanpress.php';
 }
 
-tests_add_filter( 'muplugins_loaded', 'load_clanpress' );
-require TEST_DIR . '/includes/bootstrap.php';
+tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
+
+require $directory . '/includes/bootstrap.php';
