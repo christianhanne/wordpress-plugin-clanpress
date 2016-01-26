@@ -34,6 +34,9 @@ class Clanpress_Form {
    *   - description: (optional)
    *     Will create a description which will be displayed below the form
    *     element.
+   *   - template: (optional)
+   *     Elements may define an own template. $field, $label and $description
+   *     can be used as placeholders in the markup.
    *   - options:
    *     This is only required for elements with options (like select). Should
    *     contain an array of option values and labels. Eg. foo => bar will
@@ -58,8 +61,7 @@ class Clanpress_Form {
 
     if ( is_array( $element['value'] ) ) {
       array_walk( $element['value'], 'esc_attr' );
-    }
-    else {
+    } else {
       $element['value'] = esc_attr( $element['value'] );
     }
 
@@ -68,44 +70,58 @@ class Clanpress_Form {
       $label = self::label( $element['field_id'], $element['label'] );
     }
 
+    $description = '';
+    if ( isset( $element['description'] ) ) {
+      $description = '<p class="description">' . $element['description'] . '</p>';
+    }
+
     $element['options'] = isset( $element['options'] ) ? (array) $element['options'] : array();
     $element['attributes'] = isset( $element['attributes'] ) ? (array) $element['attributes'] : array();
 
     switch ($element['type']) {
       case 'select':
         $element['attributes']['class'] = 'widefat';
-        $output = sprintf('%s%s', $label, self::select($element) );
+
+        $field = self::select($element);
+        $template = '<div>$label$field$description</div>';
         break;
 
       case 'checkbox':
         $element['attributes']['class'] = 'widefat';
-        $output = sprintf( '%s%s', self::checkbox($element), $label );
+
+        $field = self::checkbox($element);
+        $template = '<div>$field$label$description</div>';
         break;
 
       case 'checkboxes':
         $element['attributes']['class'] = 'widefat';
-        $output = sprintf( '%s%s', $label, self::checkboxes($element) );
+
+        $field = self::checkboxes($element);
+        $template = '<div>$label$field$description</div>';
         break;
 
       case 'number':
         $element['attributes']['class'] = 'tiny-text';
-        $output = sprintf( '%s %s', $label, self::input($element) );
+
+        $field = self::input($element);
+        $template = '<div>$label $field$description</div>';
         break;
 
       case 'text':
         $element['attributes']['class'] = 'widefat';
-        $output = sprintf( '%s%s', $label, self::input($element) );
+
+        $field = self::input($element);
+        $template = '<div>$field$label$description</div>';
         break;
-
-      default:
-        return '';
     }
 
-    if ( !empty( $element['description'] ) ) {
-      $output .= sprintf( '<br /><small>%s</small>', $element['description'] );
+    if ( !empty( $element['template'] ) ) {
+      $template = $element['template'];
     }
 
-    return '<p>' . $output . '</p>';
+    $pattern = array('$label', '$field', '$description');
+    $replace = array($label, $field, $description);
+    return str_replace($pattern, $replace, $template);
   }
 
   /**
