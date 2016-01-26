@@ -79,18 +79,7 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       'context' => 'normal',
       'priority' => 'default',
       'form_elements' => array(
-        'opponent_name' => array(
-          'type' => 'text',
-          'label' => __( 'Opponent name', 'clanpress' ),
-          'default' => '',
-        ),
-        'opponent_link' => array(
-          'type' => 'text',
-          'label' => __( 'Opponent website', 'clanpress' ),
-          'default' => '',
-          'pattern' => '^http[s]?:\/\/.*$',
-        ),
-        'match_link' => array(
+        'link' => array(
           'type' => 'text',
           'label' => __( 'Link to the match', 'clanpress' ),
           'default' => '',
@@ -104,7 +93,7 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       'context' => 'side',
       'priority' => 'default',
       'form_elements' => array(
-        'match_type' => array(
+        'top_match' => array(
           'type' => 'checkbox',
           'label' => __( 'Mark as top match', 'clanpress' ),
           'description' => __( 'The most recent top match will be displayed in the top match widget.', 'clanpress' ),
