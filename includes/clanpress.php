@@ -20,16 +20,17 @@ class Clanpress {
    * @see Clanpress::register_post_types()
    */
   public function __construct() {
-    require_once( self::get_helper_path() . 'helper.php' );
     require_once( self::get_helper_path() . 'form.php' );
-    require_once( self::get_helper_path() . 'widget.php' );
+    require_once( self::get_helper_path() . 'helper.php' );
+    require_once( self::get_helper_path() . 'meta-box.php' );
     require_once( self::get_helper_path() . 'post-type.php' );
     require_once( self::get_helper_path() . 'taxonomy.php' );
+    require_once( self::get_helper_path() . 'widget.php' );
 
-    add_action( 'widgets_init', array( $this, 'register_widgets' ) );
     add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
     add_action( 'admin_menu', array( $this, 'register_admin_pages' ) );
+    add_action( 'widgets_init', array( $this, 'register_widgets' ) );
   }
 
   /**
