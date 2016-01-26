@@ -47,7 +47,7 @@ class Clanpress_Opponent_Taxonomy extends Clanpress_Taxonomy {
       'show_admin_column'     => true,
       'update_count_callback' => '_update_post_term_count',
       'query_var'             => true,
-      'rewrite'               => array( 'slug' => 'attribute' ),
+      'rewrite'               => array( 'slug' => 'opponent' ),
     );
   }
 
