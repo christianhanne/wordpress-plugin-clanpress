@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * TODO
+ * This is the main plugin file which is used to identify the plugin.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
@@ -10,7 +10,7 @@
 /*
 Plugin Name: ClanPress
 Plugin URI: http://aureola.codes/wordpress-plugins/clanpress
-Description: TODO
+Description: ClanPress is full featured clan management plugin.
 Author: Christian Hanne <support@aureola.codes>
 Author URI: http://aureola.codes/wordpress-plugins/
 Version: 0.1.2
