@@ -85,14 +85,6 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
           'default' => '',
           'pattern' => '^http[s]?:\/\/.*$',
         ),
-      ),
-    );
-
-    $boxes['top_match'] = array(
-      'title' => __( 'Top match', 'clanpress' ),
-      'context' => 'side',
-      'priority' => 'default',
-      'form_elements' => array(
         'top_match' => array(
           'type' => 'checkbox',
           'label' => __( 'Mark as top match', 'clanpress' ),

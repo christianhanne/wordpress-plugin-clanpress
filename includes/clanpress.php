@@ -81,6 +81,7 @@ class Clanpress {
    */
   public static function register_taxonomies() {
     self::register_taxonomy( 'game' );
+    self::register_taxonomy( 'opponent' );
   }
 
   /**
