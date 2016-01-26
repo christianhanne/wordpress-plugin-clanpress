@@ -9,40 +9,10 @@
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
-// TODO: Find a better workaround for the syntax error in php <= 5.5.
-define( 'CLANPRESS_WIDGETS_PATH', CLANPRESS_PLUGIN_PATH . 'includes/widgets/' );
-define( 'CLANPRESS_POST_TYPES_PATH', CLANPRESS_PLUGIN_PATH . 'includes/post-types/' );
-define( 'CLANPRESS_TAXONOMIES_PATH', CLANPRESS_PLUGIN_PATH . 'includes/taxonomies/' );
-define( 'CLANPRESS_HELPER_PATH', CLANPRESS_PLUGIN_PATH . 'includes/helper/' );
-
 /**
  * @class Clanpress
  */
 class Clanpress {
-  /**
-   * @const string
-   * Holds the Clanpress' widgets directory path.
-   */
-  const WIDGETS_PATH = CLANPRESS_WIDGETS_PATH;
-
-  /**
-   * @const string
-   * Holds the Clanpress' post types directory path.
-   */
-  const POST_TYPES_PATH = CLANPRESS_POST_TYPES_PATH;
-
-  /**
-   * @const string
-   * Holds the Clanpress' taxonomies directory path.
-   */
-  const TAXONOMIES_PATH = CLANPRESS_TAXONOMIES_PATH;
-
-  /**
-   * @const string
-   * Holds the Clanpress' helper classes directory path.
-   */
-  const HELPER_PATH = CLANPRESS_HELPER_PATH;
-
   /**
    * Initializes the plugin's behavior.
    *
@@ -50,11 +20,11 @@ class Clanpress {
    * @see Clanpress::register_post_types()
    */
   public function __construct() {
-    require_once( self::HELPER_PATH . 'helper.php' );
-    require_once( self::HELPER_PATH . 'form.php' );
-    require_once( self::HELPER_PATH . 'widget.php' );
-    require_once( self::HELPER_PATH . 'post-type.php' );
-    require_once( self::HELPER_PATH . 'taxonomy.php' );
+    require_once( self::get_helper_path() . 'helper.php' );
+    require_once( self::get_helper_path() . 'form.php' );
+    require_once( self::get_helper_path() . 'widget.php' );
+    require_once( self::get_helper_path() . 'post-type.php' );
+    require_once( self::get_helper_path() . 'taxonomy.php' );
 
     add_action( 'widgets_init', array( $this, 'register_widgets' ) );
     add_action( 'init', array( $this, 'register_post_types' ) );
@@ -130,7 +100,7 @@ class Clanpress {
    * @see Clanpress_Post_Type
    */
   private static function register_post_type( $post_type ) {
-    require_once( self::POST_TYPES_PATH . $post_type . '.php' );
+    require_once( self::get_post_types_path() . $post_type . '.php' );
     $post_type_class = 'Clanpress_' . ucwords( $post_type ) . '_Post_Type';
     new $post_type_class();
   }
@@ -152,7 +122,7 @@ class Clanpress {
    * @see Clanpress_Widget
    */
   private static function register_widget( $widget ) {
-    require_once( self::WIDGETS_PATH . $widget . '.php' );
+    require_once( self::get_widgets_path() . $widget . '.php' );
     register_widget( 'Clanpress_' . ucwords( $widget ) . '_Widget' );
   }
 
@@ -173,8 +143,48 @@ class Clanpress {
    * @see Clanpress_Taxonomy
    */
   private static function register_taxonomy( $taxonomy ) {
-    require_once( self::TAXONOMIES_PATH . $taxonomy . '.php' );
+    require_once( self::get_taxonomies_path() . $taxonomy . '.php' );
     $taxonomy_class = 'Clanpress_' . ucwords( $taxonomy ) . '_Taxonomy';
     new $taxonomy_class();
+  }
+
+  /**
+   * Returns the path of the plugin's helper directory.
+   *
+   * @return string
+   *   Helper directory path.
+   */
+  private static function get_helper_path() {
+    return CLANPRESS_PLUGIN_PATH . 'includes/helper/';
+  }
+
+  /**
+   * Returns the path of the plugin's post types directory.
+   *
+   * @return string
+   *   Post types directory path.
+   */
+  private static function get_post_types_path() {
+    return CLANPRESS_PLUGIN_PATH . 'includes/post-types/';
+  }
+
+  /**
+   * Returns the path of the plugin's taxonomies directory.
+   *
+   * @return string
+   *   Taxonomies directory path.
+   */
+  private static function get_taxonomies_path() {
+    return CLANPRESS_PLUGIN_PATH . 'includes/taxonomies/';
+  }
+
+  /**
+   * Returns the path of the plugin's widgets directory.
+   *
+   * @return string
+   *   Widgets directory path.
+   */
+  private static function get_widgets_path() {
+    return CLANPRESS_PLUGIN_PATH . 'includes/widgets/';
   }
 }
