@@ -29,6 +29,13 @@ class Clanpress_Taxonomy {
 
         add_action( 'admin_menu', array( $this, 'register_admin_page' ) );
         add_action( 'parent_file', array( $this, 'register_parent_file' ) );
+
+        if ( count( $this->form_elements() ) ) {
+          add_action( $this->id() . '_add_form_fields', array( $this, 'form_add') );
+          add_action( $this->id() . '_edit_form_fields', array( $this, 'form_edit') );
+          add_action( 'create_' . $this->id() , array( $this, 'form_save') );
+          add_action( 'edited_' . $this->id() , array( $this, 'form_save') );
+        }
       }
     }
   }
@@ -66,6 +73,74 @@ class Clanpress_Taxonomy {
     }
 
     return $parent_file;
+  }
+
+  /**
+   * Adds custom field to the term creation form.
+   */
+  public function form_add() {
+    foreach ( $this->form_elements() as $key => $element ) {
+      $field_id = $this->id() . '_' . $key;
+
+      $element['field_id'] = $field_id;
+      $element['field_name'] = $field_id;
+
+      echo Clanpress_Form::element($element);
+    }
+  }
+
+  /**
+   * Adds custom form fields to the term edit form.
+   *
+   * @param object $term
+   *   The wordpress term object.
+   */
+  public function form_edit( $term ) {
+    $term_meta = get_option( $this->id() . '_' . $term->term_id );
+    foreach ( $this->form_elements() as $key => $element ) {
+      $field_id = $this->id() . '_' . $key;
+
+      if ( isset( $term_meta[ $field_id ] )) {
+        $element['value'] = $term_meta[ $field_id ];
+      }
+
+      $element['field_id'] = $field_id;
+      $element['field_name'] = $field_id;
+
+      $element['template'] = '<tr><th>$label</th><td>$field$description</td></tr>';
+
+      echo Clanpress_Form::element($element);
+    }
+  }
+
+  /**
+   * Stores values for all custom form fields.
+   *
+   * @param int $term_id
+   *   The term's storage id.
+   */
+  public function form_save( $term_id ) {
+    $term_meta = get_option( $this->id() . '_' . $term->term_id );
+    if ( empty( $term_meta ) ) {
+      $term_meta = array();
+    }
+
+    $instance = isset( $_POST ) ? $_POST : array();
+    foreach ( $this->form_elements() as $key => $element ) {
+      $field_id = $this->id() . '_' . $key;
+      if ( Clanpress_Form::is_valid( $element, $instance[ $field_id ] ) ) {
+        if ( Clanpress_Form::is_multi_value( $element ) ) {
+          $value = $instance[ $field_id ];
+          array_walk( $value, 'sanitize_text_field' );
+        } else {
+          $value = sanitize_text_field( $instance[ $field_id ] );
+        }
+
+        $term_meta[ $field_id ] = $value;
+      }
+    }
+
+    update_option( $this->id() . '_' . $term->term_id, $term_meta );
   }
 
   /**
@@ -112,6 +187,23 @@ class Clanpress_Taxonomy {
    * @link http://codex.wordpress.org/Function_Reference/register_taxonomy
    */
   protected function post_types() {
+    return array();
+  }
+
+  /**
+   * Returns an array of form elements.
+   *
+   * Should return an array of form elements for taxonomy forms. The array
+   * should consist of the form element ids as key and the element settings
+   * as values. For details on element settings check the linked function.
+   *
+   * @return array
+   *   Array of form elements for widget forms.
+   *   Eg. array('title' => $element, 'num_items' => $element)
+   *
+   * @see Clanpress_Form::element()
+   */
+  protected function form_elements() {
     return array();
   }
 

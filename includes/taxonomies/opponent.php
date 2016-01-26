@@ -59,4 +59,18 @@ class Clanpress_Opponent_Taxonomy extends Clanpress_Taxonomy {
       'clanpress_match',
     );
   }
+
+  /**
+   * @inheritdoc
+   */
+  protected function form_elements() {
+    return array(
+      'link' => array(
+        'type' => 'text',
+        'label' => __( 'Website', 'clanpress' ),
+        'pattern' => '^http[s]?:\/\/.+$',
+        'description' => __( 'Add a link to your opponent\'s website.', 'clanpress' ),
+      ),
+    );
+  }
 }
