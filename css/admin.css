@@ -1,0 +1,25 @@
+/**
+ * @file
+ * Contains styles for the clanpress admin pages.
+ *
+ * @author Christian Hanne <support@aureola.codes>
+ * @package ClanPress
+ */
+
+body.taxonomy-clanpress_game .form-field.term-slug-wrap,
+body.taxonomy-clanpress_game .form-field.term-description-wrap,
+body.taxonomy-clanpress_opponent .form-field.term-slug-wrap,
+body.taxonomy-clanpress_opponent .form-field.term-description-wrap {
+  display: none;
+}
+
+body.taxonomy-clanpress_game th.column-slug,
+body.taxonomy-clanpress_game td.column-slug,
+body.taxonomy-clanpress_game th.column-description,
+body.taxonomy-clanpress_game td.column-description,
+body.taxonomy-clanpress_opponent th.column-slug,
+body.taxonomy-clanpress_opponent td.column-slug,
+body.taxonomy-clanpress_opponent th.column-description,
+body.taxonomy-clanpress_opponent td.column-description {
+  display: none;
+}

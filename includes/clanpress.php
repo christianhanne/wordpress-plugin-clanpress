@@ -29,6 +29,7 @@ class Clanpress {
 
     add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
+    add_action( 'admin_init', array( $this, 'register_admin_styles' ) );
     add_action( 'admin_menu', array( $this, 'register_admin_pages' ) );
     add_action( 'widgets_init', array( $this, 'register_widgets' ) );
   }
@@ -83,6 +84,13 @@ class Clanpress {
   public static function register_taxonomies() {
     self::register_taxonomy( 'game' );
     self::register_taxonomy( 'opponent' );
+  }
+
+  /**
+   * Registers stylesheets for admin pages.
+   */
+  public static function register_admin_styles() {
+    wp_enqueue_style( 'clanpress', self::get_styles_uri() . '/admin.css' );
   }
 
   /**
@@ -188,5 +196,15 @@ class Clanpress {
    */
   private static function get_widgets_path() {
     return CLANPRESS_PLUGIN_PATH . 'includes/widgets/';
+  }
+
+  /**
+   * Returns the path of the plugin's styles uri.
+   *
+   * @return string
+   *   Styles directory uri.
+   */
+  private static function get_styles_uri() {
+    return CLANPRESS_PLUGIN_URL . 'css';
   }
 }
