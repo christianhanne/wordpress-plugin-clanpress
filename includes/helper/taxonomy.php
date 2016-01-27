@@ -96,7 +96,7 @@ class Clanpress_Taxonomy {
    *   The wordpress term object.
    */
   public function form_edit( $term ) {
-    $term_meta = get_option( $this->id() . '_' . $term->term_id );
+    $term_meta = $this->get_term_meta( $term->term_id );
     foreach ( $this->form_elements() as $key => $element ) {
       $field_id = $this->id() . '_' . $key;
 
@@ -120,11 +120,8 @@ class Clanpress_Taxonomy {
    *   The term's storage id.
    */
   public function form_save( $term_id ) {
-    $term_meta = get_option( $this->id() . '_' . $term->term_id );
-    if ( empty( $term_meta ) ) {
-      $term_meta = array();
-    }
-
+    $values = array();
+    
     $instance = isset( $_POST ) ? $_POST : array();
     foreach ( $this->form_elements() as $key => $element ) {
       $field_id = $this->id() . '_' . $key;
@@ -136,11 +133,41 @@ class Clanpress_Taxonomy {
           $value = sanitize_text_field( $instance[ $field_id ] );
         }
 
-        $term_meta[ $field_id ] = $value;
+        $values[ $field_id ] = $value;
       }
     }
 
-    update_option( $this->id() . '_' . $term->term_id, $term_meta );
+    $this->save_term_meta( $term_id, $values );
+  }
+
+  /**
+   * Returns the term's stored meta data.
+   *
+   * @param int $term_id
+   *   The term's storage id.
+   *
+   * @return array
+   *   Array of term meta data.
+   */
+  private function get_term_meta( $term_id ) {
+    return get_option( $this->id() . '_' . $term_id, array() );
+  }
+
+  /**
+   * Stores the term's meta data.
+   *
+   * @param int $term_id
+   *   The term's storage id.
+   * @param array $values
+   *   Array with new meta data values.
+   */
+  private function save_term_meta( $term_id, $values ) {
+    $term_meta = $this->get_term_meta( $term_id );
+    foreach ( $values as $key => $value ) {
+      $term_meta[ $key ] = $value;
+    }
+
+    update_option( $this->id() . '_' . $term_id, $term_meta );
   }
 
   /**
