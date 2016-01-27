@@ -31,10 +31,11 @@ class Clanpress_Taxonomy {
         add_action( 'parent_file', array( $this, 'register_parent_file' ) );
 
         if ( count( $this->form_elements() ) ) {
-          add_action( $this->id() . '_add_form_fields', array( $this, 'form_add') );
-          add_action( $this->id() . '_edit_form_fields', array( $this, 'form_edit') );
-          add_action( 'create_' . $this->id() , array( $this, 'form_save') );
-          add_action( 'edited_' . $this->id() , array( $this, 'form_save') );
+          add_action( $this->id() . '_add_form_fields', array( $this, 'term_add') );
+          add_action( $this->id() . '_edit_form_fields', array( $this, 'term_edit') );
+          add_action( 'create_' . $this->id() , array( $this, 'term_save') );
+          add_action( 'edited_' . $this->id() , array( $this, 'term_save') );
+          add_action( 'pre_delete_term', 'term_delete' );
         }
       }
     }
@@ -78,7 +79,7 @@ class Clanpress_Taxonomy {
   /**
    * Adds custom field to the term creation form.
    */
-  public function form_add() {
+  public function term_add() {
     foreach ( $this->form_elements() as $key => $element ) {
       $field_id = $this->id() . '_' . $key;
 
@@ -95,7 +96,7 @@ class Clanpress_Taxonomy {
    * @param object $term
    *   The wordpress term object.
    */
-  public function form_edit( $term ) {
+  public function term_edit( $term ) {
     $term_meta = $this->get_term_meta( $term->term_id );
     foreach ( $this->form_elements() as $key => $element ) {
       $field_id = $this->id() . '_' . $key;
@@ -119,9 +120,9 @@ class Clanpress_Taxonomy {
    * @param int $term_id
    *   The term's storage id.
    */
-  public function form_save( $term_id ) {
+  public function term_save( $term_id ) {
     $values = array();
-    
+
     $instance = isset( $_POST ) ? $_POST : array();
     foreach ( $this->form_elements() as $key => $element ) {
       $field_id = $this->id() . '_' . $key;
@@ -138,6 +139,20 @@ class Clanpress_Taxonomy {
     }
 
     $this->save_term_meta( $term_id, $values );
+  }
+
+  /**
+   * Cleans up all meta data before term gets deleted.
+   *
+   * @param int $term_id
+   *   The term's storage id.
+   * @param string $taxonomy
+   *   Name of the taxonomy.
+   */
+  public function term_delete( $term_id, $taxonomy ) {
+    if ( $this->id() === $taxonomy ) {
+      $this->delete_term_meta( $term_id );
+    }
   }
 
   /**
@@ -168,6 +183,16 @@ class Clanpress_Taxonomy {
     }
 
     update_option( $this->id() . '_' . $term_id, $term_meta );
+  }
+
+  /**
+   * Deletes the term's stored meta data.
+   *
+   * @param int $term_id
+   *   The term's storage id.
+   */
+  private function delete_term_meta( $term_id ) {
+    delete_option( $this->id() . '_' . $term_id );
   }
 
   /**
