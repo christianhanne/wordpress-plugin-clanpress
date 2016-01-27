@@ -83,35 +83,35 @@ class Clanpress_Form {
         $element['attributes']['class'] = 'widefat';
 
         $field = self::select($element);
-        $template = '<div>$label$field$description</div>';
+        $template = '<div class="form-field">$label$field$description</div>';
         break;
 
       case 'checkbox':
         $element['attributes']['class'] = 'widefat';
 
         $field = self::checkbox($element);
-        $template = '<div>$field$label$description</div>';
+        $template = '<div class="form-field">$field$label$description</div>';
         break;
 
       case 'checkboxes':
         $element['attributes']['class'] = 'widefat';
 
         $field = self::checkboxes($element);
-        $template = '<div>$label$field$description</div>';
+        $template = '<div class="form-field">$label$field$description</div>';
         break;
 
       case 'number':
         $element['attributes']['class'] = 'tiny-text';
 
         $field = self::input($element);
-        $template = '<div>$label $field$description</div>';
+        $template = '<div class="form-field">$label $field$description</div>';
         break;
 
       case 'text':
         $element['attributes']['class'] = 'widefat';
 
         $field = self::input($element);
-        $template = '<div>$field$label$description</div>';
+        $template = '<div class="form-field">$label$field$description</div>';
         break;
     }
 
