@@ -55,7 +55,7 @@ class Clanpress {
     self::register_widget( 'social_media' );
     self::register_widget( 'sponsors' );
     self::register_widget( 'squads' );
-    self::register_widget( 'teamspeak' );
+    self::register_widget( 'teamspeak_viewer' );
     self::register_widget( 'top_match' );
     self::register_widget( 'upcoming_matches' );
   }

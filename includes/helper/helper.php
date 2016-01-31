@@ -34,4 +34,27 @@ class Clanpress_Helper {
 
       return $options;
     }
+
+    /**
+     * Returns an uri for a specific library.
+     *
+     * @param string $library
+     *   Folder name of the library to include.
+     *
+     * @return string
+     *   Uri of the library.
+     */
+    public static function get_library_uri( $library ) {
+      return CLANPRESS_PLUGIN_URL . 'dist/vendor/' . $library;
+    }
+
+    /**
+     * Returns an uri for the scripts folder.
+     *
+     * @return string
+     *   Uri of the scripts folder.
+     */
+    public static function get_scripts_uri() {
+      return CLANPRESS_PLUGIN_URL . 'dist/js/';
+    }
 }

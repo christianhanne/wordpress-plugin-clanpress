@@ -1,0 +1,28 @@
+/**
+ * @file
+ * Initializes the teamspeak viewer plugin.
+ *
+ * @author Christian Hanne <support@aureola.codes>
+ * @package Clanpress
+ */
+(($) => {
+  'use scrict';
+
+  $(document).ready(() => {
+    $('.teamspeak-viewer').each(() => {
+      let $element = $(this);
+
+      let ts3Address = $element.attr('data-ts3-address');
+      let ts3Port = $element.attr('data-ts3-port');
+
+      if (ts3Address && ts3Port) {
+        $element.tsviewer({
+          host: ts3Address,
+          port: ts3Port
+        });
+      } else {
+        console.error('Missing or empty attributes.');
+      }
+    });
+  });
+})(jQuery);

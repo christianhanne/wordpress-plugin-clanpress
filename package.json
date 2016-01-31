@@ -7,10 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "compile:scss": "node-sass src/scss/backend.scss > dist/css/backend.css",
-    "compile:minify_css": "minify dist/css/backend.css > dist/css/backend.min.css",
-    "compile:css": "npm run compile:scss && npm run compile:minify_css",
-    "compile": "npm run compile:css",
+    "compile:minify": "cat src/css/*.css | minify --css && cat src/js/*.js | minify --js",
+    "compile:css": "node-sass src/scss/backend.scss > dist/css/backend.css",
+    "compile:js": "babel src/es6 -d dist/js",
+    "compile": "npm run compile:js && npm run compile:css && npm run compile:minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/aureolacodes/clanpress#readme",
   "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "babelify": "^7.2.0",
     "minify": "^2.0.3",
     "node-sass": "^3.4.2"
   }
