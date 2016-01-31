@@ -89,7 +89,7 @@ class Clanpress {
    * Registers stylesheets for admin pages.
    */
   public static function register_admin_styles() {
-    wp_enqueue_style( 'clanpress', self::get_styles_uri() . '/admin.css' );
+    wp_enqueue_style( 'clanpress', self::get_styles_uri() . '/backend.min.css' );
   }
 
   /**
@@ -237,6 +237,6 @@ class Clanpress {
    *   Styles directory uri.
    */
   private static function get_styles_uri() {
-    return CLANPRESS_PLUGIN_URL . 'css';
+    return CLANPRESS_PLUGIN_URL . 'dist/css';
   }
 }
