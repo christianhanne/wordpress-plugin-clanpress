@@ -1,0 +1,30 @@
+{
+  "name": "clanpress",
+  "version": "0.0.0",
+  "description": "ClanPress is full featured clan management plugin.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "compile:scss": "node-sass src/scss/backend.scss > dist/css/backend.css",
+    "compile:minify_css": "minify dist/css/backend.css > dist/css/backend.min.css",
+    "compile:css": "npm run compile:scss && npm run compile:minify_css",
+    "compile": "npm run compile:css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aureolacodes/clanpress.git"
+  },
+  "author": "Christian Hanne <support@aureola.codes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aureolacodes/clanpress/issues"
+  },
+  "homepage": "https://github.com/aureolacodes/clanpress#readme",
+  "devDependencies": {
+    "minify": "^2.0.3",
+    "node-sass": "^3.4.2"
+  }
+}
