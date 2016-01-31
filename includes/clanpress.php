@@ -15,14 +15,12 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 class Clanpress {
   /**
    * Initializes the plugin's behavior.
-   *
-   * @see Clanpress::register_widgets()
-   * @see Clanpress::register_post_types()
    */
   public function __construct() {
     require_once( self::get_helper_path() . 'form.php' );
     require_once( self::get_helper_path() . 'helper.php' );
     require_once( self::get_helper_path() . 'meta-box.php' );
+    require_once( self::get_helper_path() . 'page.php' );
     require_once( self::get_helper_path() . 'post-type.php' );
     require_once( self::get_helper_path() . 'taxonomy.php' );
     require_once( self::get_helper_path() . 'widget.php' );
@@ -37,11 +35,12 @@ class Clanpress {
   /**
    * Registers all main admin menu pages.
    *
-   * @todo Add correct capability_type.
+   * @see Clanpress::register_admin_page()
    */
   public static function register_admin_pages() {
-    $title = __( 'Clanpress', 'clanpress' );
-    add_menu_page( $title, $title, 'manage_options', 'clanpress' );
+    self::register_admin_page( 'clanpress' );
+    self::register_admin_page( 'dashboard' );
+    self::register_admin_page( 'settings' );
   }
 
   /**
@@ -91,6 +90,28 @@ class Clanpress {
    */
   public static function register_admin_styles() {
     wp_enqueue_style( 'clanpress', self::get_styles_uri() . '/admin.css' );
+  }
+
+  /**
+   * Registers a new page with the given name.
+   *
+   * This function includes a file with the page's name. This file has
+   * to contain a function named "Clanpress_[Page]_Page.
+   * [Page] should be replaced by the actual name of the post type in
+   * upper camelcase. This class has to extend the Clanpress_Page class.
+   *
+   * Please note that this function does no sanitization nor checks on
+   * the widget name, so it should stay private and be used with caution.
+   *
+   * @param string $page
+   *   Machine-readable name of page.
+   *
+   * @see Clanpress_Page
+   */
+  private static function register_admin_page( $page ) {
+    require_once( self::get_admin_page_path() . $page . '.php' );
+    $page_class = 'Clanpress_' . ucwords( $page ) . '_Page';
+    new $page_class();
   }
 
   /**
@@ -197,6 +218,17 @@ class Clanpress {
   private static function get_widgets_path() {
     return CLANPRESS_PLUGIN_PATH . 'includes/widgets/';
   }
+
+  /**
+   * Returns the path of the plugin's admin pages directory.
+   *
+   * @return string
+   *   Admin pages directory path.
+   */
+  private static function get_admin_page_path() {
+    return CLANPRESS_PLUGIN_PATH . 'includes/admin/';
+  }
+
 
   /**
    * Returns the path of the plugin's styles uri.
