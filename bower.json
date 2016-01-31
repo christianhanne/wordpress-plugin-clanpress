@@ -1,0 +1,22 @@
+{
+  "name": "clanpress",
+  "description": "ClanPress is full featured clan management plugin.",
+  "main": "index.js",
+  "authors": [
+    "Christian Hanne <support@aureola.codes"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/aureolacodes/clanpress",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-ts3viewer": "git@github.com:planetteamspeak/jquery-ts3viewer.git"
+  }
+}
