@@ -24,7 +24,7 @@ class Clanpress_Teamspeak_Viewer_Widget extends Clanpress_Widget {
     $plugin_uri = $library_uri . '/src/jquery.ts3viewer.min.js';
     wp_enqueue_script( 'clanpress_jquery_ts3viewer_plugin', $plugin_uri );
 
-    $script_uri = Clanpress_Helper::get_scripts_uri() . 'teampeak-viewer.min.js';
+    $script_uri = Clanpress_Helper::get_scripts_uri() . 'teamspeak-viewer.min.js';
     wp_enqueue_script( 'clanpress_jquery_ts3viewer', $script_uri );
 
     if ( $instance['theme'] !== 'none' ) {
