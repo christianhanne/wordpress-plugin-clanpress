@@ -87,8 +87,6 @@ class Clanpress_Form {
         break;
 
       case 'checkbox':
-        $element['attributes']['class'] = 'widefat';
-
         $field = self::checkbox($element);
         $template = '<div class="form-field">$field$label$description</div>';
         break;
@@ -111,6 +109,11 @@ class Clanpress_Form {
         $element['attributes']['class'] = 'widefat';
 
         $field = self::input($element);
+        $template = '<div class="form-field">$label$field$description</div>';
+        break;
+
+      case 'upload':
+        $field = self::upload($element);
         $template = '<div class="form-field">$label$field$description</div>';
         break;
     }
@@ -289,6 +292,46 @@ class Clanpress_Form {
 
       $output .= self::element($checkbox);
     }
+
+    return $output;
+  }
+
+  /**
+   * Returns the html markup for a file upload field.
+   *
+   * @param array $element
+   *   Contains the form element definition as an associative array.
+   *   Please check the linked method for further details.
+   *
+   * @return string
+   *   Html markup of a file upload form element.
+   *
+   * @see Clanpress_Form::element()
+   */
+  private static function upload($element) {
+    wp_enqueue_media();
+
+    $script_uri = Clanpress_Helper::get_scripts_uri() . 'upload-field.min.js';
+    wp_enqueue_script( 'clanpress_upload_field', $script_uri );
+
+    $element['type'] = 'hidden';
+    $element['attributes']['class'] = 'clanpress-upload-field';
+
+    $attachment = '';
+    if ( !empty( $element['value'] ) ) {
+      $attachment = wp_get_attachment_image( $element['value'], 'thumbnail' );
+    }
+
+    $output = self::input($element);
+
+    $output .= vsprintf('<div class="clanpress-upload-image">%s</div>', array(
+      $attachment,
+    ));
+
+    $output .= vsprintf('<input class="%s" value="%s" type="button" />', array(
+      'clanpress-upload-button upload_image_button button',
+      __( 'Select Image', 'clanpress' ),
+    ));
 
     return $output;
   }
