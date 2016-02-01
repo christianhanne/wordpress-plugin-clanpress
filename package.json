@@ -7,10 +7,12 @@
     "test": "tests"
   },
   "scripts": {
-    "compile:minify": "cat src/css/*.css | minify --css && cat src/js/*.js | minify --js",
+    "minify:css": "cleancss -o dist/css/backend.min.css dist/css/backend.css",
+    "minify:js": "uglifyjs --compress --mangle -- dist/js/teamspeak-viewer.js > dist/js/teamspeak-viewer.min.js",
+    "minify": "npm run minify:js && npm run minify:css",
     "compile:css": "node-sass src/scss/backend.scss > dist/css/backend.css",
     "compile:js": "babel src/es6 -d dist/js",
-    "compile": "npm run compile:js && npm run compile:css && npm run compile:minify",
+    "compile": "npm run compile:js && npm run compile:css && npm run minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +29,8 @@
     "babel-cli": "^6.4.5",
     "babel-preset-es2015": "^6.3.13",
     "babelify": "^7.2.0",
-    "minify": "^2.0.3",
-    "node-sass": "^3.4.2"
+    "clean-css": "^3.4.9",
+    "node-sass": "^3.4.2",
+    "uglify-js": "^2.6.1"
   }
 }
