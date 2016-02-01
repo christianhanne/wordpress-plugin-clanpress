@@ -10,13 +10,11 @@ body {
   &.taxonomy-clanpress {
     &_game,
     &_opponent {
-      .form-field.term-slug-wrap,
       .form-field.term-description-wrap {
         display: none;
       }
 
       th, td {
-        &.column-slug,
         &.column-description {
           display: none;
         }
