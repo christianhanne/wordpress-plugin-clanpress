@@ -13,18 +13,32 @@
       let $field = $(this);
       let $images = $field.parent().find('.clanpress-upload-image');
       let $button = $field.parent().find('.clanpress-upload-button');
+      let $description = $field.parent().find('.description');
 
       $button.click(function _selectImage(e) {
         e.preventDefault();
 
-        wp.media.editor.send.attachment = function(props, attachment) {
+        let uploader, options = {
+          button: {
+            text: $button.attr('value')
+          },
+          multiple: false
+        };
+
+        if ( $description.size() > 0 ) {
+          options.title = $description.text();
+        }
+
+        uploader = wp.media(options);
+        uploader.on('select', function _onSelect() {
+          let attachment = uploader.state().get('selection').first().toJSON();
           let previewUrl = attachment.sizes.thumbnail.url
           $images.html('<img src="' + previewUrl + '" alt="Preview" />');
 
           $field.val(attachment.id);
-        };
+        });
 
-        wp.media.editor.open(this);
+        uploader.open();
       });
     });
   });
