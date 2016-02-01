@@ -8,7 +8,7 @@
   },
   "scripts": {
     "minify:css": "cleancss -o dist/css/backend.min.css dist/css/backend.css",
-    "minify:js": "uglifyjs --compress --mangle -- dist/js/teamspeak-viewer.js > dist/js/teamspeak-viewer.min.js",
+    "minify:js": "uglifyjs --compress --mangle -- dist/js/teamspeak-viewer.js > dist/js/teamspeak-viewer.min.js && uglifyjs --compress --mangle -- dist/js/upload-field.js > dist/js/upload-field.min.js",
     "minify": "npm run minify:js && npm run minify:css",
     "compile:css": "node-sass src/scss/backend.scss > dist/css/backend.css",
     "compile:js": "babel src/es6 -d dist/js",
