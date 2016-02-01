@@ -71,6 +71,11 @@ class Clanpress_Opponent_Taxonomy extends Clanpress_Taxonomy {
         'pattern' => '^http[s]?:\/\/.+$',
         'description' => __( 'Add a link to your opponent\'s website.', 'clanpress' ),
       ),
+      'image' => array(
+        'type' => 'upload',
+        'default' => '',
+        'description' => __( 'Select or upload an image for this opponent.', 'clanpress' ),
+      ),
     );
   }
 }

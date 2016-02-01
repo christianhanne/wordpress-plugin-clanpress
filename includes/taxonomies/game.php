@@ -61,4 +61,17 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
       'clanpress_squad',
     );
   }
+
+  /**
+   * @inheritdoc
+   */
+  protected function form_elements() {
+    return array(
+      'image' => array(
+        'type' => 'upload',
+        'default' => '',
+        'description' => __( 'Select or upload an image for this game.', 'clanpress' ),
+      ),
+    );
+  }
 }
