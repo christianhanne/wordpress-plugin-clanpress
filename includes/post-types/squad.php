@@ -26,6 +26,75 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
   const SQUAD_TYPE_NOT_PLAYING = 'not_playing';
 
   /**
+   * Adds custom save & delete method to deal with BuddyPress features.
+   */
+  function __construct() {
+    parent::__construct();
+
+    add_action( 'save_post', array( $this, 'save_post' ) );
+    add_action( 'delete_post', array( $this, 'delete_post' ) );
+  }
+
+  /**
+   * Create/update a BuddyPress group for this post.
+   *
+   * @param int $post_id
+   *   The post id.
+   */
+  public function save_post( $post_id ) {
+    $post = get_post( $post_id );
+
+    // Check if a group has been stored previously.
+    $group_id = get_post_meta( $post_id, 'clanpress_group_id', true );
+    if ( function_exists('groups_create_group') ) {
+      $group_id = groups_create_group( array(
+        'group_id' => $group_id,
+        'name' => $post->post_title,
+        'description' => $post->post_excerpt,
+        'status' => 'hidden',
+      ) );
+
+      update_post_meta( $post_id, 'clanpress_group_id', $group_id );
+    }
+
+    // Fetch the group's members.
+    $user_ids = $this->get_group_member_ids( $group_id );
+    $meta_data = $this->meta_boxes['members']->get_meta( $post_id );
+    $members = isset( $meta_data['members'] ) ? json_decode( $meta_data['members'], true ) : array();
+
+    // Add all new members newly selected in the post type.
+    if ( function_exists('groups_join_group') ) {
+      foreach ( $members as $user_id => $enabled ) {
+        if ( !in_array( $user_id, $user_ids ) && $enabled == 1 )  {
+          groups_join_group( $group_id, $user_id );
+        }
+      }
+    }
+
+    // Remove all members no longers selected in the post type.
+    if ( function_exists('groups_leave_group') ) {
+      foreach ( $user_ids as $user_id ) {
+        if ( !isset( $members[ $user_id ] ) || $members[ $user_id ] != 1 ) {
+          groups_leave_group( $group_id, $user_id );
+        }
+      }
+    }
+  }
+
+  /**
+   * Remove the BuddyPress group related to this post.
+   *
+   * @param int $post_id
+   *   The post id.
+   */
+  public function delete_post( $post_id ) {
+    $group_id = get_post_meta( $post_id, 'clanpress_group_id', true );
+    if ( !empty( $group_id ) && function_exists('groups_delete_group') ) {
+      groups_delete_group( $group_id );
+    }
+  }
+
+  /**
    * @inheritdoc
    */
   protected function labels() {
@@ -122,5 +191,26 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
     }
 
     return $options;
+  }
+
+  /**
+   * Returns an array of group member ids.
+   *
+   * @param int $group_id
+   *   The buddypress group id.
+   *
+   * @return array
+   *   Array of user ids.
+   */
+  private function get_group_member_ids( $group_id ) {
+    $user_ids = array();
+    if ( function_exists('groups_get_group_members') ) {
+      $group = groups_get_group_members( array( 'group_id' => $group_id ) );
+      foreach ($group['members'] as $member) {
+        array_push( $user_ids, $member->ID );
+      }
+    }
+
+    return $user_ids;
   }
 }
