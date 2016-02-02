@@ -75,7 +75,7 @@ class Clanpress_Meta_Box {
    */
   public function save($post_id, $instance = array()) {
     foreach ( $this->settings['form_elements'] as $key => $element ) {
-      if ( Clanpress_Form::is_valid( $element, $instance[ $key ] ) ) {
+      if ( isset( $instance[ $key ] ) &&  Clanpress_Form::is_valid( $element, $instance[ $key ] ) ) {
         $field_id = $this->id() . '[' . $key . ']';
 
         if ( Clanpress_Form::is_multi_value( $element ) ) {
@@ -100,6 +100,8 @@ class Clanpress_Meta_Box {
     $field_id = $this->id() . '[nonce]';
     wp_nonce_field($this->id(), $field_id );
 
+    $meta_data = $this->get_meta( $post->ID );
+
     $output = '';
     foreach ( $this->settings['form_elements'] as $key => $element ) {
       $field_id = $this->id() . '[' . $key . ']';
@@ -107,7 +109,7 @@ class Clanpress_Meta_Box {
       $element['field_id'] = $field_id;
       $element['field_name'] = $field_id;
 
-      $value_raw = get_post_meta( $post->ID, $field_id, true );
+      $value_raw = $meta_data[ $key ];
       if ( Clanpress_Form::is_multi_value( $element ) ) {
         $element['value'] = json_decode( $value_raw, true );
       } else {
@@ -118,6 +120,25 @@ class Clanpress_Meta_Box {
     }
 
     echo $output;
+  }
+
+  /**
+   * Returns the metaboxes previously saved data.
+   *
+   * @param int $post_id
+   *   The post id.
+   *
+   * @return array
+   *   Array of meta data.
+   */
+  public function get_meta( $post_id ) {
+    $meta = array();
+    foreach ( $this->settings['form_elements'] as $key => $element ) {
+      $field_id = $this->id() . '[' . $key . ']';
+      $meta[ $key ] = get_post_meta( $post_id, $field_id, true );
+    }
+
+    return $meta;
   }
 
   /**
