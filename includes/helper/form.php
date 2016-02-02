@@ -112,6 +112,11 @@ class Clanpress_Form {
         $template = '<div class="form-field">$label$field$description</div>';
         break;
 
+      case 'hidden':
+        $field = self::input($element);
+        $template = '$field';
+        break;
+
       case 'upload':
         $field = self::upload($element);
         $template = '<div class="form-field">$label$field$description</div>';
