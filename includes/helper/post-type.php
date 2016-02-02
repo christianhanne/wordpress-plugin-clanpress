@@ -40,7 +40,7 @@ class Clanpress_Post_Type {
   public function add_meta_boxes() {
     foreach ( $this->meta_boxes() as $id => $settings ) {
       $meta_box = new Clanpress_Meta_Box($id, $this->id(), $settings);
-      array_push($this->meta_boxes, $meta_box);
+      $this->meta_boxes[ $id ] = $meta_box;
     }
   }
 
@@ -49,9 +49,8 @@ class Clanpress_Post_Type {
    */
   public function save_meta_boxes( $post_id ) {
     // TODO: Check user permissions.
-
     foreach ($this->meta_boxes as $meta_box) {
-      $instance = isset( $_POST[ $meta_box->id() ] ) ? $_POST[ $meta_box->id() ] : NULL;
+      $instance = isset( $_POST[ $meta_box->id() ] ) ? $_POST[ $meta_box->id() ] : array();
       $meta_box->save($post_id, $instance);
     }
   }
