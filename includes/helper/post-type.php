@@ -65,7 +65,7 @@ class Clanpress_Post_Type {
    *   Updated template path.
    */
   public static function single_template( $template ) {
-    return self::get_template( $template, 'single' );
+    return self::get_post_template( $template, 'single' );
   }
 
   /**
@@ -78,7 +78,33 @@ class Clanpress_Post_Type {
    *   Updated template path.
    */
   public static function archive_template( $template ) {
-    return self::get_template( $template, 'archive' );
+    return self::get_post_template( $template, 'archive' );
+  }
+
+  /**
+   * Includes a post type's content template.
+   *
+   * @param string $type
+   *   Display type, either 'single' or 'archive'.
+   * @param string $post_type
+   *   The post type.
+   */
+  public static function content_template( $type, $post_type ) {
+    $post_type = str_replace( '_', '-', $post_type );
+    $template_name = $type . '-content-' . $post_type . '.php';
+
+    $templates = array(
+      trailingslashit( get_stylesheet_directory() ) . $template_name,
+      trailingslashit( get_template_directory() ) . $template_name,
+      CLANPRESS_PLUGIN_PATH . 'templates/post-types/' . $template_name,
+    );
+
+    foreach ( $templates as $template ) {
+      if ( file_exists( $template ) ) {
+        load_template( $template, false );
+        break;
+      }
+    }
   }
 
   /**
@@ -137,10 +163,10 @@ class Clanpress_Post_Type {
    * @return string
    *   Updated template path.
    */
-  final private static function get_template( $template, $type ) {
+  final private static function get_post_template( $template, $type ) {
     global $post;
     if ( $post->post_type == self::id() ) {
-      $template_name = self::template_name( $type );
+      $template_name = self::post_template_name( $type );
       $template_dir = CLANPRESS_PLUGIN_PATH . 'templates/post-types/';
       if ( $template !== get_stylesheet_directory() . '/' . $template_name ) {
         return $template_dir . $template_name;
@@ -159,9 +185,8 @@ class Clanpress_Post_Type {
    * @return string
    *   Template's file name.
    */
-  final private static function template_name( $type ) {
-    $template_name = $type . '-' . str_replace( '_', '-', self::id() ) . '.php';
-    return $template_name;
+  final private static function post_template_name( $type ) {
+    return $type . '-clanpress.php';
   }
 
   /**
