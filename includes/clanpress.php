@@ -17,6 +17,7 @@ class Clanpress {
    * Initializes the plugin's behavior.
    */
   public function __construct() {
+    require_once( self::get_helper_path() . 'functions.php' );
     require_once( self::get_helper_path() . 'form.php' );
     require_once( self::get_helper_path() . 'helper.php' );
     require_once( self::get_helper_path() . 'meta-box.php' );
