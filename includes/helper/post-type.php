@@ -90,6 +90,17 @@ class Clanpress_Post_Type {
    *   The post type.
    */
   public static function content_template( $type, $post_type ) {
+    if ( $type === 'archive' ) {
+      $params = $this->archive_elements( get_post() );
+    }
+    else {
+      $params = $this->single_elements( get_post() );
+    }
+
+    foreach ($params as $key => $value) {
+      set_query_var( $key, $value );
+    }
+
     $post_type = str_replace( '_', '-', $post_type );
     $template_name = $type . '-content-' . $post_type . '.php';
 
@@ -149,6 +160,40 @@ class Clanpress_Post_Type {
    *   An array of meta boxes
    */
   protected function meta_boxes() {
+    return array();
+  }
+
+  /**
+   * Returns an array of template elements.
+   *
+   * Should return an associative array of template elements/variables. Every
+   * element in the array will be available in the post's archive template
+   * through a variable with the same name as the array key.
+   *
+   * @param WP_Post $post
+   *   The post object.
+   *
+   * @return array
+   *   Array of archive template elements
+   */
+  protected function archive_elements($post) {
+    return array();
+  }
+
+  /**
+   * Returns an array of template elements.
+   *
+   * Should return an associative array of template elements/variables. Every
+   * element in the array will be available in the post's single template
+   * through a variable with the same name as the array key.
+   *
+   * @param WP_Post $post
+   *   The post object.
+   *
+   * @return array
+   *   Array of single template elements
+   */
+  protected function single_elements($instance = array()) {
     return array();
   }
 
