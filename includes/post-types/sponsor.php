@@ -78,4 +78,28 @@ class Clanpress_Sponsor_Post_Type extends Clanpress_Post_Type {
 
     return $boxes;
   }
+
+  /**
+   * @inheritdoc
+   */
+  protected static function single_elements($post) {
+    $elements = array();
+
+    $website = get_post_meta( $post->ID, 'clanpress_sponsor_sponsor[website]', true);
+    $elements['sponsor_link'] = esc_url( $website );
+
+    return $elements;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  protected static function archive_elements($post) {
+    $elements = array();
+
+    $website = get_post_meta( $post->ID, 'clanpress_sponsor_sponsor[website]', true);
+    $elements['sponsor_link'] = esc_url( $website );
+
+    return $elements;
+  }
 }
