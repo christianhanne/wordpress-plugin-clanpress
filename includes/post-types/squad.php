@@ -176,6 +176,29 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
   }
 
   /**
+   * @inheritdoc
+   */
+  protected static function archive_elements($post) {
+    $elements = array();
+
+    $games = array();
+    foreach ( get_the_terms( $post, 'clanpress_game' ) as $term ) {
+      array_push( $games, esc_html( $term->slug ) );
+    }
+
+    $group_id = get_post_meta( $post->ID, 'clanpress_group_id', true );
+    $group_members_count = groups_get_total_member_count( $group_id );
+
+    $elements['squad_games_short'] = implode(', ', $games);
+    $elements['squad_members_count'] = $group_members_count;
+    $elements['squad_link_awards'] = 'TODO';
+    $elements['squad_link_matches'] = 'TODO';
+    $elements['squad_type'] = 'TODO';
+
+    return $elements;
+  }
+
+  /**
    * Returns an array of user ids associated with their user names.
    *
    * @return array
@@ -212,5 +235,18 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
     }
 
     return $user_ids;
+  }
+
+  /**
+   * TODO
+   *
+   * @return array
+   *   TODO
+   */
+  private function get_squad_types() {
+    return array(
+      self::SQUAD_TYPE_PLAYING     => __( 'Playing', 'clanpress' ),
+      self::SQUAD_TYPE_NOT_PLAYING => __( 'Not playing', 'clanpress' ),
+    );
   }
 }
