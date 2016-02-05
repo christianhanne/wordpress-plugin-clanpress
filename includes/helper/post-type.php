@@ -194,7 +194,7 @@ class Clanpress_Post_Type {
    * @return array
    *   Array of single template elements
    */
-  protected static function single_elements($instance = array()) {
+  protected static function single_elements($post) {
     return array();
   }
 
