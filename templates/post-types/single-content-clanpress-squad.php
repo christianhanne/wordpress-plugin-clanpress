@@ -12,11 +12,11 @@
     <?php the_post_thumbnail( 'medium' ); ?>
   </div>
   <div class="clanpress_post__description">
-    <h2 class="clanpress_post__title">
+    <h1 class="clanpress_post__title">
       <a href="<?php the_permalink(); ?>">
         <?php the_title(); ?> (<?php echo $squad_type; ?>)
       </a>
-    </h2>
+    </h1>
     <div class="clanpress_post__games">
       <?php echo _e('Squad is playing the following <strong>games</strong>:', 'clanpress'); ?>
       <?php echo $squad_games_short; ?>
