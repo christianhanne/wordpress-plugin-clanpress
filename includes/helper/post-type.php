@@ -90,11 +90,12 @@ class Clanpress_Post_Type {
    *   The post type.
    */
   public static function content_template( $type, $post_type ) {
+    $class = self::get_class_name( $post_type );
     if ( $type === 'archive' ) {
-      $params = $this->archive_elements( get_post() );
+      $params = $class::archive_elements( get_post() );
     }
     else {
-      $params = $this->single_elements( get_post() );
+      $params = $class::single_elements( get_post() );
     }
 
     foreach ($params as $key => $value) {
@@ -176,7 +177,7 @@ class Clanpress_Post_Type {
    * @return array
    *   Array of archive template elements
    */
-  protected function archive_elements($post) {
+  protected static function archive_elements($post) {
     return array();
   }
 
@@ -193,7 +194,7 @@ class Clanpress_Post_Type {
    * @return array
    *   Array of single template elements
    */
-  protected function single_elements($instance = array()) {
+  protected static function single_elements($instance = array()) {
     return array();
   }
 
@@ -232,6 +233,22 @@ class Clanpress_Post_Type {
    */
   final private static function post_template_name( $type ) {
     return $type . '-clanpress.php';
+  }
+
+  /**
+   * TODO
+   *
+   * @param string $post_type
+   *   TODO
+   *
+   * @return string
+   *   TODO
+   */
+  final private static function get_class_name( $post_type ) {
+    $class = ucwords(str_replace('_', ' ', $post_type));
+    $class = str_replace(' ', '_', $class);
+    $class .= '_Post_Type';
+    return $class;
   }
 
   /**
