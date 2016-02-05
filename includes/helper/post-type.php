@@ -262,7 +262,7 @@ class Clanpress_Post_Type {
    * @return string
    *   Machine-readable id of the post type
    */
-  final private static function id() {
+  final protected static function id() {
     $id = strtolower( get_called_class() );
     $id = str_replace( '_post_type', '', $id );
     return $id;
