@@ -15,4 +15,5 @@ if (have_posts()) :
   endwhile;
 endif;
 
+get_sidebar();
 get_footer();
