@@ -108,13 +108,7 @@ class Clanpress_Meta_Box {
 
       $element['field_id'] = $field_id;
       $element['field_name'] = $field_id;
-
-      $value_raw = $meta_data[ $key ];
-      if ( Clanpress_Form::is_multi_value( $element ) ) {
-        $element['value'] = json_decode( $value_raw, true );
-      } else {
-        $element['value'] = $value_raw;
-      }
+      $element['value'] = $meta_data[ $key ];
 
       $output .= Clanpress_Form::element( $element );
     }
