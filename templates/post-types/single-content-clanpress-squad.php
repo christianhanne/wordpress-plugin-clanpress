@@ -13,9 +13,7 @@
   </div>
   <div class="clanpress_post__description">
     <h1 class="clanpress_post__title">
-      <a href="<?php the_permalink(); ?>">
-        <?php the_title(); ?> (<?php clanpress_the_squad_type(); ?>)
-      </a>
+      <?php the_title(); ?> (<?php clanpress_the_squad_type(); ?>)
     </h1>
     <div class="clanpress_post__games">
       <?php echo _e('Squad is playing the following <strong>games</strong>:', 'clanpress'); ?>
