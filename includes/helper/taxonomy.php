@@ -97,7 +97,7 @@ class Clanpress_Taxonomy {
    *   The wordpress term object.
    */
   public function term_edit( $term ) {
-    $term_meta = $this->get_term_meta( $term->term_id );
+    $term_meta = $this->get_term_meta( $term->term_id );  
     foreach ( $this->form_elements() as $key => $element ) {
       $field_id = $this->id() . '_' . $key;
 
@@ -164,8 +164,8 @@ class Clanpress_Taxonomy {
    * @return array
    *   Array of term meta data.
    */
-  private function get_term_meta( $term_id ) {
-    return get_option( $this->id() . '_' . $term_id, array() );
+  public static function get_term_meta( $term_id ) {
+    return get_option( self::id() . '_' . $term_id, array() );
   }
 
   /**
