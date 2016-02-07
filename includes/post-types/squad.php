@@ -65,7 +65,7 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
     // Fetch the group's members.
     $user_ids = $this->get_group_member_ids( $group_id );
     $meta_data = $this->meta_boxes['members']->get_meta( $post_id );
-    $members = isset( $meta_data['members'] ) ? json_decode( $meta_data['members'], true ) : array();
+    $members = isset( $meta_data['members'] ) ?  $meta_data['members'] : array();
 
     // Add all new members newly selected in the post type.
     if ( function_exists('groups_join_group') ) {
