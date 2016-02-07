@@ -91,7 +91,7 @@ function clanpress_the_squad_awards_link($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
   vprintf('<a href="%s">%s</a>', array(
-    'TODO',
+    site_url('/awards?squad_id=' . $post->ID),
     __( 'Squad awards', 'clanpress' ),
   ));
 }
@@ -106,7 +106,7 @@ function clanpress_the_squad_matches_link($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
   vprintf('<a href="%s">%s</a>', array(
-    'TODO',
+    site_url('/matches?squad_id=' . $post->ID),
     __( 'Squad matches', 'clanpress' ),
   ));
 }
