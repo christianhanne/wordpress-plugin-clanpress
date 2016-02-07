@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Displays an archive representation of a sponsor post.
+ * Displays a single representation of a sponsor post.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
