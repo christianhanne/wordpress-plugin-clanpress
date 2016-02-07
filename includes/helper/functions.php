@@ -114,8 +114,8 @@ function clanpress_the_squad_matches_link($post = null) {
 /**
  * Displays the avatar of a given squad member.
  *
- * @param TODO $member
- *   TODO
+ * @param object $member
+ *   Buddypress group member object.
  */
 function clanpress_the_squad_member_avatar($member = null) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
@@ -128,8 +128,8 @@ function clanpress_the_squad_member_avatar($member = null) {
 /**
  * Displays the profile link of a given squad member.
  *
- * @param TODO $member
- *   TODO
+ * @param object $member
+ *   Buddypress group member object.
  */
 function clanpress_the_squad_member_link($member = null) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
@@ -139,8 +139,8 @@ function clanpress_the_squad_member_link($member = null) {
 /**
  * Displays the role of a given squad member.
  *
- * @param TODO $member
- *   TODO
+ * @param object $member
+ *   Buddypress group member object.
  */
 function clanpress_the_squad_member_role($member = null) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
@@ -156,7 +156,7 @@ function clanpress_the_squad_member_role($member = null) {
 /**
  * Returns the currently active squad member.
  *
- * @return TODO
+ * @return object
  *   Currently active squad member.
  */
 function clanpress_get_squad_member() {
