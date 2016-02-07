@@ -8,16 +8,16 @@
  */
 ?>
 <article class="clanpress_post clanpress_post--single clanpress_post--match">
-  <h2 class="clanpress_post__title">
+  <h1 class="clanpress_post__title">
     <a href="<?php the_permalink(); ?>">
       <?php the_title(); ?>
     </a>
-  </h2>
+  </h1>
   <div class="clanpress_post__versus">
-    <?php clanpress_match_squad_thumbnail( 'thumbnail' ); ?>
-    <?php clanpress_match_squad_name(); ?>
-    <?php clanpress_match_opponent_thumbnail( 'thumbnail' ); ?>
-    <?php clanpress_match_opponent_name(); ?>
+    <?php clanpress_the_match_squad_thumbnail( 'thumbnail' ); ?>
+    <?php clanpress_the_match_squad(); ?>
+    <?php clanpress_the_match_opponent_thumbnail( 'thumbnail' ); ?>
+    <?php clanpress_the_match_opponent(); ?>
   </div>
   <div class="clanpress_post__game">
     <?php clanpress_the_match_game(); ?>

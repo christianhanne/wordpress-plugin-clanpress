@@ -14,10 +14,10 @@
     </a>
   </h2>
   <div class="clanpress_post__versus">
-    <?php clanpress_match_squad_thumbnail( 'thumbnail' ); ?>
-    <?php clanpress_match_squad_name(); ?>
-    <?php clanpress_match_opponent_thumbnail( 'thumbnail' ); ?>
-    <?php clanpress_match_opponent_name(); ?>
+    <?php clanpress_the_match_squad_thumbnail( 'thumbnail' ); ?>
+    <?php clanpress_the_match_squad(); ?>
+    <?php clanpress_the_match_opponent_thumbnail( 'thumbnail' ); ?>
+    <?php clanpress_the_match_opponent(); ?>
   </div>
   <div class="clanpress_post__game">
     <?php clanpress_the_match_game(); ?>
