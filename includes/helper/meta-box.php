@@ -80,7 +80,7 @@ class Clanpress_Meta_Box {
 
         if ( Clanpress_Form::is_multi_value( $element ) ) {
           array_walk( $instance[ $key ], 'sanitize_text_field' );
-          $value = json_encode( $instance[ $key ] );
+          $value = $instance[ $key ];
         } else {
           $value = sanitize_text_field( $instance[ $key ] );
         }
