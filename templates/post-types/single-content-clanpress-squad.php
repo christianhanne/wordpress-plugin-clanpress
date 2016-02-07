@@ -14,16 +14,16 @@
   <div class="clanpress_post__description">
     <h1 class="clanpress_post__title">
       <a href="<?php the_permalink(); ?>">
-        <?php the_title(); ?> (<?php echo $squad_type; ?>)
+        <?php the_title(); ?> (<?php clanpress_the_squad_type(); ?>)
       </a>
     </h1>
     <div class="clanpress_post__games">
       <?php echo _e('Squad is playing the following <strong>games</strong>:', 'clanpress'); ?>
-      <?php echo $squad_games_short; ?>
+      <?php clanpress_the_squad_games_short(); ?>
     </div>
     <div class="clanpress_post__members_count">
       <strong><?php _e( 'Number of members:', 'clanpress' ); ?></strong>
-      <?php echo $squad_members_count; ?>
+      <?php clanpress_the_squad_members_count(); ?>
     </div>
     <div class="clanpress_post__excerpt">
       <h3><?php _e( 'Description:', 'clanpress' ); ?></h3>
@@ -31,31 +31,25 @@
     </div>
     <ul class="clanpress_post__links">
       <li class="clanpress_post__link">
-        <a href="<?php echo $squad_link_awards; ?>">
-          <?php _e( 'Squad awards', 'clanpress' ); ?>
-        </a>
+        <?php clanpress_the_squad_awards_link(); ?>
       </li>
       <li class="clanpress_post__link">
-        <a href="<?php echo $squad_link_matches; ?>">
-          <?php _e( 'Squad matches', 'clanpress' ); ?>
-        </a>
+        <?php clanpress_the_squad_matches_link(); ?>
       </li>
     </ul>
   </div>
-  <?php foreach ( $squad_members as $member ): ?>
-    <div class="clanpress_post__member">
-      <div class="clanpress_post__member_image">
-        <?php echo bp_core_fetch_avatar(array( 'item_id' => $member->ID, 'type' => 'full' )); ?>
+  <?php if (clanpress_have_squad_members()) : ?>
+    <?php while(clanpress_have_squad_members()) : clanpress_the_squad_member(); ?>
+      <div class="clanpress_post__member">
+        <div class="clanpress_post__member_image">
+          <?php clanpress_the_squad_member_avatar(); ?>
+        </div>
+        <div class="clanpress_post__member_description">
+          <strong><?php clanpress_the_squad_member_link(); ?></strong><br />
+          <?php _e( 'Role:', 'clanpress' ); ?>
+          <?php clanpress_the_squad_member_role(); ?>
+        </div>
       </div>
-      <div class="clanpress_post__member_description">
-        <strong><?php echo bp_core_get_userlink( $member->ID ); ?></strong><br />
-        <?php _e( 'Role:', 'clanpress' ); ?>
-        <?php if ( $member->is_admin || $member->is_mod ): ?>
-          <?php _e( 'Leader', 'clanpress' ); ?>
-        <?php else: ?>
-          <?php _e( 'Member', 'clanpress' ); ?>
-        <?php endif; ?>
-      </div>
-    </div>
-  <?php endforeach; ?>
+    <?php endwhile; ?>
+  <?php endif; ?>
 </article>
