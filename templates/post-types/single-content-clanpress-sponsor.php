@@ -7,7 +7,7 @@
  * @package Clanpress
  */
 ?>
-<article class="clanpress_post clanpress_post--archive clanpress_post--sponsor">
+<article class="clanpress_post clanpress_post--single clanpress_post--sponsor">
   <h1 class="clanpress_post__title">
     <?php the_title(); ?>
   </h1>
