@@ -19,9 +19,7 @@
   </div>
   <ul class="clanpress_post__links">
     <li class="clanpress_post__link">
-      <a href="<?php echo $sponsor_link; ?>">
-        <?php _e( 'To the sponsor', 'clanpress' ); ?>
-      </a>
+      <?php clanpress_the_sponsor_link(); ?>
     </li>
   </ul>
 </article>

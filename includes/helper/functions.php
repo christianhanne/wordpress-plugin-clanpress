@@ -182,3 +182,19 @@ function clanpress_have_squad_members() {
   global $_clanpress_squad_members;
   return count($_clanpress_squad_members) > 0;
 }
+
+/**
+ * Displays the link to the sponsor website.
+ *
+ * @param WP_Post $post
+ *   The post.
+ */
+function clanpress_the_sponsor_link($post = null) {
+  $post = isset( $post ) ? $post : get_post();
+
+  $website = get_post_meta( $post->ID, 'clanpress_sponsor_sponsor[website]', true);
+  vprintf('<a href="%s">%s</a>', array(
+    esc_url( $website ),
+    __( 'To the sponsor', 'clanpress' ),
+  ));
+}
