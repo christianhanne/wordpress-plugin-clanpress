@@ -107,7 +107,9 @@ class Clanpress_Post_Type {
 
     $templates = array(
       trailingslashit( get_stylesheet_directory() ) . $template_name,
+      trailingslashit( get_stylesheet_directory() ) . 'clanpress/' . $template_name,
       trailingslashit( get_template_directory() ) . $template_name,
+      trailingslashit( get_template_directory() ) .'clanpress/' . $template_name,
       CLANPRESS_PLUGIN_PATH . 'templates/post-types/' . $template_name,
     );
 
