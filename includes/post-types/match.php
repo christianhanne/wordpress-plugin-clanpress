@@ -94,6 +94,26 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       ),
     );
 
+    $boxes['result'] = array(
+      'title' => __( 'Result', 'clanpress' ),
+      'context' => 'normal',
+      'priority' => 'default',
+      'form_elements' => array(
+        'squad' => array(
+          'type' => 'text',
+          'label' => __( 'Squad', 'clanpress' ),
+          'default' => '',
+          'pattern' => '^[0-9]+$',
+        ),
+        'opponent' => array(
+          'type' => 'text',
+          'label' => __( 'Opponent', 'clanpress' ),
+          'default' => '',
+          'pattern' => '^[0-9]+$',
+        ),
+      ),
+    );
+
     $boxes['match_type'] = array(
       'title' => __( 'Match type', 'clanpress' ),
       'context' => 'side',
