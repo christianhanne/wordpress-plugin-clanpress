@@ -23,7 +23,7 @@ class Clanpress_Members_Widget extends Clanpress_Widget {
 
     $squad_id = (int) $instance['squads'];
     if ( $squad_id !== 0) {
-      $args['group_id'] = $squad_id;
+      $args['group_id'] = get_post_meta( $squad_id, 'clanpress_group_id', true );
     }
 
     clanpress_query_squad_members( $args );
