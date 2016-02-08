@@ -29,11 +29,6 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
    * Adds custom save & delete method to deal with BuddyPress features.
    */
   function __construct() {
-    global $_clanpress_squad_members, $_clanpress_squad_member;
-
-    $_clanpress_squad_members = array();
-    $_clanpress_squad_member = NULL;
-
     parent::__construct();
 
     add_action( 'save_post', array( $this, 'save_post' ) );
@@ -184,13 +179,8 @@ class Clanpress_Squad_Post_Type extends Clanpress_Post_Type {
    * @inheritdoc
    */
   protected static function single_elements($post) {
-    global $_clanpress_squad_members, $_clanpress_squad_member;
-
     $group_id = get_post_meta( $post->ID, 'clanpress_group_id', true );
-    $group = groups_get_group_members(array( 'group_id' => $group_id ));
-
-    $_clanpress_squad_member = NULL;
-    $_clanpress_squad_members = $group['members'];
+    clanpress_query_squad_members( array( 'group_id' => $group_id ) );
 
     return array();
   }

@@ -154,6 +154,21 @@ function clanpress_the_squad_member_role($member = null) {
 }
 
 /**
+ * TODO
+ *
+ * @param array $args
+ *   TODO
+ */
+function clanpress_query_squad_members( $args = array() ) {
+  global $_clanpress_squad_members, $_clanpress_squad_member;
+
+  $group = groups_get_group_members( $args );
+
+  $_clanpress_squad_member = NULL;
+  $_clanpress_squad_members = $group['members'];
+}
+
+/**
  * Returns the currently active squad member.
  *
  * @return object
