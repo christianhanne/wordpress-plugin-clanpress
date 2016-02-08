@@ -17,9 +17,7 @@ class Clanpress_Latest_Matches_Widget extends Clanpress_Widget {
    * @inheritdoc
    */
   protected function template_elements( $instance = array() ) {
-    $elements = array();
-
-    $args = array(
+    query_posts( array(
       'posts_per_page' => (int) $instance['num_items'],
       'offset' => 0,
       'orderby' => 'date',
@@ -28,18 +26,9 @@ class Clanpress_Latest_Matches_Widget extends Clanpress_Widget {
       'date_query' => array(
         'before' => date('Y-m-d'),
       ),
-    );
+    ) );
 
-    $elements['links'] = array();
-    foreach ( get_posts( $args ) as $post ) {
-      array_push($elements['links'], array(
-        'id' => $post->ID,
-        'title' => esc_html( $post->post_title ),
-        'href' =>  get_permalink( $post->ID ),
-      ));
-    }
-
-    return $elements;
+    return array();
   }
 
   /**
