@@ -17,7 +17,7 @@ class Clanpress_Widget extends WP_Widget {
    * Registers the custom plugin using the classes' id, name and description.
    */
   public function __construct() {
-    parent::__construct( $this->id(), $this->name(), array(
+    parent::__construct( $this->id(), '(ClanPress) ' . $this->name(), array(
       'description' => $this->description(),
     ));
   }
