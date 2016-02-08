@@ -8,27 +8,27 @@
  */
 ?>
 <?php if ( have_posts() ): ?>
-  <ul class="widget_clanpress__items">
+  <ul class="clanpress_widget__items">
     <?php while(have_posts()) : the_post(); ?>
-      <li class="widget_clanpress__item">
-        <div class="widget_clanpress__thumbnail">
+      <li class="clanpress_widget__item">
+        <span class="clanpress_widget__thumbnail">
           <?php the_post_thumbnail( 'thumbnail' ); ?>
-        </div>
-        <div class="widget_clanpress__post">
-          <h4 class="widget_clanpress__title">
+        </span>
+        <div class="clanpress_widget__post">
+          <h4 class="clanpress_widget__title">
             <a href="<?php the_permalink(); ?>">
               <?php the_title(); ?>
             </a>
           </h4>
-          <div class="widget_clanpress__date">
+          <div class="clanpress_widget__date">
             <?php the_date(); ?>
           </div>
-          <div class="widget_clanpress__comments">
+          <div class="clanpress_widget__comments">
             <a href="<?php comments_link(); ?>">
               <?php comments_number(); ?>
             </a>
           </div>
-          <div class="widget_clanpress__ranking">
+          <div class="clanpress_widget__ranking">
             <?php _e( 'Ranking:', 'clanpress' ); ?>
             <?php clanpress_the_award_placement(); ?>
           </div>
