@@ -1,7 +1,23 @@
-<ul class="members">
-  <?php foreach ($members as $member): ?>
-    <li class="members__item members__item--<?php echo $member['id']; ?>">
-      <?php echo $member['name']; ?>
-    </li>
-  <?php endforeach; ?>
-</ul>
+<?php
+/**
+ * @file
+ * Template of the squad members widget.
+ *
+ * @author Christian Hanne <support @aureola.codes>
+ * @package Clanpress
+ */
+?>
+<?php if (clanpress_have_squad_members()) : ?>
+  <ul class="clanpress_widget__items">
+    <?php while(clanpress_have_squad_members()) : clanpress_the_squad_member(); ?>
+      <li class="clanpress_widget__item">
+        <div class="clanpress_widget__member_image">
+          <?php clanpress_the_squad_member_avatar(); ?>
+        </div>
+        <div class="clanpress_post__member_name">
+          <?php clanpress_the_squad_member_link(); ?>
+        </div>
+      </li>
+    <?php endwhile; ?>
+  </ul>
+<?php endif; ?>

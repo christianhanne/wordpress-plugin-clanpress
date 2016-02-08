@@ -17,31 +17,18 @@ class Clanpress_Members_Widget extends Clanpress_Widget {
    * @inheritdoc
    */
   protected function template_elements( $instance = array() ) {
-    $elements = array();
-
     $args = array(
-      'number' => (int) $instance['num_items'],
-      'offset' => 0,
-      'orderby' => 'name',
-      'order' => 'ASC',
+      'max' => (int) $instance['num_items'],
     );
 
     $squad_id = (int) $instance['squads'];
     if ( $squad_id !== 0) {
-      $key = 'clanpress_squad_members[members]';
-      $args['include'] = get_post_meta( $squad_id, $key );
+      $args['group_id'] = $squad_id;
     }
 
-    $elements['members'] = array();
-    $user_query = new WP_User_Query( $args );
-    foreach ( $user_query->results as $user ) {
-      array_push($elements['members'], array(
-        'id' => $user->ID,
-        'name' => esc_html( $user->display_name ),
-      ));
-    }
+    clanpress_query_squad_members( $args );
 
-    return $elements;
+    return array();
   }
 
   /**
