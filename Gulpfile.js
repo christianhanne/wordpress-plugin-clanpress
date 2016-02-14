@@ -27,7 +27,7 @@ gulp.task('clean', () => {
 });
 
 gulp.task('compile:css', () => {
-  return gulp.src('src/scss/*')
+  return gulp.src('./src/scss/*')
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(sourcemaps.write())
@@ -35,7 +35,7 @@ gulp.task('compile:css', () => {
 });
 
 gulp.task('minify:css', ['compile:css'], () => {
-	return gulp.src('dist/css/*.css')
+	return gulp.src('./dist/css/*.css')
     .pipe(minifyCss())
 		.pipe(rename({
 			extname: '.min.css'
@@ -59,14 +59,14 @@ gulp.task('compile:js', (done) => {
           extname: '.js'
         }))
         .pipe(gulp.dest('./dist'));
-      });
+    });
 
-			es.merge(tasks);
+		es.merge(tasks).on('end', done);
   });
 });
 
 gulp.task('minify:js', ['compile:js'], () => {
-	return gulp.src('dist/js/*.js')
+	return gulp.src('./dist/js/*')
     .pipe(uglify())
 		.pipe(rename({
 			extname: '.min.js'
@@ -94,5 +94,5 @@ gulp.task('publish', ['clean'], (cb) => {
 });
 
 gulp.task('default', ['clean'], (cb) => {
-	sequence(['compile:css', 'minify:css', 'compile:js', 'minify:js'], cb);
+	sequence(['minify:css', 'minify:js'], cb);
 });
