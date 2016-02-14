@@ -1,6 +1,6 @@
 {
   "name": "clanpress",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "ClanPress is full featured clan management plugin.",
   "main": "index.js",
   "directories": {
@@ -22,6 +22,7 @@
   "devDependencies": {
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
+    "del": "^2.2.0",
     "es": "^0.5.1",
     "event-stream": "^3.3.2",
     "glob": "^7.0.0",
@@ -30,7 +31,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.2",
     "gulp-zip": "^3.1.0",
+    "run-sequence": "^1.1.5",
     "vinyl-source-stream": "^1.1.0"
   }
 }
