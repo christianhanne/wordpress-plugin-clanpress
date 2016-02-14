@@ -18,6 +18,6 @@
   ],
   "dependencies": {
     "jquery-ts3viewer": "git@github.com:planetteamspeak/jquery-ts3viewer.git",
-    "jquery-ts3status": "^0.1.1"
+    "jquery-ts3status": "^0.2.0"
   }
 }
