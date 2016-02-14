@@ -86,7 +86,7 @@ gulp.task('build', () => {
 			'index.php'
 		], {base: '.'})
 		.pipe(zip('clanpress-' + settings.version +  '.zip'))
-		.pipe(gulp.dest('./build'));
+		.pipe(gulp.dest('./builds'));
 })
 
 gulp.task('publish', ['clean'], (cb) => {
