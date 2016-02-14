@@ -1,6 +1,6 @@
 {
   "name": "clanpress",
-  "version": "0.0.0",
+  "version": "0.3.1",
   "description": "ClanPress is full featured clan management plugin.",
   "main": "index.js",
   "directories": {
@@ -19,5 +19,18 @@
     "url": "https://github.com/aureolacodes/clanpress/issues"
   },
   "homepage": "https://github.com/aureolacodes/clanpress#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "es": "^0.5.1",
+    "event-stream": "^3.3.2",
+    "glob": "^7.0.0",
+    "gulp": "^3.9.1",
+    "gulp-minify-css": "^1.2.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-zip": "^3.1.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
 }
