@@ -18,6 +18,8 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
 
+var bower = require('gulp-bower');
+
 var sequence = require('run-sequence');
 
 var settings = require('./package.json');
@@ -65,7 +67,7 @@ gulp.task('compile:js', (done) => {
   });
 });
 
-gulp.task('minify:js', ['compile:js'], () => {
+gulp.task('minify:js', ['bower', 'compile:js'], () => {
 	return gulp.src('./dist/js/*')
     .pipe(uglify())
 		.pipe(rename({
@@ -74,12 +76,25 @@ gulp.task('minify:js', ['compile:js'], () => {
     .pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('minify:js', ['bower', 'compile:js'], () => {
+	return gulp.src('./dist/js/*')
+    .pipe(uglify())
+		.pipe(rename({
+			extname: '.min.js'
+		}))
+    .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('bower', () => {
+	return bower();
+});
+
 gulp.task('build', () => {
 	return gulp
 		.src([
 			'dist/css/**',
 			'dist/js/**',
-			'dist/vendor/**',
+			'dist/vendor/jquery-*/**',
 			'includes/**',
 			'templates/**',
 			'clanpress.php',
@@ -89,8 +104,8 @@ gulp.task('build', () => {
 		.pipe(gulp.dest('./builds'));
 })
 
-gulp.task('publish', ['clean'], (cb) => {
-	sequence(['default', 'build'], cb);
+gulp.task('publish', ['default'], (cb) => {
+	sequence(['build'], cb);
 });
 
 gulp.task('default', ['clean'], (cb) => {
