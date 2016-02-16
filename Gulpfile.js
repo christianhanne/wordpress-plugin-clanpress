@@ -70,17 +70,8 @@ gulp.task('compile:js', (done) => {
   });
 });
 
-gulp.task('minify:js', ['compile:js'], () => {
-	return gulp.src('./dist/js/*/*.js')
-    .pipe(uglify())
-		.pipe(rename({
-			extname: '.min.js'
-		}))
-    .pipe(gulp.dest('dist/js'));
-});
-
 gulp.task('minify:js', ['bower', 'compile:js'], () => {
-	return gulp.src('./dist/js/*')
+	return gulp.src('./dist/js/*/*.js')
     .pipe(uglify())
 		.pipe(rename({
 			extname: '.min.js'
