@@ -25,19 +25,22 @@ var sequence = require('run-sequence');
 var settings = require('./package.json');
 
 gulp.task('clean', () => {
-	return del(['dist/css', 'dist/js']);
+	return del(['dist/css', 'dist/js', 'dist/vendor']);
 });
 
 gulp.task('compile:css', () => {
-  return gulp.src('./src/scss/*')
+  return gulp.src('./components/*/css/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(sourcemaps.write())
+    .pipe(rename((path) => {
+      path.dirname = path.dirname.replace('/css', '');
+    }))
     .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('minify:css', ['compile:css'], () => {
-	return gulp.src('./dist/css/*.css')
+	return gulp.src('./dist/css/*/*.css')
     .pipe(minifyCss())
 		.pipe(rename({
 			extname: '.min.css'
@@ -46,7 +49,7 @@ gulp.task('minify:css', ['compile:css'], () => {
 });
 
 gulp.task('compile:js', (done) => {
-	return glob('./src/es6/*.es6', function(error, files) {
+	return glob('./components/*/js/*.js', function(error, files) {
     if (error) {
 			done(error);
 		}
@@ -56,19 +59,19 @@ gulp.task('compile:js', (done) => {
 			  .transform(babel)
         .bundle()
         .pipe(source(entry))
-        .pipe(rename({
-					dirname: 'js',
-          extname: '.js'
+        .pipe(rename((path) => {
+          path.dirname = path.dirname.replace('components/', '');
+          path.dirname = path.dirname.replace('/js', '');
         }))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./dist/js'));
     });
 
 		es.merge(tasks).on('end', done);
   });
 });
 
-gulp.task('minify:js', ['bower', 'compile:js'], () => {
-	return gulp.src('./dist/js/*')
+gulp.task('minify:js', ['compile:js'], () => {
+	return gulp.src('./dist/js/*/*.js')
     .pipe(uglify())
 		.pipe(rename({
 			extname: '.min.js'
