@@ -14,23 +14,54 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  */
 class Clanpress {
   /**
+   * TODO
+   */
+  const DEFAULT_MODE = 'default';
+
+  /**
    * Initializes the plugin's behavior.
    */
   public function __construct() {
-    require_once( self::get_helper_path() . 'functions.php' );
-    require_once( self::get_helper_path() . 'form.php' );
-    require_once( self::get_helper_path() . 'helper.php' );
-    require_once( self::get_helper_path() . 'meta-box.php' );
-    require_once( self::get_helper_path() . 'page.php' );
-    require_once( self::get_helper_path() . 'post-type.php' );
-    require_once( self::get_helper_path() . 'taxonomy.php' );
-    require_once( self::get_helper_path() . 'widget.php' );
+    require_once( 'functions.php' );
+    require_once( 'form.php' );
+    require_once( 'helper.php' );
+    require_once( 'meta-box.php' );
+    require_once( 'mode.php' );
+    require_once( 'page.php' );
+    require_once( 'post-type.php' );
+    require_once( 'taxonomy.php' );
+    require_once( 'widget.php' );
 
-    add_action( 'init', array( $this, 'register_post_types' ) );
+    $this->mode(get_option('clanpress_mode', 'default'));
+
+    /*add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
     add_action( 'admin_init', array( $this, 'register_admin_styles' ) );
     add_action( 'admin_menu', array( $this, 'register_admin_pages' ) );
-    add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+    add_action( 'widgets_init', array( $this, 'register_widgets' ) );*/
+  }
+
+  /**
+   * TODO
+   */
+  private function mode($mode) {
+    $mode = !in_array( $mode, $this->modes() ) ? self::DEFAULT_MODE : $mode;
+
+    require_once( CLANPRESS_PLUGIN_PATH . 'modes/' . $mode . '.php' );
+    $mode_class = 'Clanpress_' . ucwords($mode) . '_Mode';
+    new $mode_class();
+  }
+
+  /**
+   * Returns an array of allowed modes.
+   *
+   * @return array
+   *   Allowed modes.
+   */
+  private function modes() {
+    return array(
+      'default',
+    );
   }
 
   /**
