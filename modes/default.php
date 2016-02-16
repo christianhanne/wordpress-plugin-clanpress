@@ -13,35 +13,14 @@ class Clanpress_Default_Mode extends Clanpress_Mode {
   /**
    * @inheritdoc
    */
-  protected function post_types() {
+  protected function components() {
     return array(
-      'awards'   => array('award'),
-      'matches'  => array('match'),
-      'sponsors' => array('sponsor'),
-      'squads'   => array('squad'),
+      'awards',
+      'matches',
+      'sponsors',
+      'squads',
+      'teamspeak',
+      'misc',
     );
-  }
-
-  /**
-   * @inheritdoc
-   */
-  protected function widgets() {
-    return array(
-
-    );
-  }
-
-  /**
-   * @inheritdoc
-   */
-  protected function taxonomies() {
-
-  }
-
-  /**
-   * @inheritdoc
-   */
-  protected function settings() {
-
   }
 }

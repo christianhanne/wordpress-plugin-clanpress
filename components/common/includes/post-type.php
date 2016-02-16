@@ -102,6 +102,7 @@ class Clanpress_Post_Type {
       set_query_var( $key, $value );
     }
 
+    $component = Clanpress_Helper::get_component_by_path( __FILE__ );
     $post_type = str_replace( '_', '-', $post_type );
     $template_name = $type . '-content-' . $post_type . '.php';
 
@@ -110,7 +111,7 @@ class Clanpress_Post_Type {
       trailingslashit( get_stylesheet_directory() ) . 'clanpress/' . $template_name,
       trailingslashit( get_template_directory() ) . $template_name,
       trailingslashit( get_template_directory() ) .'clanpress/' . $template_name,
-      CLANPRESS_PLUGIN_PATH . 'templates/post-types/' . $template_name,
+      Clanpress_Helper::get_templates_path( $component ) . $template_name,
     );
 
     foreach ( $templates as $template ) {

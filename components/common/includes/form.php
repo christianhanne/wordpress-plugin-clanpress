@@ -316,7 +316,8 @@ class Clanpress_Form {
   private static function upload($element) {
     wp_enqueue_media();
 
-    $script_uri = Clanpress_Helper::get_scripts_uri() . 'upload-field.min.js';
+    $component = Clanpress_Helper::get_component_by_path( __FILE__ );
+    $script_uri = Clanpress_Helper::get_scripts_uri( $component ) . 'upload-field.min.js';
     wp_enqueue_script( 'clanpress_upload_field', $script_uri );
 
     $element['type'] = 'hidden';

@@ -176,7 +176,8 @@ class Clanpress_Widget extends WP_Widget {
     if ( $overridden_template = locate_template( $template_name ) ) {
       load_template( $overridden_template );
     } else {
-      load_template( CLANPRESS_PLUGIN_PATH . 'templates/widgets/' . $template_name );
+      $component = Clanpress_Helper::get_component_by_path( __FILE__ );
+      load_template( Clanpress_Helper::get_templates_path( $component ) . $template_name );
     }
   }
 

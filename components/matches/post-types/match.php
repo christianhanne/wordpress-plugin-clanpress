@@ -137,7 +137,7 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       'form_elements' => array(
         'squads' => array(
           'type' => 'checkboxes',
-          'options' => Clanpress_Helper::get_squad_options(),
+          'options' => Clanpress_Squads_Component::get_squad_options(),
           'default' => array(),
         ),
       ),
