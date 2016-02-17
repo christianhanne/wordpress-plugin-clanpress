@@ -13,6 +13,15 @@ class Clanpress_Awards_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */
+  protected function includes() {
+    return array(
+      'functions',
+    );
+  }
+
+  /**
+   * @inheritdoc
+   */
   protected function post_types() {
     return array(
       'award',
