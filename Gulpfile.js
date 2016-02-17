@@ -89,6 +89,8 @@ gulp.task('build', () => {
 			'dist/css/**',
 			'dist/js/**',
 			'dist/vendor/jquery-*/**',
+      'components/**',
+      'modes/**',
 			'includes/**',
 			'templates/**',
 			'clanpress.php',
