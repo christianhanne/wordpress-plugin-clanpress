@@ -79,7 +79,7 @@ function clanpress_the_match_opponent_thumbnail($size = 'post-thumbnail', $post 
 function clanpress_the_match_squad($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
-  $squad_options = Clanpress_Helper::get_squad_options();
+  $squad_options = Clanpress_Squads_Component::get_squad_options();
 
   $squads = array();
   $squad_ids = get_post_meta( $post->ID, 'clanpress_match_squads[squads]', true );
@@ -104,7 +104,7 @@ function clanpress_the_match_squad($post = null) {
 function clanpress_the_match_squad_thumbnail($size = 'post-thumbnail', $post = null) {
   $post = isset( $post ) ? $post : get_post();
 
-  $squad_options = Clanpress_Helper::get_squad_options();
+  $squad_options = Clanpress_Squads_Component::get_squad_options();
 
   $images = array();
   $squad_ids = get_post_meta( $post->ID, 'clanpress_match_squads[squads]', true );
