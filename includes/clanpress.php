@@ -17,7 +17,7 @@ class Clanpress {
    * @var string
    * The default clanpress mode.
    */
-  const DEFAULT_MODE = 'default';
+  const DEFAULT_MODE = 'setup';
 
   /**
    * Initializes the plugin's behavior.
@@ -51,8 +51,6 @@ class Clanpress {
    *   Allowed modes.
    */
   private function modes() {
-    return array(
-      'default',
-    );
+    return array();
   }
 }

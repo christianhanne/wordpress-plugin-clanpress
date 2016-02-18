@@ -1,15 +1,15 @@
 <?php
 /**
- * Contains the common component class.
+ * Contains the shared component class.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
  */
 
 /**
- * @class Clanpress_Common_Component
+ * @class Clanpress_Shared_Component
  */
-class Clanpress_Common_Component extends Clanpress_Component {
+class Clanpress_Shared_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */
