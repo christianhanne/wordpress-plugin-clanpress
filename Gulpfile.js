@@ -86,6 +86,7 @@ gulp.task('bower', () => {
 gulp.task('build', () => {
 	return gulp
 		.src([
+      'assets/**',
 			'dist/css/**',
 			'dist/js/**',
 			'dist/vendor/jquery-*/**',
