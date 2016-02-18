@@ -27,9 +27,108 @@ class Clanpress_Setup_Page extends Clanpress_Page {
   }
 
   /**
-   * TODO
+   * Renders a setup page.
    */
   public function render() {
+    if ( !$this->requirements_met() ) {
+      echo '<h1>' . __( 'Clanpress', 'clanpress' ) . '</h1>';
+      echo '<div class="update-nag">';
+      echo '<h2>Buddypress not found!</h2>';
+      echo '<p>' . __( 'This plugin requires Buddypress to function properly.', 'clanpress' ) . '</p>';
+      echo '<p>' . __( 'Please install & enable the latest version of this plugin:', 'clanpress' ) . '<br />';
+      echo '<a href="https://buddypress.org/download/">Download</a></p>';
+      echo '</div>';
+    } else {
+      if ( !empty($_POST['clanpress_mode']) ) {
+        update_option( 'clanpress_mode', $_POST['clanpress_mode'] );
 
+        header('HTTP/1.1 302 Found');
+        header('Location: ' . admin_url('admin.php?page=clanpress/dashboard'));
+        exit;
+      }
+
+      echo '<h1>' . __( 'Clanpress', 'clanpress' ) . '</h1>';
+
+      $component = Clanpress_Helper::get_component_by_path( __FILE__ );
+      $script_uri = Clanpress_Helper::get_scripts_uri( $component ) . 'setup.min.js';
+      wp_enqueue_script( 'clanpress_setup', $script_uri );
+
+      echo '<form method="POST" action="' . admin_url('admin.php?page=clanpress') . '">';
+
+      echo '<div class="clanpress_modes">';
+      echo '<p>';
+      echo __( 'Please select the plugin mode. ', 'clanpress' );
+      echo __( 'Please note that it is not recommended to change plugin modes.', 'clanpress' );
+      echo '</p>';
+
+      foreach ( $this->get_modes() as $id => $mode ) {
+        echo '<div class="clanpress_modes__mode" data-mode="' . $id . '">';
+        echo '<div class="clanpress_modes__image">';
+        echo '<img src="' . $mode['thumbnail'] . '" alt="' . $mode['name'] . '" />';
+        echo '</div>';
+        echo '<div class="clanpress_modes__description">';
+        echo '<strong>' . $mode['name'] . '</strong>';
+        echo '<em>' . $mode['description'] . '</em>';
+        echo '</div>';
+        echo '</div>';
+      }
+
+      echo '</div>';
+      echo '<input id="clanpress_mode" name="clanpress_mode" type="hidden" value="" />';
+      echo '<input type="submit" value="' . __( 'Store plugin mode', 'clanpress' ) . '" />';
+      echo '</form>';
+    }
+  }
+
+  /**
+   * Returns an array of available
+   *
+   * @return array
+   *   Array of game modes.
+   */
+  private function get_modes() {
+    $modes = array();
+    foreach ( Clanpress::modes() as $mode ) {
+      require_once( Clanpress_Helper::get_modes_path() . $mode . '.php' );
+      $mode_class = Clanpress::get_mode_class( $mode );
+
+      $modes[ $mode ] = array(
+        'name' => $mode_class::name(),
+        'description' => $mode_class::description(),
+        'thumbnail' => $mode_class::thumbnail(),
+      );
+    }
+
+    return $modes;
+  }
+
+  /**
+   * Returns if the requirements have been met.
+   *
+   * @return boolean
+   *   True, if all requirements are met.
+   */
+  private function requirements_met() {
+    foreach ( $this->requirements() as $requirement ) {
+      if ( !function_exists( $requirement ) ) {
+        return FALSE;
+      }
+    }
+
+    return TRUE;
+  }
+
+  /**
+   * Returns an array of required functions for the clanpress plugin.
+   *
+   * @return array
+   *   Required functions.
+   */
+  private function requirements() {
+    return array(
+      'bp_core_fetch_avatar',
+      'bp_core_get_userlink',
+      'groups_get_group_members',
+    );
   }
 }

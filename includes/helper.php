@@ -224,6 +224,16 @@ class Clanpress_Helper {
   }
 
   /**
+   * Returns the path to the modes directory.
+   *
+   * @return string
+   *   Path to the modes directory.
+   */
+  public static function get_modes_path() {
+    return CLANPRESS_PLUGIN_PATH . 'modes/';
+  }
+
+  /**
    * Returns an uri for a specific library.
    *
    * @param string $library
@@ -260,6 +270,16 @@ class Clanpress_Helper {
    */
   public static function get_scripts_uri( $component ) {
     return CLANPRESS_PLUGIN_URL . 'dist/js/' . $component . '/';
+  }
+
+  /**
+   * Returns an uri for the assets folder.
+   *
+   * @return string
+   *   Uri of the scripts folder.
+   */
+  public static function get_assets_path() {
+    return CLANPRESS_PLUGIN_URL . 'assets/';
   }
 
   /**

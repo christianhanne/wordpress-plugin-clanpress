@@ -18,4 +18,13 @@ class Clanpress_Setup_Component extends Clanpress_Component {
       'setup',
     );
   }
+
+  /**
+   * @inheritdoc
+   */
+  protected function admin_styles() {
+    return array(
+      'setup',
+    );
+  }
 }
