@@ -27,17 +27,6 @@ class Clanpress_Common_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */
-  protected function admin_pages() {
-    return array(
-      'clanpress',
-      'dashboard',
-      'settings',
-    );
-  }
-
-  /**
-   * @inheritdoc
-   */
   protected function admin_styles() {
     return array(
       'backend',
