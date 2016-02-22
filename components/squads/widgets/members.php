@@ -43,6 +43,7 @@ class Clanpress_Members_Widget extends Clanpress_Widget {
       ),
       'squads' => array(
         'type' => 'select',
+        'label' => __( 'Squad', 'clanpress' ),
         'options' => $this->squads_options(),
         'default' => 0,
       ),
@@ -68,7 +69,7 @@ class Clanpress_Members_Widget extends Clanpress_Widget {
    */
   private function squads_options() {
     $options = array( __( 'All squads', 'clanpress' ) );
-    $options += Clanpress_Helper::get_squad_options();
+    $options += Clanpress_Squads_Component::get_squad_options();
     return $options;
   }
 
