@@ -292,8 +292,7 @@ class Clanpress_Helper {
    *   Id of the component.
    */
   public static function get_component_by_path( $path ) {
-    $path = str_replace(CLANPRESS_PLUGIN_PATH . 'components/', '', $path);
-    preg_match('/(.*)\//U', $path, $matches);
+    preg_match('/components\/(.*)\//Ui', $path, $matches);
     return $matches[1];
   }
 
