@@ -25,6 +25,7 @@ class Clanpress_Squads_Component extends Clanpress_Component {
         'post_type' => 'clanpress_squad',
       );
 
+      $options = array();
       foreach ( get_posts( $args ) as $post ) {
         $options[ $post->ID ] = $post->post_title;
       }
