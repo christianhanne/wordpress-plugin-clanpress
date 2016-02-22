@@ -14,6 +14,20 @@ class Clanpress_Setup_Page extends Clanpress_Page {
   /**
    * @inheritdoc
    */
+  function __construct() {
+    if ( !empty($_POST['clanpress_mode']) ) {
+      update_option( 'clanpress_mode', $_POST['clanpress_mode'], true );
+      wp_redirect( admin_url('index.php') );
+      exit;
+    }
+    else {
+      parent::__construct();
+    }
+  }
+
+  /**
+   * @inheritdoc
+   */
   protected function settings() {
     return array(
       'page_title' => __( 'Clanpress', 'clanpress' ),
@@ -39,14 +53,6 @@ class Clanpress_Setup_Page extends Clanpress_Page {
       echo '<a href="https://buddypress.org/download/">Download</a></p>';
       echo '</div>';
     } else {
-      if ( !empty($_POST['clanpress_mode']) ) {
-        update_option( 'clanpress_mode', $_POST['clanpress_mode'] );
-
-        header('HTTP/1.1 302 Found');
-        header('Location: ' . admin_url('admin.php?page=clanpress/dashboard'));
-        exit;
-      }
-
       echo '<h1>' . __( 'Clanpress', 'clanpress' ) . '</h1>';
 
       $component = Clanpress_Helper::get_component_by_path( __FILE__ );
