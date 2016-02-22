@@ -16,8 +16,6 @@ class Clanpress_Admin_Component extends Clanpress_Component {
   protected function admin_pages() {
     return array(
       'clanpress',
-      'dashboard',
-      'settings',
     );
   }
 }
