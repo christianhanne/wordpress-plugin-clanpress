@@ -37,18 +37,20 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */
-  protected function includes() {
+  protected function group_extensions() {
     return array(
-      'functions',
+      'games',
+      'image',
+      'squad_type',
     );
   }
 
   /**
    * @inheritdoc
    */
-  protected function post_types() {
+  protected function includes() {
     return array(
-      'squad',
+      'functions',
     );
   }
 
