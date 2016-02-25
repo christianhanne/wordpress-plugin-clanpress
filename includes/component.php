@@ -23,6 +23,7 @@ class Clanpress_Component {
     add_action( 'admin_init', array( $this, 'register_admin_styles' ) );
     add_action( 'admin_menu', array( $this, 'register_admin_pages' ) );
     add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+    add_action( 'bp_include', array( $this, 'register_group_extensions' ) );
   }
 
   /**
@@ -44,6 +45,17 @@ class Clanpress_Component {
   public function register_admin_styles() {
     foreach ( $this->admin_styles() as $admin_style ) {
       Clanpress_Helper::register_style( $this->id(), $admin_style );
+    }
+  }
+
+  /**
+   * Registers group extensions for buddypress.
+   *
+   * @see Clanpress_Helper::register_group_extension().
+   */
+  public function register_group_extensions() {
+    foreach ( $this->group_extensions() as $group_extension ) {
+      Clanpress_Helper::register_group_extension( $this->id(), $group_extension );
     }
   }
 
@@ -108,6 +120,20 @@ class Clanpress_Component {
   protected function admin_styles() {
     return array();
   }
+
+  /**
+   * Returns an array of buddypress group extensions this component registers.
+   *
+   * Names of the group extensions must equal the post type's file names. All
+   * files must be located inside the component's folder.
+   *
+   * @return array
+   *   Array of group extensions.
+   */
+  protected function group_extensions() {
+    return array();
+  }
+
 
   /**
    * Returns an array of post types this component registers.
