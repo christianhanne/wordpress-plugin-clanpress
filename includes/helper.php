@@ -37,12 +37,12 @@ class Clanpress_Helper {
   }
 
   /**
-  * Registers a new style with the given name
-  *
-  * @param string $component
-  *   Id of the component.
-  * @param string $style
-  *   Filename of the style.
+   * Registers a new style with the given name
+   *
+   * @param string $component
+   *   Id of the component.
+   * @param string $style
+   *   Filename of the style.
    */
   public static function register_style( $component, $style ) {
     $styles_uri = self::get_styles_uri( $component ) . $style . '.min.css';
@@ -50,12 +50,32 @@ class Clanpress_Helper {
   }
 
   /**
-  * Registers an include file.
-  *
-  * @param string $component
-  *   Id of the component.
-  * @param string $include
-  *   Filename of the include.
+   * Registers a buddypress group extension.
+   *
+   * @param string $component
+   *   Id of the component.
+   * @param string $extension
+   *   Filename of the extension.
+   */
+  public static function register_group_extension( $component, $extension ) {
+    if ( class_exists( 'BP_Group_Extension' ) ) {
+      if ( !class_exists( 'Clanpress_Group_Extension' ) ) {
+        require 'group-extension.php';
+      }
+
+      require_once( self::get_group_extensions_path( $component ) . self::normalize( $extension ) . '.php' );
+      $group_extension = 'Clanpress_' . ucwords( $extension ) . '_Group_Extension';
+      bp_register_group_extension( $group_extension );
+    }
+  }
+
+  /**
+   * Registers an include file.
+   *
+   * @param string $component
+   *   Id of the component.
+   * @param string $include
+   *   Filename of the include.
    */
   public static function register_include( $component, $include ) {
     require_once( self::get_includes_path( $component ) . self::normalize( $include ) . '.php' );
@@ -208,6 +228,19 @@ class Clanpress_Helper {
   public static function get_includes_path( $component ) {
     $component_path = self::get_component_path( $component );
     return $component_path . 'includes/';
+  }
+
+  /**
+   * Returns the path of the plugin's buddypress group extensions directory.
+   *
+   * @param string $component
+   *   Name of the component. Must equal it's id.
+   * @return string
+   *   Group extensions directory path.
+   */
+  public static function get_group_extensions_path( $component ) {
+    $component_path = self::get_component_path( $component );
+    return $component_path . 'group-extensions/';
   }
 
   /**
