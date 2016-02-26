@@ -28,8 +28,7 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	 *   TODO
 	 */
 	public function display( $group_id = NULL ) {
-			$group_id = bp_get_group_id();
-			echo 'What a cool plugin!';
+
 	}
 
 	/**
@@ -39,11 +38,19 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	 *   TODO
 	 */
 	public function settings_screen( $group_id = NULL ) {
-			$setting = groups_get_groupmeta( $group_id, 'group_extension_example_1_setting' );
+		$instance = groups_get_groupmeta( $group_id, $this->id() );
 
-			?>
-			Save your plugin setting here: <input type="text" name="group_extension_example_1_setting" value="<?php echo esc_attr( $setting ) ?>" />
-			<?php
+    // TODO: This should be merged into a helper function.
+    foreach ( $this->form_elements() as $id => $element ) {
+      $element['field_id'] = $this->id() . '[' . $id . ']';
+      $element['field_name'] = $this->id() . '[' . $id . ']';
+
+      if ( isset( $instance[ $id ] ) ) {
+        $element['default'] = $instance[ $id ];
+      }
+
+      echo Clanpress_Form::element( $element );
+    }
 	}
 
 	/**
@@ -53,13 +60,29 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	 *   TODO
 	 */
 	public function settings_screen_save( $group_id = NULL ) {
-			$setting = '';
+		$instance = groups_get_groupmeta( $group_id, $this->id() );
+    if ( empty( $instance ) ) {
+      $instance = array();
+    }
 
-			if ( isset( $_POST['group_extension_example_1_setting'] ) ) {
-					$setting = $_POST['group_extension_example_1_setting'];
-			}
+    // TODO: This should be merged into a helper function.
+   	if ( isset( $_POST[ $this->id() ] ) ) {
+			$new_instance = $_POST[ $this->id() ];
 
-			groups_update_groupmeta( $group_id, 'group_extension_example_1_setting', $setting );
+      foreach ( $this->form_elements() as $id => $element ) {
+        if ( isset( $new_instance[ $id ] ) &&  Clanpress_Form::is_valid( $element, $new_instance[ $id ] ) ) {
+          $field_id = $this->id() . '[' . $id . ']';
+          if ( Clanpress_Form::is_multi_value( $element ) ) {
+            array_walk( $new_instance[ $id ], 'sanitize_text_field' );
+            $instance[ $id ] = $new_instance[ $id ];
+          } else {
+            $instance[ $id ] = sanitize_text_field( $new_instance[ $id ] );
+          }
+        }
+      }
+		}
+
+		groups_update_groupmeta( $group_id, $this->id(), $instance );
 	}
 
   /**
@@ -71,6 +94,16 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
    * @link https://codex.buddypress.org/developer/group-extension-api/
    */
   protected function settings() {
+    return array();
+  }
+
+  /**
+   * TODO
+   *
+   * @return array
+   *   TODO
+   */
+  protected function form_elements() {
     return array();
   }
 
