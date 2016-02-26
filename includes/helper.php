@@ -64,7 +64,10 @@ class Clanpress_Helper {
       }
 
       require_once( self::get_group_extensions_path( $component ) . self::normalize( $extension ) . '.php' );
-      $group_extension = 'Clanpress_' . ucwords( $extension ) . '_Group_Extension';
+
+      // TODO: We should add a function to capitalize words correctly.
+      $extension = str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $extension ) ) );
+      $group_extension = 'Clanpress_' . $extension . '_Group_Extension';
       bp_register_group_extension( $group_extension );
     }
   }
