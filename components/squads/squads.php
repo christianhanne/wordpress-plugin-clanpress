@@ -39,9 +39,8 @@ class Clanpress_Squads_Component extends Clanpress_Component {
    */
   protected function group_extensions() {
     return array(
-      'games',
-      'image',
       'squad_type',
+      'games',
     );
   }
 
