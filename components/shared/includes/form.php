@@ -87,8 +87,10 @@ class Clanpress_Form {
         break;
 
       case 'checkbox':
+        // TODO: Find a better solution for this.
         $field = self::checkbox($element);
-        $template = '<div class="form-field">$field$label$description</div>';
+        $field = self::label( $element['field_id'], $field . $element['label'] );
+        $template = '<div class="form-field">$field$description</div>';
         break;
 
       case 'checkboxes':
