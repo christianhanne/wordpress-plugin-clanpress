@@ -17,6 +17,7 @@ class Clanpress_Default_Component extends Clanpress_Component {
    */
   protected function includes() {
     return array(
+			'functions',
       'form',
       'meta-box',
       'page',

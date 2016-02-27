@@ -216,7 +216,7 @@ class Clanpress_Post_Type {
     global $post;
     if ( $post->post_type == self::id() ) {
       $template_name = self::post_template_name( $type );
-      $template_dir = CLANPRESS_PLUGIN_PATH . 'templates/post-types/';
+      $template_dir = Clanpress_Helper::get_templates_path( Clanpress_Helper::DEFAULT_COMPONENT );
       if ( $template !== get_stylesheet_directory() . '/' . $template_name ) {
         return $template_dir . $template_name;
       }
