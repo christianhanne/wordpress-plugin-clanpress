@@ -16,14 +16,8 @@ class Clanpress_Games_Group_Extension extends Clanpress_Group_Extension {
   protected function settings() {
     return array(
       'name' => __( 'Games', 'clanpress' ),
+      'show_tab' => 'noone',
     );
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function display( $group_id = NULL ) {
-    echo 'TODO';
   }
 
   /**

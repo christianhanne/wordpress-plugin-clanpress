@@ -22,13 +22,6 @@ class Clanpress_Squad_Type_Group_Extension extends Clanpress_Group_Extension {
    */
   const PLAYING = 'playing';
 
-  /**
-	 * @inheritdoc
-	 */
-	public function display( $group_id = NULL ) {
-    echo 'TODO';
-	}
-
 	/**
 	 * @inheritdoc
 	 */
@@ -49,6 +42,7 @@ class Clanpress_Squad_Type_Group_Extension extends Clanpress_Group_Extension {
   protected function settings() {
     return array(
       'name' => __( 'Squad Type', 'clanpress' ),
+      'show_tab' => 'noone',
     );
   }
 
