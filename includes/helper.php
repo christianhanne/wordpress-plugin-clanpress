@@ -19,6 +19,12 @@ class Clanpress_Helper {
   const DEFAULT_COMPONENT = 'default';
 
   /**
+   * @var array
+   * Stores an associative array of classes with their components.
+   */
+  private static $classes = array();
+
+  /**
    * Registers a new page with the given name.
    *
    * This function includes a file with the page's name. This file has
@@ -40,6 +46,8 @@ class Clanpress_Helper {
     require_once( self::get_pages_path( $component ) . self::normalize( $page ) . '.php' );
     $page_class = 'Clanpress_' . ucwords( $page ) . '_Page';
     new $page_class();
+
+    self::$classes[$page_class] = $component;
   }
 
   /**
@@ -75,6 +83,8 @@ class Clanpress_Helper {
       $extension = str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $extension ) ) );
       $group_extension = 'Clanpress_' . $extension . '_Group_Extension';
       bp_register_group_extension( $group_extension );
+
+      self::$classes[$group_extension] = $component;
     }
   }
 
@@ -112,6 +122,8 @@ class Clanpress_Helper {
     require_once( self::get_post_types_path( $component ) . self::normalize( $post_type ) . '.php' );
     $post_type_class = 'Clanpress_' . ucwords( $post_type ) . '_Post_Type';
     new $post_type_class();
+
+    self::$classes[$post_type_class] = $component;
   }
 
   /**
@@ -136,6 +148,8 @@ class Clanpress_Helper {
     require_once( self::get_taxonomies_path( $component ) . self::normalize( $taxonomy ) . '.php' );
     $taxonomy_class = 'Clanpress_' . ucwords( $taxonomy ) . '_Taxonomy';
     new $taxonomy_class();
+
+    self::$classes[$taxonomy_class] = $component;
   }
 
   /**
@@ -158,7 +172,10 @@ class Clanpress_Helper {
    */
   public static function register_widget( $component, $widget ) {
     require_once( self::get_widgets_path( $component ) . self::normalize( $widget ) . '.php' );
-    register_widget( 'Clanpress_' . ucwords( $widget ) . '_Widget' );
+    $widget_class = 'Clanpress_' . ucwords( $widget ) . '_Widget';
+    register_widget( $widget_class );
+
+    self::$classes[$widget_class] = $component;
   }
 
   /**
@@ -336,6 +353,19 @@ class Clanpress_Helper {
   public static function get_component_by_path( $path ) {
     preg_match('/components\/(.*)\//Ui', $path, $matches);
     return $matches[1];
+  }
+
+  /**
+   * Returns the components id for a given class name.
+   *
+   * @param string $class
+   *   Name of the class.
+   *
+   * @return string|null
+   *   Id of the component.
+   */
+  public static function get_component_by_class( $class ) {
+    return isset( self::$classes[ $class ] ) ? self::$classes[ $class ] : null;
   }
 
   /**
