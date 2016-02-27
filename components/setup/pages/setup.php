@@ -42,6 +42,8 @@ class Clanpress_Setup_Page extends Clanpress_Page {
 
   /**
    * Renders a setup page.
+   *
+   * @TODO Add a template for this. Feels wrong to output this in a function.
    */
   public function render() {
     if ( !$this->requirements_met() ) {
@@ -113,6 +115,8 @@ class Clanpress_Setup_Page extends Clanpress_Page {
    *
    * @return boolean
    *   True, if all requirements are met.
+   *
+   * @TODO Learn how to correctly check for extensions & use this method.
    */
   private function requirements_met() {
     foreach ( $this->requirements() as $requirement ) {
