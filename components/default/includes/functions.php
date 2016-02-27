@@ -17,5 +17,7 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
   *   Display type, either 'single' or 'archive'.
   */
 function clanpress_content_template( $type ) {
-  Clanpress_Post_Type::content_template( $type, get_post_type() );
+  $post_type = get_post_type();
+  $class = Clanpress_Post_Type::get_class_name( $post_type );
+  $class::content_template( $type, $post_type );
 }

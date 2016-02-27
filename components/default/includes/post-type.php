@@ -102,7 +102,7 @@ class Clanpress_Post_Type {
       set_query_var( $key, $value );
     }
 
-    $component = Clanpress_Helper::get_component_by_path( __FILE__ );
+    $component = Clanpress_Helper::get_component_by_class( get_called_class() );
     $post_type = str_replace( '_', '-', $post_type );
     $template_name = $type . '-content-' . $post_type . '.php';
 
@@ -247,7 +247,7 @@ class Clanpress_Post_Type {
    * @return string
    *   Post type's class name.
    */
-  final private static function get_class_name( $post_type ) {
+  final public static function get_class_name( $post_type ) {
     $class = ucwords(str_replace('_', ' ', $post_type));
     $class = str_replace(' ', '_', $class);
     $class .= '_Post_Type';
