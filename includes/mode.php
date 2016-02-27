@@ -17,8 +17,8 @@ class Clanpress_Mode {
    */
   function __construct() {
     $components = $this->components();
-    if ( !in_array( 'shared', $components ) ) {
-      array_unshift( $components, 'shared' );
+    if ( !in_array( Clanpress_Helper::DEFAULT_COMPONENT, $components ) ) {
+      array_unshift( $components, Clanpress_Helper::DEFAULT_COMPONENT );
     }
 
     foreach ( $components as $component ) {

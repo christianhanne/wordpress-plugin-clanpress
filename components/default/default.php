@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the shared component class.
+ * Contains the default component class.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @package Clanpress
@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 /**
  * @class Clanpress_Shared_Component
  */
-class Clanpress_Shared_Component extends Clanpress_Component {
+class Clanpress_Default_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */

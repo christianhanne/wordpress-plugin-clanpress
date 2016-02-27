@@ -13,6 +13,12 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  */
 class Clanpress_Helper {
   /**
+   * @var string
+   * Holds the id of the default component.
+   */
+  const DEFAULT_COMPONENT = 'default';
+
+  /**
    * Registers a new page with the given name.
    *
    * This function includes a file with the page's name. This file has
