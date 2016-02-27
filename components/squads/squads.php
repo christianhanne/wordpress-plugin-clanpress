@@ -21,15 +21,13 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   public static function get_squad_options() {
     static $options;
     if ( !isset( $options ) ) {
-      $args = array(
-        'orderby' => 'title',
-        'order' => 'ASC',
-        'post_type' => 'clanpress_squad',
-      );
+      $groups = BP_Groups_Group::get(array(
+				'type' => 'alphabetical',
+				'per_page' => 999
+			));
 
-      $options = array();
-      foreach ( get_posts( $args ) as $post ) {
-        $options[ $post->ID ] = $post->post_title;
+      foreach ( $groups['groups'] as $group ) {
+        $options[ $group->id ] = $group->name;
       }
     }
 
