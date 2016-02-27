@@ -6,6 +6,8 @@
  * @package Clanpress
  */
 
+defined( 'ABSPATH' ) or die( 'Access restricted.' );
+
 /**
  * Displays a link to the matches' external website.
  *

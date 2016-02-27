@@ -6,6 +6,8 @@
  * @package Clanpress
  */
 
+defined( 'ABSPATH' ) or die( 'Access restricted.' );
+
 /**
  * @class Clanpress_Squad_Type_Group_Extension
  */

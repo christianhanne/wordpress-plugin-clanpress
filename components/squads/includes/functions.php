@@ -6,6 +6,8 @@
  * @package Clanpress
  */
 
+defined( 'ABSPATH' ) or die( 'Access restricted.' );
+
 /**
  * Displays the squad type of the given squad post.
  *

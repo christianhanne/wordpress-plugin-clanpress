@@ -6,6 +6,8 @@
  * @license MIT
  */
 
+defined( 'ABSPATH' ) or die( 'Access restricted.' );
+
 /**
  * @class Clanpress_Component
  */
