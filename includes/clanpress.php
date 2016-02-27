@@ -38,10 +38,7 @@ class Clanpress {
    */
   public static function modes() {
     return array(
-      'single-game',
       'multi-game',
-      'minecraft',
-      'star-citizen',
     );
   }
 
