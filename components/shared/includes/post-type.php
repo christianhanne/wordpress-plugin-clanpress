@@ -239,13 +239,13 @@ class Clanpress_Post_Type {
   }
 
   /**
-   * TODO
+   * Returns the class name for a given post type id.
    *
    * @param string $post_type
-   *   TODO
+   *   The post type id.
    *
    * @return string
-   *   TODO
+   *   Post type's class name.
    */
   final private static function get_class_name( $post_type ) {
     $class = ucwords(str_replace('_', ' ', $post_type));
