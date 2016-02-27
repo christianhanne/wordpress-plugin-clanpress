@@ -11,7 +11,9 @@
  */
 class Clanpress_Group_Extension extends BP_Group_Extension {
   /**
-   * TODO
+   * Creates a new buddypress group extension with the given settings.
+   *
+   * @see Clanpress_Group_Extension::settings()
    */
   function __construct() {
     $settings = $this->settings();
@@ -22,20 +24,14 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
   }
 
 	/**
-	 * TODO
+	 * Handles the display of the form elements on the group's settings screen.
+	 *
+	 * Please note that (for some stupid reason) this function has to be added
+	 * to the child class also. Otherwise the form elements won't show up. For
+	 * convenience add parent::settings_screen() to the child class function.
 	 *
 	 * @param int|null $group_id
-	 *   TODO
-	 */
-	public function display( $group_id = NULL ) {
-
-	}
-
-	/**
-	 * TODO
-	 *
-	 * @param int|null $group_id
-	 *   TODO
+	 *   The group id.
 	 */
 	public function settings_screen( $group_id = NULL ) {
 		$instance = groups_get_groupmeta( $group_id, $this->id() );
@@ -53,11 +49,15 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
     }
 	}
 
-	/**
-	 * TODO
+  /**
+	 * Handles the storage of the group extensions form elements.
+	 *
+	 * Please note that (for some stupid reason) this function has to be added
+	 * to the child class also. Otherwise the form elements won't show up. For
+	 * convenience add parent::settings_screen_save() to the child class function.
 	 *
 	 * @param int|null $group_id
-	 *   TODO
+	 *   The group id.
 	 */
 	public function settings_screen_save( $group_id = NULL ) {
 		$instance = groups_get_groupmeta( $group_id, $this->id() );
@@ -86,10 +86,13 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	}
 
   /**
-   * TODO
+   * Returns a settings array for the buddypress group extension.
+   *
+   * Please take a look at the linked website for more details on extension
+   * settings. The function should at least return a name value.
    *
    * @return array
-   *   TODO
+   *   Group extension settings array.
    *
    * @link https://codex.buddypress.org/developer/group-extension-api/
    */
@@ -98,20 +101,31 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
   }
 
   /**
-   * TODO
+   * Returns an array of form elements.
+   *
+   * Should return an array of form elements for the group extension. The array
+   * should consist of the form element ids as key and the element settings
+   * as values. For details on element settings check the linked function.
    *
    * @return array
-   *   TODO
+   *   Array of form elements for widget forms.
+   *   Eg. array('title' => $element, 'num_items' => $element)
+   *
+   * @see Clanpress_Form::element()
    */
   protected function form_elements() {
     return array();
   }
 
 	/**
-	 * TODO
+	 * Returns the id of the given buddypress group extension.
+	 *
+	 * The id will be used for registering the extension and storing the groups
+	 * meta data. The id will be retrieved from the class name and has to be
+	 * unique.
 	 *
 	 * @return string
-	 *   TODO
+	 *   Id of the group extension.
 	 */
 	private final function id() {
 		$class_name = get_called_class();
