@@ -13,7 +13,7 @@ Plugin URI: http://aureola.codes/wordpress-plugins/clanpress
 Description: ClanPress is full featured clan management plugin.
 Author: Christian Hanne <support@aureola.codes>
 Author URI: http://aureola.codes/wordpress-plugins/
-Version: 0.5.3
+Version: 0.6.0
 Text Domain: clanpress
 */
 
