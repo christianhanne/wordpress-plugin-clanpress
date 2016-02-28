@@ -9,18 +9,18 @@
  * @package Clanpress
  */
 ?>
-<?php if ( have_posts() ): ?>
+<?php if ( bp_has_groups( 'type=alphabetical&max=' . $num_items ) ): ?>
   <ul class="clanpress_widget__items">
-    <?php while(have_posts()) : the_post(); ?>
+    <?php while(bp_groups()) : bp_the_group(); ?>
       <li class="clanpress_widget__item">
         <span class="clanpress_widget__thumbnail">
-          <?php the_post_thumbnail( 'thumbnail' ); ?>
+          <?php bp_group_avatar( 'type=thumb&width=100&height=100' ) ?>
         </span>
         <h4 class="clanpress_widget__title">
-          <?php the_title(); ?>
+          <?php bp_group_name(); ?>
         </h4>
-        <a href="<?php the_permalink(); ?>">
-          <?php _e( 'View Squad', 'clanpress_the_award_placement' ); ?>
+        <a href="<?php bp_group_permalink(); ?>">
+          <?php _e( 'View Squad', 'clanpress' ); ?>
         </a>
       </li>
     <?php endwhile; ?>

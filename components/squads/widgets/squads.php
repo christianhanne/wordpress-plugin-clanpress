@@ -19,15 +19,9 @@ class Clanpress_Squads_Widget extends Clanpress_Widget {
    * @inheritdoc
    */
   protected function template_elements( $instance = array() ) {
-    query_posts( array(
-      'posts_per_page' => (int) $instance['num_items'],
-      'offset' => 0,
-      'orderby' => 'title',
-      'order' => 'ASC',
-      'post_type' => 'clanpress_squad',
-    ) );
-
-    return array();
+    return array(
+      'num_items' => (int) $instance['num_items'],
+    );
   }
 
   /**
