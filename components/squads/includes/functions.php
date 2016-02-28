@@ -14,14 +14,14 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 /**
  * Displays the squad type of the given squad post.
  *
- * @param WP_Post $post
- *   The post.
+ * @param int|null $group_id
+ *   The group id.
  */
-function clanpress_the_squad_type($post = null) {
-  $post = isset( $post ) ? $post : get_post();
+function clanpress_the_squad_type($group_id = null) {
+  $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
-  $squad_type_id = get_post_meta( $post->ID, 'clanpress_squad_squad_type[squad_type]', true );
-  $squad_types = Clanpress_Squad_Post_type::get_squad_types();
+  $squad_type_id = groups_get_groupmeta( $group_id, 'clanpress_squad_type[squad_type]' );
+  $squad_types = Clanpress_Squad_Type_Group_Extension::get_squad_types();
 
   echo $squad_types[ $squad_type_id ];
 }
