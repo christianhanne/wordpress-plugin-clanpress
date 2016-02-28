@@ -52,6 +52,7 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   protected function group_extensions() {
     return array(
       'awards',
+      'matches',
       'squad_type',
       'games',
     );
