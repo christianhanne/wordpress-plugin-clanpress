@@ -43,8 +43,8 @@ class Clanpress_Multi_Game_Mode extends Clanpress_Mode {
     return array(
       'admin',
       'awards',
+      'games',
       'matches',
-      'misc',
       'sponsors',
       'squads',
       'teamspeak',

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the misc component class.
+ * Contains the games component class.
  *
  * @author Christian Hanne <support@aureola.codes>
  * @copyright Copyright (c) 2016, Aureola
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 /**
  * @class Clanpress_Misc_Component
  */
-class Clanpress_Misc_Component extends Clanpress_Component {
+class Clanpress_Games_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */
