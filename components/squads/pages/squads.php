@@ -55,7 +55,7 @@ class Clanpress_Squads_Page extends Clanpress_Page {
     return array(
       'page_title' => __( 'Squads', 'clanpress' ),
       'menu_title' => __( 'Squads', 'clanpress' ),
-      'capability' => 'bp_moderate', // TODO: Add correct capability.
+      'capability' => 'bp_moderate',
       'menu_slug' => 'admin.php?page=clanpress/squads',
       'function' => array( $this, 'render' ),
     );
