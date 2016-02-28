@@ -25,7 +25,7 @@ class Clanpress_Top_Match_Widget extends Clanpress_Widget {
       'post_type' => 'clanpress_match',
       'meta_query' => array(
     		array(
-    			'key' => 'clanpress_match_top_match[match_type]',
+    			'key' => 'clanpress_match_match[top_match]',
     			'value' => '1',
     		),
     	)
