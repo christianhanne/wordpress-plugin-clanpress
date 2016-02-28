@@ -40,6 +40,15 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */
+  protected function admin_pages() {
+    return array(
+      'squads',
+    );
+  }
+
+  /**
+   * @inheritdoc
+   */
   protected function group_extensions() {
     return array(
       'squad_type',
