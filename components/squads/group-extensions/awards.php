@@ -50,7 +50,13 @@ class Clanpress_Awards_Group_Extension extends Clanpress_Group_Extension {
     	)
     ) );
 
-    require Clanpress_Award_Post_Type::archive_template();
+    if ( have_posts() ) {
+      while ( have_posts() ) {
+        the_post();
+        clanpress_content_template( 'archive' );
+      }
+    }
+
     wp_reset_query();
   }
 }
