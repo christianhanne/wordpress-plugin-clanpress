@@ -29,11 +29,13 @@ function clanpress_the_award_placement($post = null) {
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @TODO Update for new squad logic.
  */
 function clanpress_the_award_squad($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
-  $squad_options = Clanpress_Helper::get_squad_options();
+  $squad_options = Clanpress_Squads_Component::get_squad_options();
 
   $squads = array();
   $squad_ids = get_post_meta( $post->ID, 'clanpress_award_squad[squad]', true );
