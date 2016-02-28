@@ -18,6 +18,15 @@ class Clanpress_Teamspeak_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */
+  protected function includes() {
+		return array(
+			'functions',
+		);
+	}
+
+  /**
+   * @inheritdoc
+   */
   protected function widgets() {
     return array(
       'teamspeak_status',
