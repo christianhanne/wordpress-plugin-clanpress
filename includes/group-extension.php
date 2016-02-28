@@ -37,17 +37,18 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	 *
 	 * @param int|null $group_id
 	 *   The group id.
+	 *
+	 * @TODO: This should be merged into a helper function.
 	 */
 	public function settings_screen( $group_id = NULL ) {
-		$instance = groups_get_groupmeta( $group_id, $this->id() );
-
-    // TODO: This should be merged into a helper function.
     foreach ( $this->form_elements() as $id => $element ) {
       $element['field_id'] = $this->id() . '[' . $id . ']';
       $element['field_name'] = $this->id() . '[' . $id . ']';
 
-      if ( isset( $instance[ $id ] ) ) {
-        $element['default'] = $instance[ $id ];
+      if ( Clanpress_Form::is_multi_value( $element ) ) {
+        $element['default'] = $this->get_multi_value( $group_id, $id );
+      } else {
+        $element['default'] = $this->get_single_value( $group_id, $id );
       }
 
       echo Clanpress_Form::element( $element );
@@ -63,31 +64,22 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	 *
 	 * @param int|null $group_id
 	 *   The group id.
+	 *
+	 * @TODO: This should be merged into a helper function.
 	 */
 	public function settings_screen_save( $group_id = NULL ) {
-		$instance = groups_get_groupmeta( $group_id, $this->id() );
-    if ( empty( $instance ) ) {
-      $instance = array();
-    }
-
-    // TODO: This should be merged into a helper function.
    	if ( isset( $_POST[ $this->id() ] ) ) {
-			$new_instance = $_POST[ $this->id() ];
-
+			$instance = $_POST[ $this->id() ];
       foreach ( $this->form_elements() as $id => $element ) {
-        if ( isset( $new_instance[ $id ] ) &&  Clanpress_Form::is_valid( $element, $new_instance[ $id ] ) ) {
-          $field_id = $this->id() . '[' . $id . ']';
+        if ( isset( $instance[ $id ] ) &&  Clanpress_Form::is_valid( $element, $instance[ $id ] ) ) {
           if ( Clanpress_Form::is_multi_value( $element ) ) {
-            array_walk( $new_instance[ $id ], 'sanitize_text_field' );
-            $instance[ $id ] = $new_instance[ $id ];
+            $this->store_multi_value( $group_id, $id, $instance[ $id ] );
           } else {
-            $instance[ $id ] = sanitize_text_field( $new_instance[ $id ] );
+            $this->store_single_value( $group_id, $id, $instance[ $id ] );
           }
         }
       }
 		}
-
-		groups_update_groupmeta( $group_id, $this->id(), $instance );
 	}
 
   /**
@@ -120,6 +112,93 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
    */
   protected function form_elements() {
     return array();
+  }
+
+  /**
+   * Stores a single value as post meta data.
+   *
+   * @param int $group_id
+   *   The group id.
+   * @param string $id
+   *   Id of the form field.
+   * @param mixed $value
+   *   Value to be stored.
+   */
+  private function store_single_value($group_id, $id, $value) {
+    $value = sanitize_text_field( $value );
+    groups_update_groupmeta( $group_id, $this->get_field_id( $id ), $value );
+  }
+
+  /**
+   * Stores multiple values as post meta data.
+   *
+   * @param int $group_id
+   *   The group id.
+   * @param string $id
+   *   Id of the form field.
+   * @param mixed $value
+   *   Value to be stored.
+   */
+  private function store_multi_value($group_id, $id, $values) {
+    foreach ( $values as $key => $value) {
+      $value = sanitize_text_field( $value );
+      groups_update_groupmeta( $group_id, $this->get_field_id( $id ) . '[' . $key . ']', $value );
+    }
+  }
+
+  /**
+   * Handles retrieval for single value fields.
+   *
+   * @param int $group_id
+   *   The group id.
+   * @param string $id
+   *   Id of the form field.
+   *
+   * @return mixed
+   *   The stored value.
+   */
+  private function get_single_value($group_id, $id) {
+    return groups_get_groupmeta( $group_id, $this->get_field_id( $id ), true );
+  }
+
+  /**
+   * Handles retrieval of multi-value fields.
+   *
+   * @param int $group_id
+   *   The group id.
+   * @param string $id
+   *   Id of the form field.
+   *
+   * @return array
+   *   Array of stored values.
+   */
+  private function get_multi_value($group_id, $id) {
+    $return = array();
+
+    $field_id = $this->get_field_id( $id );
+    foreach ( groups_get_groupmeta( $group_id, '', true ) as $key => $value) {
+      if ( strpos( $key, $field_id ) !== FALSE ) {
+        $storage_key = str_replace( array( $field_id, '[', ']' ), '', $key);
+        if ( !empty($storage_key) ) {
+          $return[ $storage_key ] = is_array( $value ) ? current( $value ) : $value;
+        }
+      }
+    }
+
+    return $return;
+  }
+
+  /**
+   * Returns the field id as defined in the post variables.
+   *
+   * @param string $id
+   *   Id of the form field.
+   *
+   * @return string
+   *   Field id.
+   */
+  private function get_field_id($id) {
+    return $this->id() . '[' . $id . ']';
   }
 
 	/**
