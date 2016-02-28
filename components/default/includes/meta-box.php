@@ -80,16 +80,11 @@ class Clanpress_Meta_Box {
   public function save($post_id, $instance = array()) {
     foreach ( $this->settings['form_elements'] as $key => $element ) {
       if ( isset( $instance[ $key ] ) &&  Clanpress_Form::is_valid( $element, $instance[ $key ] ) ) {
-        $field_id = $this->id() . '[' . $key . ']';
-
         if ( Clanpress_Form::is_multi_value( $element ) ) {
-          array_walk( $instance[ $key ], 'sanitize_text_field' );
-          $value = $instance[ $key ];
+          $this->store_multi_value( $post_id, $key, $instance[ $key ] );
         } else {
-          $value = sanitize_text_field( $instance[ $key ] );
+          $this->store_single_value( $post_id, $key, $instance[ $key ] );
         }
-
-        update_post_meta( $post_id, $field_id, $value );
       }
     }
   }
@@ -132,11 +127,102 @@ class Clanpress_Meta_Box {
   public function get_meta( $post_id ) {
     $meta = array();
     foreach ( $this->settings['form_elements'] as $key => $element ) {
-      $field_id = $this->id() . '[' . $key . ']';
-      $meta[ $key ] = get_post_meta( $post_id, $field_id, true );
+      if ( Clanpress_Form::is_multi_value( $element ) ) {
+        $meta[ $key ] = $this->get_multi_value( $post_id, $key );
+      }
+      else {
+        $meta[ $key ] = $this->get_single_value( $post_id, $key );
+      }
     }
 
     return $meta;
+  }
+
+  /**
+   * Stores a single value as post meta data.
+   *
+   * @param int $post_id
+   *   The post id.
+   * @param string $id
+   *   Id of the form field.
+   * @param mixed $value
+   *   Value to be stored.
+   */
+  private function store_single_value($post_id, $id, $value) {
+    $value = sanitize_text_field( $value );
+    update_post_meta( $post_id, $this->get_field_id( $id ), $value );
+  }
+
+  /**
+   * Stores multiple values as post meta data.
+   *
+   * @param int $post_id
+   *   The post id.
+   * @param string $id
+   *   Id of the form field.
+   * @param mixed $value
+   *   Value to be stored.
+   */
+  private function store_multi_value($post_id, $id, $values) {
+    foreach ( $values as $key => $value) {
+      $value = sanitize_text_field( $value );
+      update_post_meta( $post_id, $this->get_field_id( $id ) . '[' . $key . ']', $value );
+    }
+  }
+
+  /**
+   * Handles retrieval for single value fields.
+   *
+   * @param int $post_id
+   *   The post id.
+   * @param string $id
+   *   Id of the form field.
+   *
+   * @return mixed
+   *   The stored value.
+   */
+  private function get_single_value($post_id, $id) {
+    return get_post_meta( $post_id, $this->get_field_id( $id ), true );
+  }
+
+  /**
+   * Handles retrieval of multi-value fields.
+   *
+   * @param int $post_id
+   *   The post id.
+   * @param string $id
+   *   Id of the form field.
+   *
+   * @return array
+   *   Array of stored values.
+   */
+  private function get_multi_value($post_id, $id) {
+    $return = array();
+
+    $field_id = $this->get_field_id( $id );
+    foreach ( get_post_meta( $post_id, '', true ) as $key => $value) {
+      if ( strpos( $key, $field_id ) !== FALSE ) {
+        $storage_key = str_replace( array( $field_id, '[', ']' ), '', $key);
+        if ( !empty($storage_key) ) {
+          $return[ $storage_key ] = is_array( $value ) ? current( $value ) : $value;
+        }
+      }
+    }
+
+    return $return;
+  }
+
+  /**
+   * Returns the field id as defined in the post variables.
+   *
+   * @param string $id
+   *   Id of the form field.
+   *
+   * @return string
+   *   Field id.
+   */
+  private function get_field_id($id) {
+    return $this->id() . '[' . $id . ']';
   }
 
   /**

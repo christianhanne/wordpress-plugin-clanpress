@@ -207,7 +207,11 @@ class Clanpress_Form {
    */
   private static function input($element) {
     $attributes = isset( $element['attributes'] ) ? $element['attributes'] : array();
-    $attributes['id'] = $element['field_id'];
+
+    if ( isset( $element['field_id'] ) ) {
+      $attributes['id'] = $element['field_id'];
+    }
+
     $attributes['name'] = $element['field_name'];
     $attributes['type'] = $element['type'];
 
@@ -238,7 +242,14 @@ class Clanpress_Form {
       $element['attributes']['checked'] = 'checked';
     }
 
-    return self::input($element);
+    $output = self::input( array(
+      'field_name' => $element['field_name'],
+      'type' => 'hidden',
+      'value' => 0,
+    ) );
+
+    $output .= self::input($element);
+    return $output;
   }
 
   /**
