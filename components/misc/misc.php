@@ -23,13 +23,4 @@ class Clanpress_Misc_Component extends Clanpress_Component {
       'game',
     );
   }
-
-  /**
-   * @inheritdoc
-   */
-  protected function widgets() {
-    return array(
-      'social_media',
-    );
-  }
 }
