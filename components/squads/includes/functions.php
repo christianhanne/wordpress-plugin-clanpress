@@ -20,24 +20,34 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 function clanpress_the_squad_type($group_id = null) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
-  $squad_type_id = groups_get_groupmeta( $group_id, 'clanpress_squad_type[squad_type]' );
+  $squad_type = Clanpress_Squad_Type_Group_Extension::get_meta_value( $group_id, 'squad_type' );
   $squad_types = Clanpress_Squad_Type_Group_Extension::get_squad_types();
 
-  echo $squad_types[ $squad_type_id ];
+  if ( isset( $squad_types[ $squad_type ] ) ) {
+    echo $squad_types[ $squad_type ];
+  }
 }
 
 /**
  * Displays a list of games for the given squad.
  *
- * @param WP_Post $post
- *   The post.
+ * @param int|null $group_id
+ *   The group id.
  */
-function clanpress_the_squad_games($post = null) {
-  $post = isset( $post ) ? $post : get_post();
+function clanpress_the_squad_games($group_id = null) {
+  $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
-  $games = array();
-  foreach ( get_the_terms( $post, 'clanpress_game' ) as $term ) {
-    array_push( $games, esc_html( $term->name ) );
+  $games_selected = Clanpress_Games_Group_Extension::get_meta_value( $group_id, 'games' );
+
+  $terms = get_terms( 'clanpress_game', array(
+    'orderby' => 'name',
+    'hide_empty' => false,
+  ) );
+
+  foreach ( $terms as $term ) {
+    if ( $games_selected[ $term->term_id ] == 1 ) {
+        array_push( $games, esc_html( $term->name ) );
+    }
   }
 
   echo implode(', ', $games);
@@ -46,15 +56,23 @@ function clanpress_the_squad_games($post = null) {
 /**
  * Displays a list of short names for the games of a given squad.
  *
- * @param WP_Post $post
- *   The post.
+ * @param int|null $group_id
+ *   The group id.
  */
-function clanpress_the_squad_games_short($post = null) {
-  $post = isset( $post ) ? $post : get_post();
+function clanpress_the_squad_games_short($group_id = null) {
+  $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
-  $games = array();
-  foreach ( get_the_terms( $post, 'clanpress_game' ) as $term ) {
-    array_push( $games, esc_html( $term->slug ) );
+  $games_selected = Clanpress_Games_Group_Extension::get_meta_value( $group_id, 'games' );
+
+  $terms = get_terms( 'clanpress_game', array(
+    'orderby' => 'name',
+    'hide_empty' => false,
+  ) );
+
+  foreach ( $terms as $term ) {
+    if ( $games_selected[ $term->term_id ] == 1 ) {
+        array_push( $games, esc_html( $term->slug ) );
+    }
   }
 
   echo implode(', ', $games);
@@ -63,27 +81,24 @@ function clanpress_the_squad_games_short($post = null) {
 /**
  * Displays the members count of a given squad.
  *
- * @param WP_Post $post
- *   The post.
+ * @param int|null $group_id
+ *   The group id.
  */
-function clanpress_the_squad_members_count($post = null) {
-  $post = isset( $post ) ? $post : get_post();
+function clanpress_the_squad_members_count($group_id = null) {
+  $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
-  $group_id = get_post_meta( $post->ID, 'clanpress_group_id', true );
   echo (int) groups_get_total_member_count( $group_id );
 }
 
 /**
  * Displays a link to an awards archive filtered for the given squad.
  *
- * @param WP_Post $post
- *   The post.
+ * @param BP_Groups_Group $group
+ *   The group.
  */
-function clanpress_the_squad_awards_link($post = null) {
-  $post = isset( $post ) ? $post : get_post();
-
+function clanpress_the_squad_awards_link($group = null) {
   vprintf('<a href="%s">%s</a>', array(
-    site_url('/awards?squad_id=' . $post->ID),
+    bp_get_group_permalink( $group ) . '/clanpress_awards/',
     __( 'Squad awards', 'clanpress' ),
   ));
 }
@@ -91,14 +106,12 @@ function clanpress_the_squad_awards_link($post = null) {
 /**
  * Displays a link to a matches archive filtered for the given squad.
  *
- * @param WP_Post $post
- *   The post.
+ * @param BP_Groups_Group $group
+ *   The group.
  */
-function clanpress_the_squad_matches_link($post = null) {
-  $post = isset( $post ) ? $post : get_post();
-
+function clanpress_the_squad_matches_link($group = null) {
   vprintf('<a href="%s">%s</a>', array(
-    site_url('/matches?squad_id=' . $post->ID),
+    bp_get_group_permalink( $group ) . '/clanpress_awards/',
     __( 'Squad matches', 'clanpress' ),
   ));
 }

@@ -106,6 +106,22 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
   }
 
   /**
+   * Returns the value of the given meta data element.
+   *
+   * @param int $group_id
+   *   The group id.
+   * @param int $id
+   *   The form element id.
+   *
+   * @return mixed
+   *   Stored meta value.
+   */
+  public static function get_meta_value( $group_id, $id ) {
+    $meta = self::get_meta( $group_id );
+    return isset( $meta[ $id ] ) ? $meta[ $id ] : null;
+  }
+
+  /**
    * Returns a settings array for the buddypress group extension.
    *
    * Please take a look at the linked website for more details on extension
