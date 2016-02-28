@@ -12,7 +12,7 @@
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Games_Group_Extension
+ * @class Clanpress_Awards_Group_Extension
  */
 class Clanpress_Awards_Group_Extension extends Clanpress_Group_Extension {
   /**
