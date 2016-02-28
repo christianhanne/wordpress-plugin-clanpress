@@ -21,12 +21,9 @@ class Clanpress_Members_Widget extends Clanpress_Widget {
   protected function template_elements( $instance = array() ) {
     $args = array(
       'max' => (int) $instance['num_items'],
+      'group_id' => (int) $instance['squads'],
+      'exclude_admins_mods' => false,
     );
-
-    $squad_id = (int) $instance['squads'];
-    if ( $squad_id !== 0) {
-      $args['group_id'] = get_post_meta( $squad_id, 'clanpress_group_id', true );
-    }
 
     clanpress_query_squad_members( $args );
 

@@ -169,10 +169,30 @@ function clanpress_the_squad_member_role($member = null) {
 function clanpress_query_squad_members( $args = array() ) {
   global $_clanpress_squad_members, $_clanpress_squad_member;
 
-  $group = groups_get_group_members( $args );
+  $members = array();
+  if ( !empty( $args['group_id'] ) ) {
+    $group = groups_get_group_members( $args );
+    foreach ( $group['members'] as $member ) {
+      $members[ $member->ID ] = $member;
+    }
+  } else {
+    $squads = Clanpress_Squads_Component::get_squad_options();
+    foreach ( $squads as $group_id => $group_name ) {
+      $args['group_id'] = $group_id;
+
+      $group = groups_get_group_members( $args );
+      foreach ( $group['members'] as $member ) {
+        $members[ $member->ID ] = $member;
+      }
+    }
+
+    if ( $args['max'] > 0 ) {
+      $members = array_slice( $members, 0, $args['max'] );
+    }
+  }
 
   $_clanpress_squad_member = NULL;
-  $_clanpress_squad_members = $group['members'];
+  $_clanpress_squad_members = array_values( $members );
 }
 
 /**
