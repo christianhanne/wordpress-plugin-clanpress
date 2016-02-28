@@ -60,26 +60,26 @@ class Clanpress_Post_Type {
   /**
    * Returns the correct path for a single post template.
    *
-   * @param string $template
+   * @param string|null $template
    *   Original template path.
    *
    * @return string
    *   Updated template path.
    */
-  public static function single_template( $template ) {
+  public static function single_template( $template = null ) {
     return self::get_post_template( $template, 'single' );
   }
 
   /**
    * Returns the correct path for an archive template.
    *
-   * @param string $template
+   * @param string|null $template
    *   Original template path.
    *
    * @return string
    *   Updated template path.
    */
-  public static function archive_template( $template ) {
+  public static function archive_template( $template = null ) {
     return self::get_post_template( $template, 'archive' );
   }
 
@@ -206,7 +206,7 @@ class Clanpress_Post_Type {
   /**
    * Returns the correct template for the given template type.
    *
-   * @param string $template
+   * @param string|null $template
    *   Original template path.
    * @param string $type
    *   Template type.
@@ -214,13 +214,22 @@ class Clanpress_Post_Type {
    * @return string
    *   Updated template path.
    */
-  final private static function get_post_template( $template, $type ) {
+  final private static function get_post_template( $template = null, $type ) {
     global $post;
-    if ( $post->post_type == self::id() ) {
+    if ( $post->post_type == self::id() || $template === null ) {
       $template_name = self::post_template_name( $type );
       $template_dir = Clanpress_Helper::get_templates_path( Clanpress_Helper::DEFAULT_COMPONENT );
-      if ( $template !== get_stylesheet_directory() . '/' . $template_name ) {
-        return $template_dir . $template_name;
+
+      $suggestions = array(
+        get_stylesheet_directory() . '/' . $template_name,
+        get_stylesheet_directory() . '/clanpress/' . $template_name,
+        $template_dir . $template_name,
+      );
+
+      foreach ( $suggestions as $suggestion ) {
+        if ( file_exists( $suggestion ) ) {
+          return $suggestion;
+        }
       }
     }
 
