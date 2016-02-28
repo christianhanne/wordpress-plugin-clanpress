@@ -1,11 +1,9 @@
 <?php
 /**
+ * @file
  * Contains the controller class for custom clanpress pages.
  *
  * @author Christian Hanne <support@aureola.codes>
- * @copyright Copyright (c) 2016, Aureola
- * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
- *
  * @package Clanpress
  */
 
@@ -15,6 +13,12 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  * @class Clanpress_Page
  */
 class Clanpress_Page {
+  /**
+   * @var string|null
+   * Stores the returned menu hook.
+   */
+  protected $hook = null;
+
   /**
    * Registers the page if settings have been defined.
    */
@@ -26,7 +30,7 @@ class Clanpress_Page {
 
     $is_submenu_page = strpos( $settings['menu_slug'], 'clanpress/' ) !== FALSE;
     if ( !$is_submenu_page ) {
-      add_menu_page(
+      $this->hook = add_menu_page(
         isset( $settings['page_title'] ) ? $settings['page_title'] : NULL,
         isset( $settings['menu_title'] ) ? $settings['menu_title'] : NULL,
         isset( $settings['capability'] ) ? $settings['capability'] : NULL,
@@ -37,7 +41,7 @@ class Clanpress_Page {
       );
     }
     else {
-      add_submenu_page(
+      $this->hook = add_submenu_page(
         'clanpress',
         isset( $settings['page_title'] ) ? $settings['page_title'] : NULL,
         isset( $settings['menu_title'] ) ? $settings['menu_title'] : NULL,
