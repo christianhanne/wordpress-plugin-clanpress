@@ -19,6 +19,15 @@ class Clanpress_Teamspeak_Status_Widget extends Clanpress_Widget {
    * @inheritdoc
    */
   protected function template_elements( $instance = array() ) {
+    $library_uri = Clanpress_Helper::get_library_uri('jquery-ts3status');
+
+    $plugin_uri = $library_uri . '/src/jquery.ts3status.min.js';
+    wp_enqueue_script( 'clanpress_jquery_ts3status_plugin', $plugin_uri );
+
+    $component = Clanpress_Helper::get_component_by_path( __FILE__ );
+    $script_uri = Clanpress_Helper::get_scripts_uri( $component ) . 'teamspeak-status.min.js';
+    wp_enqueue_script( 'clanpress_jquery_ts3status', $script_uri );
+
     return array(
       'address' => esc_attr( $instance['address'] ),
       'port' => esc_attr( $instance['port'] ),
