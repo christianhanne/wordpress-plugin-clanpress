@@ -1,9 +1,11 @@
 <?php
 /**
- * @file
  * Contains the parent class of the plugin's custom taxonomies.
  *
  * @author Christian Hanne <support@aureola.codes>
+ * @copyright Copyright (c) 2016, Aureola
+ * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
+ *
  * @package Clanpress
  */
 
@@ -97,7 +99,7 @@ class Clanpress_Taxonomy {
    *   The wordpress term object.
    */
   public function term_edit( $term ) {
-    $term_meta = $this->get_term_meta( $term->term_id );  
+    $term_meta = $this->get_term_meta( $term->term_id );
     foreach ( $this->form_elements() as $key => $element ) {
       $field_id = $this->id() . '_' . $key;
 

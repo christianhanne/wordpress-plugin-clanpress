@@ -1,8 +1,10 @@
 /**
- * @file
  * Initializes an upload field's behavior.
  *
  * @author Christian Hanne <support@aureola.codes>
+ * @copyright Copyright (c) 2016, Aureola
+ * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
+ *
  * @package Clanpress
  */
 (($, wp) => {

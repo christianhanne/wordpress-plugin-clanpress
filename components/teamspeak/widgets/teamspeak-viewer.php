@@ -1,9 +1,11 @@
 <?php
 /**
- * @file
  * Contains the class of the custom 'Teamspeak' widget.
  *
  * @author Christian Hanne <support@aureola.codes>
+ * @copyright Copyright (c) 2016, Aureola
+ * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
+ *
  * @package Clanpress
  *
  * @link https://www.planetteamspeak.com/rest-api/

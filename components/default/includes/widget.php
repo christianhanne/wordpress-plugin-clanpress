@@ -1,9 +1,11 @@
 <?php
 /**
- * @file
  * Contains the parent class of the plugin's custom widgets.
  *
  * @author Christian Hanne <support@aureola.codes>
+ * @copyright Copyright (c) 2016, Aureola
+ * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
+ *
  * @package Clanpress
  */
 
@@ -177,7 +179,7 @@ class Clanpress_Widget extends WP_Widget {
       load_template( $overridden_template );
     } else {
       $obj = new ReflectionObject($this);
-      $component = Clanpress_Helper::get_component_by_path( $obj->getFileName() ); 
+      $component = Clanpress_Helper::get_component_by_path( $obj->getFileName() );
       $templates_path = Clanpress_Helper::get_templates_path( $component );
       load_template( $templates_path . $template_name );
     }

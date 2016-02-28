@@ -1,9 +1,11 @@
 <?php
 /**
- * @file
  * This is the main plugin file which is used to identify the plugin.
  *
  * @author Christian Hanne <support@aureola.codes>
+ * @copyright Copyright (c) 2016, Aureola
+ * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
+ *
  * @package Clanpress
  */
 

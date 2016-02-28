@@ -1,9 +1,11 @@
 <?php
 /**
- * @file
  * Displays a single page representation of an award post.
  *
  * @author Christian Hanne <support@aureola.codes>
+ * @copyright Copyright (c) 2016, Aureola
+ * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
+ *
  * @package Clanpress
  */
 ?>
