@@ -134,6 +134,6 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	 */
 	private final function id() {
 		$class_name = get_called_class();
-		return str_replace( 'group_extension', '', strtolower( $class_name ) );
+		return str_replace( '_group_extension', '', strtolower( $class_name ) );
 	}
 }
