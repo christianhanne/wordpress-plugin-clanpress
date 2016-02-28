@@ -83,6 +83,29 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	}
 
   /**
+   * Returns the metaboxes previously saved data.
+   *
+   * @param int $group_id
+   *   The group id.
+   *
+   * @return array
+   *   Array of meta data.
+   */
+  public static function get_meta( $group_id ) {
+    $meta = array();
+    foreach ( self::form_elements() as $key => $element ) {
+      if ( Clanpress_Form::is_multi_value( $element ) ) {
+        $meta[ $key ] = self::get_multi_value( $group_id, $key );
+      }
+      else {
+        $meta[ $key ] = self::get_single_value( $group_id, $key );
+      }
+    }
+
+    return $meta;
+  }
+
+  /**
    * Returns a settings array for the buddypress group extension.
    *
    * Please take a look at the linked website for more details on extension
@@ -124,9 +147,9 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
    * @param mixed $value
    *   Value to be stored.
    */
-  private function store_single_value($group_id, $id, $value) {
+  private static function store_single_value($group_id, $id, $value) {
     $value = sanitize_text_field( $value );
-    groups_update_groupmeta( $group_id, $this->get_field_id( $id ), $value );
+    groups_update_groupmeta( $group_id, self::get_field_id( $id ), $value );
   }
 
   /**
@@ -139,10 +162,10 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
    * @param mixed $value
    *   Value to be stored.
    */
-  private function store_multi_value($group_id, $id, $values) {
+  private static function store_multi_value($group_id, $id, $values) {
     foreach ( $values as $key => $value) {
       $value = sanitize_text_field( $value );
-      groups_update_groupmeta( $group_id, $this->get_field_id( $id ) . '[' . $key . ']', $value );
+      groups_update_groupmeta( $group_id, self::get_field_id( $id ) . '[' . $key . ']', $value );
     }
   }
 
@@ -157,8 +180,8 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
    * @return mixed
    *   The stored value.
    */
-  private function get_single_value($group_id, $id) {
-    return groups_get_groupmeta( $group_id, $this->get_field_id( $id ), true );
+  private static function get_single_value($group_id, $id) {
+    return groups_get_groupmeta( $group_id, self::get_field_id( $id ), true );
   }
 
   /**
@@ -172,10 +195,10 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
    * @return array
    *   Array of stored values.
    */
-  private function get_multi_value($group_id, $id) {
+  private static function get_multi_value($group_id, $id) {
     $return = array();
 
-    $field_id = $this->get_field_id( $id );
+    $field_id = self::get_field_id( $id );
     foreach ( groups_get_groupmeta( $group_id, '', true ) as $key => $value) {
       if ( strpos( $key, $field_id ) !== FALSE ) {
         $storage_key = str_replace( array( $field_id, '[', ']' ), '', $key);
@@ -197,8 +220,8 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
    * @return string
    *   Field id.
    */
-  private function get_field_id($id) {
-    return $this->id() . '[' . $id . ']';
+  private static function get_field_id($id) {
+    return self::id() . '[' . $id . ']';
   }
 
 	/**
@@ -211,7 +234,7 @@ class Clanpress_Group_Extension extends BP_Group_Extension {
 	 * @return string
 	 *   Id of the group extension.
 	 */
-	private final function id() {
+	private static final function id() {
 		$class_name = get_called_class();
 		return str_replace( '_group_extension', '', strtolower( $class_name ) );
 	}
