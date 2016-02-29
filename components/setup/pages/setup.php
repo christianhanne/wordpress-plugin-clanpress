@@ -21,11 +21,11 @@ class Clanpress_Setup_Page extends Clanpress_Page {
   function __construct() {
     if ( $this->requirements_met() ) {
       if ( !empty($_POST['clanpress_mode']) ) {
-        $this-process_mode( $_POST['clanpress_mode'] );
+        $this->process_mode( $_POST['clanpress_mode'] );
       }
       else if ( count( $this->get_modes() ) === 1 ) {
         $mode = current( array_keys( $this->get_modes() ) );
-        $this-process_mode( $mode );
+        $this->process_mode( $mode );
       }
     }
     else {
