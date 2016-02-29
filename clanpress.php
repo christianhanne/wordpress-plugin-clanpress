@@ -21,9 +21,14 @@ Text Domain: clanpress
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
-define( 'CLANPRESS_VERSION', '0.3.1' );
+define( 'CLANPRESS_VERSION', '0.7.0' );
 define( 'CLANPRESS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'CLANPRESS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once( CLANPRESS_PLUGIN_PATH . 'includes/clanpress.php' );
-$clanpress = new Clanpress();
+
+register_activation_hook(   __FILE__, array( 'Clanpress', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'Clanpress', 'deactivate' ) );
+register_uninstall_hook(    __FILE__, array( 'Clanpress', 'uninstall' ) );
+
+add_action( 'plugins_loaded', array( 'Clanpress', 'init' ) );

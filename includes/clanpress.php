@@ -23,6 +23,12 @@ class Clanpress {
   const DEFAULT_MODE = 'setup';
 
   /**
+   * @var Clanpress
+   * Holds an instance of the Clanpress plugin.
+   */
+  protected static $instance;
+
+  /**
    * Initializes the plugin's behavior.
    */
   public function __construct() {
@@ -31,6 +37,70 @@ class Clanpress {
     require_once( CLANPRESS_PLUGIN_PATH . 'includes/mode.php');
 
     $this->mode( get_option( 'clanpress_mode', self::DEFAULT_MODE ) );
+  }
+
+  /**
+   * Creates a new instance of the given plugin.
+   */
+  public static function init() {
+    if ( empty( self::$instance ) ) {
+      self::$instance = new self;
+    }
+
+    return self::$instance;
+  }
+
+  /**
+   * Performs all necessary steps for plugin activation.
+   *
+   * @see register_activation_hook()
+   */
+  public static function activate() {
+    if ( !current_user_can( 'activate_plugins' ) ) {
+      return;
+    }
+
+    $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+    check_admin_referer( 'activate-plugin_' . $plugin );
+
+    update_option( 'clanpress_mode', self::DEFAULT_MODE );
+  }
+
+  /**
+   * Performs all necessary steps for plugin deactivation.
+   *
+   * @see register_deactivation_hook()
+   */
+  public static function deactivate() {
+    if ( !current_user_can( 'activate_plugins' ) ) {
+      return;
+    }
+
+    $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+    check_admin_referer( 'deactivate-plugin_' . $plugin );
+
+    delete_option( 'clanpress_mode' );
+  }
+
+  /**
+   * Performs all necessary steps for plugin uninstallation.
+   *
+   * @see register_uninstall_hook()
+   */
+  public static function uninstall() {
+    if ( !current_user_can( 'activate_plugins' ) || __FILE__ !== WP_UNINSTALL_PLUGIN ) {
+      return;
+    }
+
+    check_admin_referer( 'bulk-plugins' );
+
+    // Remove all stored clanpress options.
+    $options = wp_load_alloptions();
+    foreach ( $options as $key => $value ) {
+      if ( substr( $key, 0, 9 ) === 'clanpress' ) {
+        delete_option( $key );
+      }
+    }
   }
 
   /**
