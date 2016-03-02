@@ -26,9 +26,9 @@ class Clanpress {
    * Initializes the plugin's behavior.
    */
   public function __construct() {
-    require_once( CLANPRESS_PLUGIN_PATH . 'includes/component.php');
     require_once( CLANPRESS_PLUGIN_PATH . 'includes/helper.php');
     require_once( CLANPRESS_PLUGIN_PATH . 'includes/mode.php');
+    require_once( CLANPRESS_PLUGIN_PATH . 'includes/component.php');
 
     Clanpress_Mode::init();
   }
