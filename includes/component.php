@@ -196,7 +196,6 @@ class Clanpress_Component {
    *   Id of the component
    */
   protected function id() {
-    $class = strtolower( get_called_class() );
-    return str_replace( array( 'clanpress_', '_component' ), '', $class );
+    return Clanpress_Helper::get_id( get_called_class(), 'component' );
   }
 }

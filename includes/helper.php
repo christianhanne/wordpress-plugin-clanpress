@@ -28,6 +28,44 @@ class Clanpress_Helper {
   private static $classes = array();
 
   /**
+   * Registers a new mode with the given name.
+   *
+   * This function includes a file with the mode's name. This file has
+   * to contain a function named "Clanpress_[Mode]_Mode.
+   * [Mode] should be replaced by the actual name of the plugin mode in
+   * upper camelcase. This class has to extend the Clanpress_Mode class.
+   *
+   * @param string $mode
+   *   Machine-readable name of the mode.
+   *
+   * @see Clanpress_Mode
+   */
+  public static function register_mode( $mode ) {
+    require_once( Clanpress_Helper::get_modes_path() . self::normalize( $mode ) . '.php' );
+    $mode_class = self::get_class( $mode, 'mode' );
+    new $mode_class();
+  }
+
+  /**
+   * Registers a new component with the given name.
+   *
+   * This function includes a file with the component's name. This file has
+   * to contain a function named "Clanpress_[Component]_Component.
+   * [Mode] should be replaced by the actual name of the plugin component in
+   * upper camelcase. This class has to extend the Clanpress_Component class.
+   *
+   * @param string $component
+   *   Machine-readable name of the component.
+   *
+   * @see Clanpress_Component
+   */
+  public static function register_component( $component ) {
+    require_once( self::get_component_path( $component ) . self::normalize( $component ) . '.php' );
+    $component = self::get_class( $component, 'component' );
+    new $component();
+  }
+
+  /**
    * Registers a new page with the given name.
    *
    * This function includes a file with the page's name. This file has

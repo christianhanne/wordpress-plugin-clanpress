@@ -16,6 +16,20 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  */
 class Clanpress_Mode {
   /**
+   * @var string
+   * Stores the default mode's id.
+   */
+  const DEFAULT = 'setup';
+
+  /**
+   * @var array
+   * Holds an array of clanpress modes.
+   */
+  protected static $modes = array(
+    'multi-game',
+  );
+
+  /**
    * Add all registered components.
    */
   function __construct() {
@@ -25,34 +39,59 @@ class Clanpress_Mode {
     }
 
     foreach ( $components as $component ) {
-      $this->add_component( $component );
+      Clanpress_Helper::register_component( $component );
     }
   }
 
   /**
-   * Adds the component with the given name.
-   *
-   * @param string $id
-   *   Id of the component.
+   * Initializes the currently active mode.
    */
-  private function add_component( $id ) {
-    $component_path = Clanpress_Helper::get_component_path( $id );
-    require_once $component_path . $id . '.php';
-
-    $component = $this->get_component_class( $id );
-    new $component();
+  public static function init() {
+    Clanpress_Helper::register_mode( self::get() );
   }
 
   /**
-   * Returns the class name for a given component id.
+   * Sets the mode to the given one if possible.
    *
-   * @param string $id
-   *   Id of the component.
+   * @param string|null $mode
+   *   Id of the mode.
+   *
+   * @return bool
+   *   Returns true, if mode could be updated.
+   */
+  public static function set( $mode = null ) {
+    if ( in_array( $mode, self::list() ) ) {
+      update_option( 'clanpress_mode', $mode ) );
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Returns the currently active mode.
    *
    * @return string
-   *   Name of the component's class.
+   *   Currently active mode.
    */
-  private function get_component_class( $id ) {
-    return 'Clanpress_' . ucwords($id) . '_Component';
+  public static function get() {
+    return get_option( 'clanpress_mode', self::DEFAULT ) );
+  }
+
+  /**
+   * Returns an array of allowed modes.
+   *
+   * @return array
+   *   Allowed modes.
+   */
+  public static function list() {
+    return self::$modes;
+  }
+
+  /**
+   * Removes the stored clanpress mode so the default mode will kick in.
+   */
+  public static function reset() {
+    delete_option( 'clanpress_mode' );
   }
 }

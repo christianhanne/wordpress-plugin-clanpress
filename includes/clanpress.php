@@ -17,12 +17,6 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  */
 class Clanpress {
   /**
-   * @var string
-   * The default clanpress mode.
-   */
-  const DEFAULT_MODE = 'setup';
-
-  /**
    * @var Clanpress
    * Holds an instance of the Clanpress plugin.
    */
@@ -36,13 +30,13 @@ class Clanpress {
     require_once( CLANPRESS_PLUGIN_PATH . 'includes/helper.php');
     require_once( CLANPRESS_PLUGIN_PATH . 'includes/mode.php');
 
-    $this->mode( get_option( 'clanpress_mode', self::DEFAULT_MODE ) );
+    Clanpress_Mode::init();
   }
 
   /**
    * Creates a new instance of the given plugin.
    */
-  public static function init() {
+  public static function instance() {
     if ( empty( self::$instance ) ) {
       self::$instance = new self;
     }
@@ -63,7 +57,7 @@ class Clanpress {
     $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
     check_admin_referer( 'activate-plugin_' . $plugin );
 
-    update_option( 'clanpress_mode', self::DEFAULT_MODE );
+    Clanpress_Mode::reset();
   }
 
   /**
@@ -79,7 +73,7 @@ class Clanpress {
     $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
     check_admin_referer( 'deactivate-plugin_' . $plugin );
 
-    delete_option( 'clanpress_mode' );
+    Clanpress_Mode::reset();
   }
 
   /**
@@ -101,45 +95,6 @@ class Clanpress {
         delete_option( $key );
       }
     }
-  }
-
-  /**
-   * Returns an array of allowed modes.
-   *
-   * @return array
-   *   Allowed modes.
-   */
-  public static function modes() {
-    return array(
-      'multi-game',
-    );
-  }
-
-  /**
-   * Returns the class name for a given mode id.
-   *
-   * @param string $mode
-   *   Id of the plugin mode.
-   *
-   * @return string
-   *   Class name of the mode.
-   */
-  public static function get_mode_class($mode) {
-    return 'Clanpress_' . ucwords( str_replace( '-', '_', $mode ) ) . '_Mode';
-  }
-
-  /**
-   * Registers and initializes the given clanpress mode.
-   *
-   * @param string $mode
-   *   Id of the clanpress mode.
-   */
-  private function mode($mode) {
-    $mode = !in_array( $mode, $this->modes() ) ? self::DEFAULT_MODE : $mode;
-
-    require_once( Clanpress_Helper::get_modes_path() . $mode . '.php' );
-    $mode_class = self::get_mode_class( $mode );
-    new $mode_class();
   }
 
 }

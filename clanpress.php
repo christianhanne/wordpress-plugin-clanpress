@@ -31,4 +31,4 @@ register_activation_hook(   __FILE__, array( 'Clanpress', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Clanpress', 'deactivate' ) );
 register_uninstall_hook(    __FILE__, array( 'Clanpress', 'uninstall' ) );
 
-add_action( 'plugins_loaded', array( 'Clanpress', 'init' ) );
+add_action( 'plugins_loaded', array( 'Clanpress', 'instance' ) );
