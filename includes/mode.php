@@ -34,11 +34,9 @@ class Clanpress_Mode {
    */
   function __construct() {
     $components = $this->components();
-    if ( !in_array( Clanpress_Helper::DEFAULT_COMPONENT, $components ) ) {
-      array_unshift( $components, Clanpress_Helper::DEFAULT_COMPONENT );
-    }
+    array_unshift( $components, Clanpress_Helper::DEFAULT_COMPONENT );
 
-    foreach ( $components as $component ) {
+    foreach ( array_unique( $components ) as $component ) {
       Clanpress_Helper::register_component( $component );
     }
   }
@@ -93,5 +91,15 @@ class Clanpress_Mode {
    */
   public static function reset() {
     delete_option( 'clanpress_mode' );
+  }
+
+  /**
+   * Returns an array of components this mode registers.
+   *
+   * @return array
+   *   Array of components.
+   */
+  protected function components() {
+    return array();
   }
 }
