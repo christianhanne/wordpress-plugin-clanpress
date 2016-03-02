@@ -17,9 +17,9 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 class Clanpress_Helper {
   /**
    * @var string
-   * Holds the id of the default component.
+   * Holds the id of the shared component.
    */
-  const DEFAULT_COMPONENT = 'default';
+  const DEFAULT_COMPONENT = 'shared';
 
   /**
    * @var array
@@ -75,17 +75,11 @@ class Clanpress_Helper {
    *   Filename of the extension.
    */
   public static function register_group_extension( $component, $extension ) {
-    if ( class_exists( 'BP_Group_Extension' ) ) {
-      if ( !class_exists( 'Clanpress_Group_Extension' ) ) {
-        require 'group-extension.php';
-      }
+    require_once( self::get_group_extensions_path( $component ) . self::normalize( $extension ) . '.php' );
+    $group_extension = self::get_class( $extension, 'group_extension' );
+    bp_register_group_extension( $group_extension );
 
-      require_once( self::get_group_extensions_path( $component ) . self::normalize( $extension ) . '.php' );
-      $group_extension = self::get_class( $extension, 'group_extension' );
-      bp_register_group_extension( $group_extension );
-
-      self::$classes[$group_extension] = $component;
-    }
+    self::$classes[$group_extension] = $component;
   }
 
   /**
