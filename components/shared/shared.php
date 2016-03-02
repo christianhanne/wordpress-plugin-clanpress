@@ -28,6 +28,7 @@ class Clanpress_Shared_Component extends Clanpress_Component {
       'taxonomy',
       'widget',
       'group-extension',
+      'settings',
     );
   }
 

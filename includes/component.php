@@ -16,6 +16,12 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  */
 class Clanpress_Component {
   /**
+   * @var Clanpress_Settings
+   * Holds the settings class of this component.
+   */
+  protected $settings;
+
+  /**
    * Initializes the component.
    */
   function __construct() {
@@ -29,6 +35,8 @@ class Clanpress_Component {
     add_action( 'admin_menu', array( $this, 'register_admin_pages' ) );
     add_action( 'widgets_init', array( $this, 'register_widgets' ) );
     add_action( 'bp_include', array( $this, 'register_group_extensions' ) );
+
+    $this->settings = new Clanpress_Settings( $this->id(), $this->name(), $this->settings() );
   }
 
   /**
@@ -187,6 +195,42 @@ class Clanpress_Component {
    */
   protected function includes() {
     return array();
+  }
+
+  /**
+   * Returns an array of settings for this component.
+   *
+   * Settings will be added as separate sections inside the clanpress
+   * settings page. All settings must be added using the clanpress form
+   * api. Check the linked function for details.
+   *
+   * @return array
+   *   Array of form elements.
+   *
+   * @see Clanpress_Form::element()
+   */
+  protected function settings() {
+    return array();
+  }
+
+  /**
+   * Can be overridden to add a human readable name to this component.
+   *
+   * @return string
+   *   Name of the component.
+   */
+  protected function name() {
+    return $this->id();
+  }
+
+  /**
+   * Can be overridden to add a description to this component.
+   *
+   * @return string
+   *   Description text.
+   */
+  protected function description() {
+    return __( 'N/A', 'clanpress' );
   }
 
   /**
