@@ -47,7 +47,7 @@ class Clanpress_Helper {
    */
   public static function register_page( $component, $page ) {
     require_once( self::get_pages_path( $component ) . self::normalize( $page ) . '.php' );
-    $page_class = 'Clanpress_' . ucwords( $page ) . '_Page';
+    $page_class = self::get_class( $page_class, 'page' );
     new $page_class();
 
     self::$classes[$page_class] = $component;
@@ -81,10 +81,7 @@ class Clanpress_Helper {
       }
 
       require_once( self::get_group_extensions_path( $component ) . self::normalize( $extension ) . '.php' );
-
-      // TODO: We should add a function to capitalize words correctly.
-      $extension = str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $extension ) ) );
-      $group_extension = 'Clanpress_' . $extension . '_Group_Extension';
+      $group_extension = self::get_class( $extension, 'group_extension' );
       bp_register_group_extension( $group_extension );
 
       self::$classes[$group_extension] = $component;
@@ -123,7 +120,7 @@ class Clanpress_Helper {
    */
   public static function register_post_type( $component, $post_type ) {
     require_once( self::get_post_types_path( $component ) . self::normalize( $post_type ) . '.php' );
-    $post_type_class = 'Clanpress_' . ucwords( $post_type ) . '_Post_Type';
+    $post_type_class = self::get_class( $post_type, 'post_type' );
     new $post_type_class();
 
     self::$classes[$post_type_class] = $component;
@@ -149,7 +146,7 @@ class Clanpress_Helper {
    */
   public static function register_taxonomy( $component, $taxonomy ) {
     require_once( self::get_taxonomies_path( $component ) . self::normalize( $taxonomy ) . '.php' );
-    $taxonomy_class = 'Clanpress_' . ucwords( $taxonomy ) . '_Taxonomy';
+    $taxonomy_class = self::get_class( $taxonomy, 'taxonomy' );
     new $taxonomy_class();
 
     self::$classes[$taxonomy_class] = $component;
@@ -175,7 +172,7 @@ class Clanpress_Helper {
    */
   public static function register_widget( $component, $widget ) {
     require_once( self::get_widgets_path( $component ) . self::normalize( $widget ) . '.php' );
-    $widget_class = 'Clanpress_' . ucwords( $widget ) . '_Widget';
+    $widget_class = self::get_class( $widget, 'widget' );
     register_widget( $widget_class );
 
     self::$classes[$widget_class] = $component;
@@ -380,7 +377,46 @@ class Clanpress_Helper {
    * @return string
    *   Normalized filename.
    */
-  public static function normalize( $filename ) {
+  public static function normalize( $filename = '' ) {
     return preg_replace( '/[^a-z\d-]/i', '-', $filename );
+  }
+
+  /**
+   * Converts a given id into a valid clanpress class name.
+   *
+   * @param string $id
+   *   Raw id string to convert.
+   * @param string $suffix
+   *   Class suffix to use.
+   *
+   * @return string
+   *   Converted string.
+   */
+  public static function get_class( $id = '', $suffix = '' ) {
+    $class_raw = 'clanpress_' . $id;
+    if ( ! empty( $suffix ) ) {
+      $class_raw .= '_' . $suffix;
+    }
+
+    return str_replace( '-', '_', ucwords( str_replace( '_', '-', $class ) ) );
+  }
+
+  /**
+   * Extracts an id from a given clanpress class name.
+   *
+   * @param string $class
+   *   Clanpress class name.
+   *
+   * @return string
+   *   Extracted id string.
+   */
+  public static function get_id( $class = '', $suffix = '' ) {
+    $pattern = '/^Clanpress_(.*)';
+    if ( !empty( $suffix ) ) {
+      $pattern .= '_' . $suffix;
+    }
+    $pattern .= '$/i';
+
+    return preg_replace( $pattern, '$1', strtolower( $class ) );
   }
 }
