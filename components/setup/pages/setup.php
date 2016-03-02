@@ -19,18 +19,21 @@ class Clanpress_Setup_Page extends Clanpress_Page {
    * @inheritdoc
    */
   function __construct() {
+    $mode = null;
     if ( $this->requirements_met() ) {
       if ( !empty($_POST['clanpress_mode']) ) {
-        $this->process_mode( $_POST['clanpress_mode'] );
-      }
-      else if ( count( $this->get_modes() ) === 1 ) {
-        $mode = current( array_keys( $this->get_modes() ) );
-        $this->process_mode( $mode );
+        $mode = $_POST['clanpress_mode'];
+      } else if ( count( $this->get_modes() ) === 1 ) {
+        $mode = current( array_keys( $this->get_modes() );
       }
     }
-    else {
-      parent::__construct();
+
+    if (Clanpress_Mode::set( $mode )) {
+      wp_redirect( admin_url('index.php') );
+      exit;
     }
+
+    parent::__construct();
   }
 
   /**
@@ -97,28 +100,21 @@ class Clanpress_Setup_Page extends Clanpress_Page {
   }
 
   /**
-   * Stores the given mode & redirects to the default wordpress admin page.
-   *
-   * @param string $mode
-   *   The mode's name.
-   */
-  private function process_mode( $mode ) {
-    update_option( 'clanpress_mode', $mode, true );
-    wp_redirect( admin_url('index.php') );
-    exit;
-  }
-
-  /**
    * Returns an array of available
    *
    * @return array
    *   Array of game modes.
    */
   private function get_modes() {
+    static $modes;
+    if ( isset( $modes ) ) {
+      return $modes;
+    }
+
     $modes = array();
-    foreach ( Clanpress::modes() as $mode ) {
+    foreach ( Clanpress_Mode::list() as $mode ) {
       require_once( Clanpress_Helper::get_modes_path() . $mode . '.php' );
-      $mode_class = Clanpress::get_mode_class( $mode );
+      $mode_class = Clanpress_Helper::get_class( $mode, 'mode' );
 
       $modes[ $mode ] = array(
         'name' => $mode_class::name(),
