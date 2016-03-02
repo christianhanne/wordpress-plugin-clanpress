@@ -27,8 +27,8 @@ define( 'CLANPRESS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once( CLANPRESS_PLUGIN_PATH . 'includes/clanpress.php' );
 
-register_activation_hook(   __FILE__, array( 'Clanpress', 'activate' ) );
+register_activation_hook( __FILE__, array( 'Clanpress', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Clanpress', 'deactivate' ) );
-register_uninstall_hook(    __FILE__, array( 'Clanpress', 'uninstall' ) );
+register_uninstall_hook( __FILE__, array( 'Clanpress', 'uninstall' ) );
 
 add_action( 'plugins_loaded', array( 'Clanpress', 'instance' ) );
