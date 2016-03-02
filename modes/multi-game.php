@@ -33,7 +33,7 @@ class Clanpress_Multi_Game_Mode extends Clanpress_Mode {
    * @inheritdoc
    */
   public static function thumbnail() {
-    return Clanpress_Helper::get_assets_path() . 'modes/multi-game.png';
+    return Clanpress_Helper::get_assets_path() . 'modes/placeholder.png';
   }
 
   /**
