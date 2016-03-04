@@ -165,7 +165,7 @@ class Clanpress_Post_Type {
    * @return array
    *   An array of meta boxes
    */
-  protected function meta_boxes() {
+  protected static function meta_boxes() {
     return array();
   }
 

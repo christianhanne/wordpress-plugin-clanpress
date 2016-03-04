@@ -63,7 +63,7 @@ class Clanpress_Award_Post_Type extends Clanpress_Post_Type {
   /**
    * @inheritdoc
    */
-  protected function meta_boxes() {
+  protected static function meta_boxes() {
     $boxes['placement'] = array(
       'title' => __( 'Placement', 'clanpress' ),
       'context' => 'side',

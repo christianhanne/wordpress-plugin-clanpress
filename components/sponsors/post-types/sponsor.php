@@ -63,7 +63,7 @@ class Clanpress_Sponsor_Post_Type extends Clanpress_Post_Type {
   /**
    * @inheritdoc
    */
-  protected function meta_boxes() {
+  protected static function meta_boxes() {
     $boxes['sponsor'] = array(
       'title' => __( 'Sponsor', 'clanpress' ),
       'context' => 'normal',

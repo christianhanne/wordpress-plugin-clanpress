@@ -75,7 +75,7 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
   /**
   * @inheritdoc
   */
-  protected function meta_boxes() {
+  protected static function meta_boxes() {
     $boxes['match'] = array(
       'title' => __( 'Match', 'clanpress' ),
       'context' => 'normal',
