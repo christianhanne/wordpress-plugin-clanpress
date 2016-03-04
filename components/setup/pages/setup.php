@@ -24,7 +24,7 @@ class Clanpress_Setup_Page extends Clanpress_Page {
       if ( !empty($_POST['clanpress_mode']) ) {
         $mode = $_POST['clanpress_mode'];
       } else if ( count( $this->get_modes() ) === 1 ) {
-        $mode = current( array_keys( $this->get_modes() );
+        $mode = current( array_keys( $this->get_modes() ) );
       }
     }
 
@@ -112,7 +112,7 @@ class Clanpress_Setup_Page extends Clanpress_Page {
     }
 
     $modes = array();
-    foreach ( Clanpress_Mode::list() as $mode ) {
+    foreach ( Clanpress_Mode::modes() as $mode ) {
       require_once( Clanpress_Helper::get_modes_path() . $mode . '.php' );
       $mode_class = Clanpress_Helper::get_class( $mode, 'mode' );
 
