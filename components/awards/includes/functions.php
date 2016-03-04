@@ -39,7 +39,9 @@ function clanpress_the_award_squad($post = null) {
   $squads = array();
   if (is_array($squad_ids)) {
     foreach ( $squad_ids as $squad_id => $checked ) {
-      array_push( $squads, $squad_options[ $squad_id ] );
+      if ( $checked ) {
+        array_push( $squads, $squad_options[ $squad_id ] );
+      }
     }
   }
 
