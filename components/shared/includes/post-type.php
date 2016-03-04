@@ -213,6 +213,8 @@ class Clanpress_Post_Type {
    *
    * @return string
    *   Updated template path.
+   *
+   * @TODO Check if this is obsolete.
    */
   final private static function get_post_template( $template = null, $type ) {
     global $post;
@@ -250,6 +252,31 @@ class Clanpress_Post_Type {
   }
 
   /**
+   * Returns previously stored meta data for the given post id.
+   *
+   * @param int $post_id
+   *   The post id.
+   * @param string $meta_box
+   *   The meta box id.
+   * @param string $field
+   *   The field id.
+   *
+   * @return mixed
+   *   Returns the stored post meta value or null if not found.
+   */
+  final public static function get_post_value($post_id, $meta_box, $field) {
+    $meta_boxes = self::meta_boxes();
+    if ( !isset( $meta_boxes[ $meta_box ] ) ) {
+      return null;
+    }
+
+    $instance = new Clanpress_Meta_Box( $meta_box, self::id(), $meta_boxes[ $meta_box ] );
+    $meta = $instance->get_meta( $post_id );
+
+    return isset( $meta[ $field ] ) ? $meta[ $field ] : null;
+  }
+
+  /**
    * Returns the class name for a given post type id.
    *
    * @param string $post_type
@@ -257,6 +284,8 @@ class Clanpress_Post_Type {
    *
    * @return string
    *   Post type's class name.
+   *
+   * @TODO Use helper function instead.
    */
   final public static function get_class_name( $post_type ) {
     $class = ucwords(str_replace('_', ' ', $post_type));
@@ -275,6 +304,8 @@ class Clanpress_Post_Type {
    *
    * @return string
    *   Machine-readable id of the post type
+   *
+   * @TODO Use helper function instead.
    */
   final protected static function id() {
     $id = strtolower( get_called_class() );
