@@ -20,11 +20,13 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 function clanpress_the_match_link($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
-  $match_link = get_post_meta( $post->ID, 'clanpress_match_match[link]', true);
-  vprintf('<a href="%s">%s</a>', array(
-    esc_url( $match_link ),
-    __( 'To the match', 'clanpress' ),
-  ));
+  $match_link = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'match', 'link' );
+  if ( !empty( $match_link ) ) {
+    vprintf('<a href="%s">%s</a>', array(
+      esc_url( $match_link ),
+      __( 'To the match', 'clanpress' ),
+    ));
+  }
 }
 
 /**
@@ -87,10 +89,12 @@ function clanpress_the_match_squad($post = null) {
   $squad_options = Clanpress_Squads_Component::get_squad_options();
 
   $squads = array();
-  $squad_ids = get_post_meta( $post->ID, 'clanpress_match_squads[squads]', true );
-  if (is_array($squad_ids)) {
+  $squad_ids = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'squads', 'squads' );
+  if ( is_array( $squad_ids ) ) {
     foreach ( $squad_ids as $squad_id => $checked ) {
-      array_push( $squads, $squad_options[ $squad_id ] );
+      if ( $checked ) {
+        array_push( $squads, $squad_options[ $squad_id ] );
+      }
     }
   }
 
@@ -112,10 +116,13 @@ function clanpress_the_match_squad_thumbnail($size = 'post-thumbnail', $post = n
   $squad_options = Clanpress_Squads_Component::get_squad_options();
 
   $images = array();
-  $squad_ids = get_post_meta( $post->ID, 'clanpress_match_squads[squads]', true );
-  if (is_array($squad_ids)) {
+  $squad_ids = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'squads', 'squads' );
+  if ( is_array( $squad_ids ) ) {
     foreach ( $squad_ids as $squad_id => $checked ) {
-      array_push( $images, get_the_post_thumbnail( $squad_id, $size ) );
+      if ( $checked ) {
+        $image = bp_core_fetch_avatar( array( 'item_id' => $squad_id, 'object' => 'group', 'type' => $size ) );
+        array_push( $images, $image );
+      }
     }
   }
 
@@ -151,8 +158,25 @@ function clanpress_the_match_game() {
 function clanpress_the_match_result($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
-  $squad = get_post_meta( $post->ID, 'clanpress_match_result[squad]', true);
-  $opponent = get_post_meta( $post->ID, 'clanpress_match_result[opponent]', true);
+  $squad = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'squad');
+  $opponent = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'opponent');
 
   printf('%d:%d', $squad, $opponent);
+}
+
+/**
+ * Displays the match type.
+ *
+ * @param WP_Post $post
+ *   The post.
+ */
+function clanpress_the_match_type($post = null) {
+  $post = isset( $post ) ? $post : get_post();
+
+  $match_types = Clanpress_Match_Post_Type::get_match_types();
+  $match_type = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'match_type', 'match_type');
+
+  if ( isset( $match_types[ $match_type ] ) ) {
+    echo $match_types[ $match_type ];
+  }
 }

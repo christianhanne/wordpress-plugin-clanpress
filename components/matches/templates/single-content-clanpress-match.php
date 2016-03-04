@@ -21,6 +21,9 @@
     <?php clanpress_the_match_opponent_thumbnail( 'thumbnail' ); ?>
     <?php clanpress_the_match_opponent(); ?>
   </div>
+  <div class="clanpress_post__match_type">
+    <?php clanpress_the_match_type(); ?>
+  </div>
   <div class="clanpress_post__game">
     <?php clanpress_the_match_game(); ?>
   </div>

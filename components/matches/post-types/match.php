@@ -123,10 +123,7 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
       'form_elements' => array(
         'match_type' => array(
           'type' => 'select',
-          'options' => array(
-            self::MATCH_TYPE_OFFICIAL => __( 'Official war', 'clanpress' ),
-            self::MATCH_TYPE_FUN      => __( 'Fun war', 'clanpress' ),
-          ),
+          'options' => self::get_match_types(),
           'default' => self::MATCH_TYPE_OFFICIAL,
         ),
       ),
@@ -146,5 +143,18 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
     );
 
     return $boxes;
+  }
+
+  /**
+   * Returns an array of match types.
+   *
+   * @return array
+   *   Array of match types.
+   */
+  public static function get_match_types() {
+    return array(
+      self::MATCH_TYPE_OFFICIAL => __( 'Official war', 'clanpress' ),
+      self::MATCH_TYPE_FUN      => __( 'Fun war', 'clanpress' ),
+    );
   }
 }
