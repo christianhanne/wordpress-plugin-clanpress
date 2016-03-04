@@ -85,7 +85,7 @@ class Clanpress_Helper {
    */
   public static function register_page( $component, $page ) {
     require_once( self::get_pages_path( $component ) . self::normalize( $page ) . '.php' );
-    $page_class = self::get_class( $page_class, 'page' );
+    $page_class = self::get_class( $page, 'page' );
     new $page_class();
 
     self::$classes[$page_class] = $component;
@@ -114,10 +114,10 @@ class Clanpress_Helper {
    */
   public static function register_group_extension( $component, $extension ) {
     require_once( self::get_group_extensions_path( $component ) . self::normalize( $extension ) . '.php' );
-    $group_extension = self::get_class( $extension, 'group_extension' );
-    bp_register_group_extension( $group_extension );
+    $class = self::get_class( $extension, 'group_extension' );
+    bp_register_group_extension( $class );
 
-    self::$classes[$group_extension] = $component;
+    self::$classes[$class] = $component;
   }
 
   /**

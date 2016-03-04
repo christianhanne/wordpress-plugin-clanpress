@@ -25,18 +25,25 @@ class Clanpress_Component {
    * Initializes the component.
    */
   function __construct() {
-    foreach ( $this->includes() as $include ) {
-      Clanpress_Helper::register_include( $this->id(), $include );
-    }
+    $this->register_includes();
+    $this->register_group_extensions();
 
     add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
     add_action( 'admin_init', array( $this, 'register_admin_styles' ) );
     add_action( 'admin_menu', array( $this, 'register_admin_pages' ) );
     add_action( 'widgets_init', array( $this, 'register_widgets' ) );
-    add_action( 'bp_include', array( $this, 'register_group_extensions' ) );
+  }
 
-    $this->settings = new Clanpress_Settings( $this->id(), $this->name(), $this->settings() );
+  /**
+   * Register all includes for the given component.
+   *
+   * @see Clanpress_Helper::register_include()
+   */
+  public function register_includes() {
+    foreach ( $this->includes() as $include ) {
+      Clanpress_Helper::register_include( $this->id(), $include );
+    }
   }
 
   /**
