@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 function clanpress_the_award_placement($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
-  $placement = get_post_meta( $post->ID, 'clanpress_award_placement[placement]', true );
+  $placement = Clanpress_Award_Post_Type::get_post_value( $post->ID, 'placement', 'placement' );
   echo !empty( $placement ) ? $placement : '&ndash;';
 }
 
@@ -29,17 +29,14 @@ function clanpress_the_award_placement($post = null) {
  *
  * @param WP_Post $post
  *   The post.
- *
- * @TODO Update for new squad logic.
  */
 function clanpress_the_award_squad($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
   $squad_options = Clanpress_Squads_Component::get_squad_options();
+  $squad_ids = Clanpress_Award_Post_Type::get_post_value( $post->ID, 'squad', 'squad' );
 
   $squads = array();
-  $squad_ids = get_post_meta( $post->ID, 'clanpress_award_squad[squad]', true );
-
   if (is_array($squad_ids)) {
     foreach ( $squad_ids as $squad_id => $checked ) {
       array_push( $squads, $squad_options[ $squad_id ] );
