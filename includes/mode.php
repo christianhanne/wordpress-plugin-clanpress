@@ -19,7 +19,7 @@ class Clanpress_Mode {
    * @var string
    * Stores the default mode's id.
    */
-  const DEFAULT = 'setup';
+  const DEFAULT_MODE = 'setup';
 
   /**
    * @var array
@@ -73,7 +73,7 @@ class Clanpress_Mode {
    *   Currently active mode.
    */
   public static function get() {
-    return get_option( 'clanpress_mode', self::DEFAULT ) );
+    return get_option( 'clanpress_mode', self::DEFAULT_MODE ) );
   }
 
   /**
