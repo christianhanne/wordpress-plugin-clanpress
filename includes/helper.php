@@ -425,9 +425,9 @@ class Clanpress_Helper {
    *   Converted string.
    */
   public static function get_class( $id = '', $suffix = '' ) {
-    $class_raw = 'clanpress_' . $id;
+    $class = 'clanpress_' . $id;
     if ( ! empty( $suffix ) ) {
-      $class_raw .= '_' . $suffix;
+      $class .= '_' . $suffix;
     }
 
     return str_replace( '-', '_', ucwords( str_replace( '_', '-', $class ) ) );

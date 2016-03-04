@@ -58,8 +58,8 @@ class Clanpress_Mode {
    *   Returns true, if mode could be updated.
    */
   public static function set( $mode = null ) {
-    if ( in_array( $mode, self::list() ) ) {
-      update_option( 'clanpress_mode', $mode ) );
+    if ( in_array( $mode, self::modes() ) ) {
+      update_option( 'clanpress_mode', $mode );
       return true;
     }
 
@@ -73,7 +73,7 @@ class Clanpress_Mode {
    *   Currently active mode.
    */
   public static function get() {
-    return get_option( 'clanpress_mode', self::DEFAULT_MODE ) );
+    return get_option( 'clanpress_mode', self::DEFAULT_MODE );
   }
 
   /**
@@ -82,7 +82,7 @@ class Clanpress_Mode {
    * @return array
    *   Allowed modes.
    */
-  public static function list() {
+  public static function modes() {
     return self::$modes;
   }
 
