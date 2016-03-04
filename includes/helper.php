@@ -430,7 +430,7 @@ class Clanpress_Helper {
       $class .= '_' . $suffix;
     }
 
-    return str_replace( '-', '_', ucwords( str_replace( '_', '-', $class ) ) );
+    return str_replace( ' ', '_', ucwords( str_replace( array( '_', '-' ), ' ', $class ) ) );
   }
 
   /**
