@@ -265,12 +265,14 @@ class Clanpress_Post_Type {
    *   Returns the stored post meta value or null if not found.
    */
   final public static function get_post_value($post_id, $meta_box, $field) {
-    $meta_boxes = self::meta_boxes();
+    $class = get_called_class();
+
+    $meta_boxes = $class::meta_boxes();
     if ( !isset( $meta_boxes[ $meta_box ] ) ) {
       return null;
     }
 
-    $instance = new Clanpress_Meta_Box( $meta_box, self::id(), $meta_boxes[ $meta_box ] );
+    $instance = new Clanpress_Meta_Box( $meta_box, $class::id(), $meta_boxes[ $meta_box ] );
     $meta = $instance->get_meta( $post_id );
 
     return isset( $meta[ $field ] ) ? $meta[ $field ] : null;
