@@ -20,9 +20,11 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 function clanpress_the_sponsor_link($post = null) {
   $post = isset( $post ) ? $post : get_post();
 
-  $website = get_post_meta( $post->ID, 'clanpress_sponsor_sponsor[website]', true);
-  vprintf('<a href="%s">%s</a>', array(
-    esc_url( $website ),
-    __( 'To the sponsor', 'clanpress' ),
-  ));
+  $website = Clanpress_Sponsor_Post_Type( $post->ID, 'sponsor', 'website' );
+  if ( $website ) {
+    vprintf('<a href="%s">%s</a>', array(
+      esc_url( $website ),
+      __( 'To the sponsor', 'clanpress' ),
+    ));
+  }
 }
