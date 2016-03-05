@@ -255,7 +255,7 @@ class Clanpress_Form {
       $attributes['value'] = $element['value'];
     }
 
-    $value = esc_html( nl2br( $attributes['value'] ) );
+    $value = esc_html( $attributes['value'] );
     unset($attributes['value']);
 
     return sprintf('<textarea%s>%s</textarea>', self::attributes($attributes), $value);
