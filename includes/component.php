@@ -27,6 +27,7 @@ class Clanpress_Component {
   function __construct() {
     $this->register_includes();
     $this->register_group_extensions();
+    $this->register_settings();
 
     add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
@@ -40,7 +41,7 @@ class Clanpress_Component {
    *
    * @see Clanpress_Helper::register_include()
    */
-  public function register_includes() {
+  protected function register_includes() {
     foreach ( $this->includes() as $include ) {
       Clanpress_Helper::register_include( $this->id(), $include );
     }
@@ -73,7 +74,7 @@ class Clanpress_Component {
    *
    * @see Clanpress_Helper::register_group_extension().
    */
-  public function register_group_extensions() {
+  protected function register_group_extensions() {
     foreach ( $this->group_extensions() as $group_extension ) {
       Clanpress_Helper::register_group_extension( $this->id(), $group_extension );
     }
@@ -113,6 +114,14 @@ class Clanpress_Component {
     foreach ( $this->widgets() as $widget ) {
       Clanpress_Helper::register_widget( $this->id(), $widget );
     }
+  }
+
+  /**
+   * TODO
+   */
+  protected function register_settings() {
+    $instance = Clanpress_Settings::instance();
+    $instance->add_settings( $this->id(), $this->name(), $this->settings() );
   }
 
   /**
@@ -209,10 +218,7 @@ class Clanpress_Component {
    *
    * Settings will be added as separate sections inside the clanpress
    * settings page. All settings must be added using the clanpress form
-   * api. Check the linked function for details.
-   *
-   * @return array
-   *   Array of form elements.
+   * api. Check the linked function for details.[register_settings description]
    *
    * @see Clanpress_Form::element()
    */
