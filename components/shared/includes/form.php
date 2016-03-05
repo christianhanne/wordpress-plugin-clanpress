@@ -116,6 +116,13 @@ class Clanpress_Form {
         $template = '<div class="form-field">$label$field$description</div>';
         break;
 
+      case 'textarea':
+        $element['attributes']['class'] = 'widefat';
+
+        $field = self::textarea($element);
+        $template = '<div class="form-field">$label$field$description</div>';
+        break;
+
       case 'hidden':
         $field = self::input($element);
         $template = '$field';
@@ -220,6 +227,38 @@ class Clanpress_Form {
     }
 
     return sprintf('<input%s />', self::attributes($attributes));
+  }
+
+  /**
+   * Returns the html markup of a textarea form element.
+   *
+   * @param array $element
+   *   Contains the form element definition as an associative array.
+   *   Please check the linked method for further details.
+   *
+   * @return string
+   *   Html markup of a textarea form element.
+   *
+   * @see Clanpress_Form::element()
+   */
+  private static function textarea($element) {
+    $attributes = isset( $element['attributes'] ) ? $element['attributes'] : array();
+
+    if ( isset( $element['field_id'] ) ) {
+      $attributes['id'] = $element['field_id'];
+    }
+
+    $attributes['name'] = $element['field_name'];
+    $attributes['type'] = $element['type'];
+
+    if ( !isset( $attributes['value'] ) ) {
+      $attributes['value'] = $element['value'];
+    }
+
+    $value = esc_html( nl2br( $attributes['value'] ) );
+    unset($attributes['value']);
+
+    return sprintf('<textarea%s>%s</textarea>', self::attributes($attributes), $value);
   }
 
   /**
