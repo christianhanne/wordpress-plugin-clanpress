@@ -16,6 +16,15 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  */
 class Clanpress_Squads_Component extends Clanpress_Component {
   /**
+   * @inheritdoc
+   */
+  public function __construct() {
+    parent::__construct();
+
+    new Clanpress_Squads_Multi_Site();
+  }
+
+  /**
    * Returns an array of squad options.
    *
    * @return array
@@ -64,6 +73,7 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   protected function includes() {
     return array(
       'functions',
+      'multi-site',
     );
   }
 
