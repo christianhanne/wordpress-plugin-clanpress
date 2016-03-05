@@ -79,6 +79,19 @@ class Clanpress_Settings {
   }
 
   /**
+   * Returns the settings values stored for the given component.
+   *
+   * @param string $component
+   *   The component id.
+   *
+   * @return array
+   *   Array of stored settings.
+   */
+  public function get_values( $component ) {
+    return get_option( $this->get_section_id( $component ), array() );
+  }
+
+  /**
    * Registers all previously added settings.
    */
   public function register_settings() {
