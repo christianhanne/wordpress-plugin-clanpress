@@ -160,8 +160,13 @@ function clanpress_the_match_result($post = null) {
 
   $squad = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'squad');
   $opponent = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'opponent');
+  $map = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'map');
 
-  printf('%d:%d', $squad, $opponent);
+  vprintf( __( 'Map: %s, <strong>%d:%d</strong>', 'clanpress' ), array(
+    esc_html( $map ),
+    esc_html( $squad ),
+    esc_html( $opponent ),
+  ) );
 }
 
 /**

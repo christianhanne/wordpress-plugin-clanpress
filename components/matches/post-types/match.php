@@ -113,6 +113,12 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
           'default' => '',
           'pattern' => '^[0-9]+$',
         ),
+        'map' => array(
+          'type' => 'text',
+          'label' => __( 'Map', 'clanpress' ),
+          'default' => '',
+          'pattern' => '^.+$',
+        ),
       ),
     );
 
