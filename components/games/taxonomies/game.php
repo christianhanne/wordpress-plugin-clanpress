@@ -116,13 +116,13 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   public function admin_table_column( $output, $column, $term_id ) {
     switch ( $column ) {
       case 'icon':
-        return clanpress_the_game_icon( $term_id, array(
+        return clanpress_get_game_icon( $term_id, array(
           self::ICON_SIZE,
           self::ICON_SIZE,
         ) );
 
       case 'image':
-        return clanpress_the_game_image( $term_id, array(
+        return clanpress_get_game_image( $term_id, array(
           self::ICON_SIZE,
           self::ICON_SIZE,
         ) );
