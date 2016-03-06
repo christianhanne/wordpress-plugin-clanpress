@@ -203,6 +203,7 @@ class Clanpress_Settings {
    */
   public function display_field( $args ) {
     unset( $args['element']['label'] );
+
     echo Clanpress_Form::element( $args['element'] );
   }
 

@@ -87,4 +87,25 @@ class Clanpress_Squads_Component extends Clanpress_Component {
       'squads',
     );
   }
+
+  /**
+   * @inheritdoc
+   */
+  protected function settings() {
+    return array(
+      'show_old_groups' => array(
+        'type' => 'checkbox',
+        'label' => __( 'Show old groups', 'clanpress' ),
+        'description' => __( 'Show groups created before this component was enabled.', 'clanpress' ),
+        'default' => false,
+      ),
+    );
+  }
+  
+  /**
+   * @inheritdoc
+   */
+  protected function name() {
+    return __( 'Squads', 'clanpress' );
+  }
 }

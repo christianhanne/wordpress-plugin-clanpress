@@ -53,10 +53,15 @@ class Clanpress_Squads_Multi_Site  {
   public function groups_get_groups( $groups ) {
     $blog = get_blog_details( get_current_blog_id(), true );
 
+    $settings = Clanpress_Settings::instance()->get_values( 'squads' );
+    $show_old_groups = @!!$settings['show_old_groups'];
+
     $groups_filtered = array();
     foreach ( $groups['groups'] as $group ) {
       $clanpress_blog_id = groups_get_groupmeta( $group->id, 'clanpress_blog_id' );
-      if ( empty( $clanpress_blog_id ) || $clanpress_blog_id == $blog->blog_id ) {
+      if ( $clanpress_blog_id == $blog->blog_id ) {
+        array_push( $groups_filtered, $group );
+      } else if ( $show_old_groups && empty( $clanpress_blog_id ) ) {
         array_push( $groups_filtered, $group );
       }
     }

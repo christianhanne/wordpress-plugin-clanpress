@@ -91,8 +91,15 @@ class Clanpress_Form {
       case 'checkbox':
         // TODO: Find a better solution for this.
         $field = self::checkbox($element);
-        $field = self::label( $element['field_id'], $field . $element['label'] );
-        $template = '<div class="form-field">$field$description</div>';
+
+        if ( isset( $element['label'] ) ) {
+          $field = self::label( $element['field_id'], $field . $element['label'] );
+          $template = '<div class="form-field">$field$description</div>';
+        } else if ( isset( $element['description'] ) ) {
+          $field = self::label( $element['field_id'], $field . $element['description'] );
+          $template = '<div class="form-field">$field</div>';
+        }
+
         break;
 
       case 'checkboxes':
