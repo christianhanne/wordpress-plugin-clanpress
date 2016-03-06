@@ -45,6 +45,9 @@ class Clanpress_Widget extends WP_Widget {
     $this->load_template( $this->template_elements( $instance ) );
 
     echo $after_widget;
+
+    // Make sure we won't override the main query.
+    wp_reset_query();
   }
 
   /**
