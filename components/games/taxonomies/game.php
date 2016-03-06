@@ -19,7 +19,7 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
    * @var int
    * Defines the icon size in pixels.
    */
-  const ICON_SIZE = 100;
+  const ICON_SIZE = 50;
 
   /**
    * @inheritdoc
@@ -77,8 +77,11 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
     return array(
       'image' => array(
         'type' => 'upload',
-        'default' => '',
-        'description' => __( 'Select or upload an image for this game.', 'clanpress' ),
+        'label' => __( 'Image', 'clanpress' ),
+      ),
+      'icon' => array(
+        'type' => 'upload',
+        'label' => __( 'Icon', 'clanpress' ),
       ),
     );
   }
@@ -96,6 +99,7 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
       $new_columns[ $key ] = $value;
     }
 
+    $new_columns['image'] = __( 'Image', 'clanpress' );
     $new_columns['icon'] = __( 'Icon', 'clanpress' );
     return $new_columns;
   }
@@ -104,20 +108,22 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
    * @inheritdoc
    */
   public function admin_table_column( $output, $column, $term_id ) {
-    if ( $column === 'icon' ) {
-      $meta = $this->get_term_meta( $term_id );
+    switch ( $column ) {
+      case 'icon':
+      case 'image':
+        $meta = $this->get_term_meta( $term_id );
+        if ( empty( $meta[ 'clanpress_game_' . $column ] ) ) {
+          return '&ndash;';
+        }
 
-      if ( empty( $meta['clanpress_game_image'] ) ) {
-        return '&ndash;';
-      }
+        $attachment_id = (int) $meta[ 'clanpress_game_' . $column ];
+        return wp_get_attachment_image( $attachment_id, array(
+          self::ICON_SIZE,
+          self::ICON_SIZE,
+        ) );
 
-      $attachment_id = (int) $meta['clanpress_game_image'];
-      return wp_get_attachment_image( $attachment_id, array(
-        self::ICON_SIZE,
-        self::ICON_SIZE,
-      ) );
+      default:
+        return parent::admin_table_column( $output, $column, $term_id );
     }
-
-    return parent::admin_table_column( $output, $column, $term_id );
   }
 }
