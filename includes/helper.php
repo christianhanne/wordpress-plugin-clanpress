@@ -113,6 +113,10 @@ class Clanpress_Helper {
    *   Filename of the extension.
    */
   public static function register_group_extension( $component, $extension ) {
+    if ( !class_exists('Clanpress_Group_Extension') ) {
+      return;
+    }
+
     require_once( self::get_group_extensions_path( $component ) . self::normalize( $extension ) . '.php' );
     $class = self::get_class( $extension, 'group_extension' );
     bp_register_group_extension( $class );
