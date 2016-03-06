@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  * @param WP_Post $post
  *   The post.
  */
-function clanpress_the_match_link($post = null) {
+function clanpress_the_match_link( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $match_link = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'match', 'link' );
@@ -35,7 +35,7 @@ function clanpress_the_match_link($post = null) {
  * @param WP_Post $post
  *   The post.
  */
-function clanpress_the_match_opponent($post = null) {
+function clanpress_the_match_opponent( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $opponents = array();
@@ -59,7 +59,7 @@ function clanpress_the_match_opponent($post = null) {
  * @param WP_Post $post
  *   The post.
  */
-function clanpress_the_match_opponent_thumbnail($size = 'post-thumbnail', $post = null) {
+function clanpress_the_match_opponent_thumbnail( $size = 'post-thumbnail', $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $attachments = array();
@@ -83,7 +83,7 @@ function clanpress_the_match_opponent_thumbnail($size = 'post-thumbnail', $post 
  * @param WP_Post $post
  *   The post.
  */
-function clanpress_the_match_squad($post = null) {
+function clanpress_the_match_squad( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $squad_options = Clanpress_Squads_Component::get_squad_options();
@@ -110,7 +110,7 @@ function clanpress_the_match_squad($post = null) {
  * @param WP_Post $post
  *   The post.
  */
-function clanpress_the_match_squad_thumbnail($size = 'post-thumbnail', $post = null) {
+function clanpress_the_match_squad_thumbnail( $size = 'post-thumbnail', $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $squad_options = Clanpress_Squads_Component::get_squad_options();
@@ -135,7 +135,7 @@ function clanpress_the_match_squad_thumbnail($size = 'post-thumbnail', $post = n
  * @param WP_Post $post
  *   The post.
  */
-function clanpress_the_match_game() {
+function clanpress_the_match_game( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $games = array();
@@ -155,7 +155,7 @@ function clanpress_the_match_game() {
  * @param WP_Post $post
  *   The post.
  */
-function clanpress_the_match_result($post = null) {
+function clanpress_the_match_result( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $squad = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'squad');
@@ -175,7 +175,7 @@ function clanpress_the_match_result($post = null) {
  * @param WP_Post $post
  *   The post.
  */
-function clanpress_the_match_type($post = null) {
+function clanpress_the_match_type( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $match_types = Clanpress_Match_Post_Type::get_match_types();
