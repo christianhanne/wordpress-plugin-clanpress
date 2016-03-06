@@ -66,10 +66,7 @@ function clanpress_the_match_opponent_thumbnail( $size = 'post-thumbnail', $post
   $terms = get_the_terms( $post, 'clanpress_opponent' );
   if ( is_array( $terms ) && count( $terms ) ) {
     foreach ( $terms as $term ) {
-      $term_meta = Clanpress_Opponent_Taxonomy::get_term_meta( $term->term_id );
-      $attachment_id = (int) $term_meta['clanpress_opponent_image'];
-
-      $attachment = wp_get_attachment_image( $attachment_id, $size );
+      $attachment = clanpress_the_opponent_image( $term->term_id, $size );
       array_push( $attachments, $attachment );
     }
   }
@@ -184,4 +181,68 @@ function clanpress_the_match_type( $post = null ) {
   if ( isset( $match_types[ $match_type ] ) ) {
     echo $match_types[ $match_type ];
   }
+}
+
+/**
+ * Displays the link to the opponent's website.
+ *
+ * @param int $term_id
+ *   The term id.
+ */
+function clanpress_the_opponent_link( $term_id ) {
+  $link = clanpress_get_opponent_link( $term_id );
+  if ( !empty( $link ) ) {
+    printf( '<a href="%s">%s</a>', $link, __( 'Website', 'clanpress' ) );
+  }
+}
+
+/**
+ * Displays the opponent image for the given term id.
+ *
+ * @param int $term_id
+ *   The term id.
+ * @param string|array $size
+ *   Display size, either wordpress format or dimensions array.
+ */
+function clanpress_the_opponent_image( $term_id, $size = 'thumbnail') {
+  echo clanpress_get_opponent_image( $term_id, $size );
+}
+
+/**
+ * Returns the link to the opponent's website.
+ *
+ * @param int $term_id
+ *   The term id.
+ *
+ * @return string
+ *   The opponent's website link.
+ */
+function clanpress_get_opponent_link( $term_id ) {
+  $meta = Clanpress_Opponent_Taxonomy::get_term_meta( $term_id );
+  if ( !empty( $meta[ 'clanpress_opponent_link' ] ) ) {
+    return esc_url( $meta[ 'clanpress_opponent_link' ] );
+  }
+
+  return '';
+}
+
+/**
+ * Returns the image for the given term id.
+ *
+ * @param int $term_id
+ *   The term id.
+ * @param string|array $size
+ *   Display size, either wordpress format or dimensions array.
+ *
+ * @return string
+ *    The opponent's image as an image tag.
+ */
+function clanpress_get_opponent_image( $term_id, $size = 'thumbnail' ) {
+  $meta = Clanpress_Opponent_Taxonomy::get_term_meta( $term_id );
+  if ( !empty( $meta[ 'clanpress_opponent_image' ] ) ) {
+    $attachment_id = (int) $meta[ 'clanpress_opponent_image' ];
+    return wp_get_attachment_image( $attachment_id, $size );
+  }
+
+  return '';
 }

@@ -16,6 +16,12 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  */
 class Clanpress_Opponent_Taxonomy extends Clanpress_Taxonomy {
   /**
+   * @var int
+   * Defines the icon size in pixels.
+   */
+  const ICON_SIZE = 50;
+
+  /**
    * @inheritdoc
    */
   protected function labels() {
@@ -80,4 +86,42 @@ class Clanpress_Opponent_Taxonomy extends Clanpress_Taxonomy {
       ),
     );
   }
+
+  /**
+   * @inheritdoc
+   */
+  public function admin_table_thead( $columns ) {
+    $new_columns = array();
+    foreach ( $columns as $key => $value ) {
+      if ( $key == 'posts' || $key == 'description' ) {
+        continue;
+      }
+
+      $new_columns[ $key ] = $value;
+    }
+
+    $new_columns['link'] = __( 'Website', 'clanpress' );
+    $new_columns['image'] = __( 'Image', 'clanpress' );
+    return $new_columns;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function admin_table_column( $output, $column, $term_id ) {
+    switch ( $column ) {
+      case 'link':
+        return clanpress_get_opponent_link( $term_id );
+
+      case 'image':
+        return clanpress_get_opponent_image( $term_id, array(
+          self::ICON_SIZE,
+          self::ICON_SIZE,
+        ) );
+
+      default:
+        return parent::admin_table_column( $output, $column, $term_id );
+    }
+  }
+
 }
