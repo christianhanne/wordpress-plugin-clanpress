@@ -22,6 +22,12 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   const ICON_SIZE = 50;
 
   /**
+   * @var int
+   * Defines the image size in pixels.
+   */
+  const IMAGE_SIZE = 100;
+
+  /**
    * @inheritdoc
    */
   protected function labels() {
@@ -110,14 +116,13 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   public function admin_table_column( $output, $column, $term_id ) {
     switch ( $column ) {
       case 'icon':
-      case 'image':
-        $meta = $this->get_term_meta( $term_id );
-        if ( empty( $meta[ 'clanpress_game_' . $column ] ) ) {
-          return '&ndash;';
-        }
+        return clanpress_the_game_icon( $term_id, array(
+          self::ICON_SIZE,
+          self::ICON_SIZE,
+        ) );
 
-        $attachment_id = (int) $meta[ 'clanpress_game_' . $column ];
-        return wp_get_attachment_image( $attachment_id, array(
+      case 'image':
+        return clanpress_the_game_image( $term_id, array(
           self::ICON_SIZE,
           self::ICON_SIZE,
         ) );

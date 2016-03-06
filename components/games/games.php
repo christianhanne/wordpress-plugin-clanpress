@@ -18,6 +18,15 @@ class Clanpress_Games_Component extends Clanpress_Component {
   /**
    * @inheritdoc
    */
+  protected function includes() {
+    return array(
+      'functions',
+    );
+  }
+
+  /**
+   * @inheritdoc
+   */
   protected function taxonomies() {
     return array(
       'game',
