@@ -86,6 +86,8 @@ gulp.task('bower', () => {
 gulp.task('build', () => {
 	return gulp
 		.src([
+      'LICENSE',
+      'README.md',
       'assets/**',
 			'dist/css/**',
 			'dist/js/**',
@@ -93,7 +95,6 @@ gulp.task('build', () => {
       'components/**',
       'modes/**',
 			'includes/**',
-			'templates/**',
 			'clanpress.php',
 			'index.php'
 		], {base: '.'})
