@@ -40,7 +40,7 @@ class Clanpress_Taxonomy {
           add_action( 'pre_delete_term', 'term_delete' );
 
           add_filter( 'manage_edit-' . $this->id() . '_columns', array( $this, 'admin_table_thead' ) );
-          add_filter( 'manage_' . $this->id() . '_custom_column', array( $this, 'admin_table_column' ) );
+          add_filter( 'manage_' . $this->id() . '_custom_column', array( $this, 'admin_table_column' ), 10, 3 );
         }
       }
     }
@@ -200,7 +200,7 @@ class Clanpress_Taxonomy {
    *   Edited column output.
    */
   public function admin_table_column( $output, $column, $term_id ) {
-    return 'TODO' . $output;
+    return $output;
   }
 
   /**

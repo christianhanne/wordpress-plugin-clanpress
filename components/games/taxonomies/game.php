@@ -16,6 +16,12 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  */
 class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   /**
+   * @var int
+   * Defines the icon size in pixels.
+   */
+  const ICON_SIZE = 100;
+
+  /**
    * @inheritdoc
    */
   protected function labels() {
@@ -75,5 +81,43 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
         'description' => __( 'Select or upload an image for this game.', 'clanpress' ),
       ),
     );
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function admin_table_thead( $columns ) {
+    $new_columns = array();
+    foreach ( $columns as $key => $value ) {
+      if ( $key == 'posts' || $key == 'description' ) {
+        continue;
+      }
+
+      $new_columns[ $key ] = $value;
+    }
+
+    $new_columns['icon'] = __( 'Icon', 'clanpress' );
+    return $new_columns;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function admin_table_column( $output, $column, $term_id ) {
+    if ( $column === 'icon' ) {
+      $meta = $this->get_term_meta( $term_id );
+
+      if ( empty( $meta['clanpress_game_image'] ) ) {
+        return '&ndash;';
+      }
+
+      $attachment_id = (int) $meta['clanpress_game_image'];
+      return wp_get_attachment_image( $attachment_id, array(
+        self::ICON_SIZE,
+        self::ICON_SIZE,
+      ) );
+    }
+
+    return parent::admin_table_column( $output, $column, $term_id );
   }
 }
