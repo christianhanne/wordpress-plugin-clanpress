@@ -33,11 +33,12 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   public static function get_squad_options() {
     static $options;
     if ( !isset( $options ) ) {
-      $groups = BP_Groups_Group::get(array(
+      $args = array(
 				'type' => 'alphabetical',
 				'per_page' => 999
-			));
+			);
 
+      $groups = groups_get_groups( $args );
       foreach ( $groups['groups'] as $group ) {
         $options[ $group->id ] = $group->name;
       }
