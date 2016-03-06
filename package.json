@@ -1,6 +1,6 @@
 {
   "name": "clanpress",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "ClanPress is full featured clan management plugin.",
   "main": "index.js",
   "directories": {
