@@ -38,6 +38,9 @@ class Clanpress_Taxonomy {
           add_action( 'create_' . $this->id() , array( $this, 'term_save') );
           add_action( 'edited_' . $this->id() , array( $this, 'term_save') );
           add_action( 'pre_delete_term', 'term_delete' );
+
+          add_filter( 'manage_edit-' . $this->id() . '_columns', array( $this, 'admin_table_thead' ) );
+          add_filter( 'manage_' . $this->id() . '_custom_column', array( $this, 'admin_table_column' ) );
         }
       }
     }
@@ -168,6 +171,36 @@ class Clanpress_Taxonomy {
    */
   public static function get_term_meta( $term_id ) {
     return get_option( self::id() . '_' . $term_id, array() );
+  }
+
+  /**
+   * Overwrite columns for taxonomy's admin table.
+   *
+   * @param array $columns
+   *   Array of table columns.
+   *
+   * @return array
+   *   Edited array of table columns.
+   */
+  public function admin_table_thead( $columns ) {
+    return $columns;
+  }
+
+  /**
+   * Overwrite output of taxonomy's admin table column.
+   *
+   * @param string $output
+   *   Original html output of the column.
+   * @param string $column
+   *   Name of the column.
+   * @param int $term_id
+   *   The term id.
+   *
+   * @return string
+   *   Edited column output.
+   */
+  public function admin_table_column( $output, $column, $term_id ) {
+    return 'TODO' . $output;
   }
 
   /**
