@@ -42,6 +42,11 @@
 
         uploader.open();
       });
+
+      $field.closest('form').find('input[type="submit"]').click(function() {
+        $images.html('');
+        $field.val('');
+      });
     });
   });
 })(jQuery, wp);
