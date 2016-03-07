@@ -40,7 +40,7 @@ function clanpress_the_subtitle() {
 function clanpress_the_header_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['header'] ) ) {
-    $attachment = wp_get_attachment_image( $settings['header'], $size );
+    echo wp_get_attachment_image( $settings['header'], $size );
   }
 }
 
@@ -50,10 +50,10 @@ function clanpress_the_header_image( $size = 'thumbnail' ) {
  * @param string $size
  *   Size of the image.
  */
-function clanpress_the_icon_image( $type = 'thumbnail' ) {
+function clanpress_the_icon_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['icon'] ) ) {
-    $attachment = wp_get_attachment_image( $settings['icon'], $size );
+    echo wp_get_attachment_image( $settings['icon'], $size );
   }
 }
 
@@ -63,10 +63,10 @@ function clanpress_the_icon_image( $type = 'thumbnail' ) {
  * @param string $size
  *   Size of the image.
  */
-function clanpress_the_logo_image( $type = 'thumbnail' ) {
+function clanpress_the_logo_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['logo'] ) ) {
-    $attachment = wp_get_attachment_image( $settings['logo'], $size );
+    echo wp_get_attachment_image( (int) $settings['logo'], $size );
   }
 }
 
