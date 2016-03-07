@@ -71,6 +71,54 @@ function clanpress_the_logo_image( $size = 'thumbnail' ) {
 }
 
 /**
+ * Returns the url of the header image.
+ *
+ * @param string $size
+ *   Size of the image.
+ *
+ * @return string
+ *   Url to the header image in the given size.
+ */
+function clanpress_get_header_image_src( $size = 'thumbnail' ) {
+  $settings = Clanpress_Settings::instance()->get_values( 'admin' );
+  if ( !empty( $settings['header'] ) ) {
+    return wp_get_attachment_image_src( $settings['header'], $size )[0];
+  }
+}
+
+/**
+ * Returns the url of the icon.
+ *
+ * @param string $size
+ *   Size of the image.
+ *
+ * @return string
+ *   Url to the icon in the given size.
+ */
+function clanpress_get_icon_image_src( $size = 'thumbnail' ) {
+  $settings = Clanpress_Settings::instance()->get_values( 'admin' );
+  if ( !empty( $settings['icon'] ) ) {
+    return wp_get_attachment_image_src( $settings['icon'], $size )[0];
+  }
+}
+
+/**
+ * Returns the url of the logo.
+ *
+ * @param string $size
+ *   Size of the image.
+ *
+ * @return string
+ *   Url to the logo in the given size.
+ */
+function clanpress_get_logo_image_src( $size = 'thumbnail' ) {
+  $settings = Clanpress_Settings::instance()->get_values( 'admin' );
+  if ( !empty( $settings['logo'] ) ) {
+    return wp_get_attachment_image_src( (int) $settings['logo'], $size )[0];
+  }
+}
+
+/**
  * Displays the stored footer.
  */
 function clanpress_the_footer() {
