@@ -204,7 +204,12 @@ class Clanpress_Form {
    *   True, if this is a multi-value element.
    */
   public static function is_multi_value($element) {
-    return $element['type'] === 'checkboxes' || @is_array( $element['default'] );
+    if ( isset( $element['default'] ) && is_array( $element['default'] )) {
+      return true;
+    } else if ( $element['type'] === 'checkboxes' ) {
+      return true;
+    }
+    return false;
   }
 
   /**
