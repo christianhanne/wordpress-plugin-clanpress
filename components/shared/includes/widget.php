@@ -178,7 +178,13 @@ class Clanpress_Widget extends WP_Widget {
     }
 
     $template_name = $this->template_name();
-    if ( $overridden_template = locate_template( $template_name ) ) {
+    
+    $template_names = array(
+      $template_name,
+      'clanpress/' . $template_name,
+    );
+
+    if ( $overridden_template = locate_template( $template_names ) ) {
       load_template( $overridden_template );
     } else {
       $obj = new ReflectionObject($this);
