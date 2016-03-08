@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Sponsors
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -16,6 +16,8 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_sponsor_link($post = null) {
   $post = isset( $post ) ? $post : get_post();

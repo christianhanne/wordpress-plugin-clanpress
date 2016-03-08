@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Teamspeak\Templates
  */
 ?>
 <div class="teamspeak-status"

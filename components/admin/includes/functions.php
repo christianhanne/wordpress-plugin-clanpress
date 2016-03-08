@@ -6,13 +6,16 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Admin
+ * @filesource
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
  * Displays the stored clan name.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_clan_name() {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
@@ -23,6 +26,8 @@ function clanpress_the_clan_name() {
 
 /**
  * Displays the stored clan subtitle.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_subtitle() {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
@@ -36,6 +41,8 @@ function clanpress_the_subtitle() {
  *
  * @param string $size
  *   Size of the image.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_header_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
@@ -49,6 +56,8 @@ function clanpress_the_header_image( $size = 'thumbnail' ) {
  *
  * @param string $size
  *   Size of the image.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_icon_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
@@ -62,6 +71,8 @@ function clanpress_the_icon_image( $size = 'thumbnail' ) {
  *
  * @param string $size
  *   Size of the image.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_logo_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
@@ -78,6 +89,8 @@ function clanpress_the_logo_image( $size = 'thumbnail' ) {
  *
  * @return string
  *   Url to the header image in the given size.
+ *
+ * @subpackage Theme
  */
 function clanpress_get_header_image_src( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
@@ -94,6 +107,8 @@ function clanpress_get_header_image_src( $size = 'thumbnail' ) {
  *
  * @return string
  *   Url to the icon in the given size.
+ *
+ * @subpackage Theme
  */
 function clanpress_get_icon_image_src( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
@@ -110,6 +125,8 @@ function clanpress_get_icon_image_src( $size = 'thumbnail' ) {
  *
  * @return string
  *   Url to the logo in the given size.
+ *
+ * @subpackage Theme
  */
 function clanpress_get_logo_image_src( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
@@ -120,6 +137,8 @@ function clanpress_get_logo_image_src( $size = 'thumbnail' ) {
 
 /**
  * Displays the stored footer.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_footer() {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );

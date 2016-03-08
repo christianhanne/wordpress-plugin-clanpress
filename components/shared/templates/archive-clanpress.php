@@ -6,7 +6,8 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Shared\Templates
+ * @filesource
  */
 
 get_header();

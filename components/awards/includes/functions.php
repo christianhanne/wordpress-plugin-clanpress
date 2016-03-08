@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Awards
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -16,6 +16,8 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_award_placement($post = null) {
   $post = isset( $post ) ? $post : get_post();
@@ -29,6 +31,8 @@ function clanpress_the_award_placement($post = null) {
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_award_squad($post = null) {
   $post = isset( $post ) ? $post : get_post();

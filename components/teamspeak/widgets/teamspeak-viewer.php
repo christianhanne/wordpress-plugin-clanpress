@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Teamspeak\Widgets
  *
  * @link https://www.planetteamspeak.com/rest-api/
  */
@@ -14,11 +14,11 @@
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Teamspeak_Widget
+ * @{inheritdoc}
  */
 class Clanpress_Teamspeak_Viewer_Widget extends Clanpress_Widget {
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function template_elements( $instance = array() ) {
     $library_uri = Clanpress_Helper::get_library_uri('jquery-ts3viewer');
@@ -42,7 +42,7 @@ class Clanpress_Teamspeak_Viewer_Widget extends Clanpress_Widget {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function form_elements() {
     return array(
@@ -78,14 +78,14 @@ class Clanpress_Teamspeak_Viewer_Widget extends Clanpress_Widget {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function name() {
     return __( 'TS3 Viewer', 'clanpress' );
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function description() {
     return __( 'Displays a visually appealing view of your TeamSpeak server.', 'clanpress' );

@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Matches
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Matches_Component
+ * @{inheritdoc}
  */
 class Clanpress_Matches_Component extends Clanpress_Component {
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function includes() {
     return array(
@@ -25,7 +25,7 @@ class Clanpress_Matches_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function post_types() {
     return array(
@@ -34,7 +34,7 @@ class Clanpress_Matches_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function taxonomies() {
     return array(
@@ -43,7 +43,7 @@ class Clanpress_Matches_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function widgets() {
     return array(

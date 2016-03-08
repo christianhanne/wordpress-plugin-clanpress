@@ -9,13 +9,13 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Squads
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Squads_Multi_Site
+ * TODO
  */
 class Clanpress_Squads_Multi_Site  {
   /**

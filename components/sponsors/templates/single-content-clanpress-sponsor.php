@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Sponsors\Templates
  */
 ?>
 <article class="clanpress_post clanpress_post--single clanpress_post--sponsor">

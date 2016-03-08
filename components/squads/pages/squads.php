@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Squads\Pages
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Squads_Page
+ * @{inheritdoc}
  */
 class Clanpress_Squads_Page extends Clanpress_Page {
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   function __construct() {
     parent::__construct();
@@ -49,7 +49,7 @@ class Clanpress_Squads_Page extends Clanpress_Page {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function settings() {
     return array(

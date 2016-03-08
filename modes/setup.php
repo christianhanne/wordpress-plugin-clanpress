@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Modes
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Setup_Mode
+ * @{inheritdoc}
  */
 class Clanpress_Setup_Mode extends Clanpress_Mode {
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function components() {
     return array(

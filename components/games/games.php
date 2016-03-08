@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Games
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Misc_Component
+ * @{inheritdoc}
  */
 class Clanpress_Games_Component extends Clanpress_Component {
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function includes() {
     return array(
@@ -25,7 +25,7 @@ class Clanpress_Games_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function taxonomies() {
     return array(

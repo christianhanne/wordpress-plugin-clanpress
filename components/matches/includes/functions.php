@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Matches
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -16,6 +16,8 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_match_link( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
@@ -34,6 +36,8 @@ function clanpress_the_match_link( $post = null ) {
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_match_opponent( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
@@ -58,6 +62,8 @@ function clanpress_the_match_opponent( $post = null ) {
  *   and height values in pixels (in that order).
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_match_opponent_thumbnail( $size = 'post-thumbnail', $post = null ) {
   $post = isset( $post ) ? $post : get_post();
@@ -79,6 +85,8 @@ function clanpress_the_match_opponent_thumbnail( $size = 'post-thumbnail', $post
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_match_squad( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
@@ -106,6 +114,8 @@ function clanpress_the_match_squad( $post = null ) {
  *   and height values in pixels (in that order).
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_match_squad_thumbnail( $size = 'post-thumbnail', $post = null ) {
   $post = isset( $post ) ? $post : get_post();
@@ -131,6 +141,8 @@ function clanpress_the_match_squad_thumbnail( $size = 'post-thumbnail', $post = 
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_match_game( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
@@ -151,6 +163,8 @@ function clanpress_the_match_game( $post = null ) {
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_match_result( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
@@ -171,6 +185,8 @@ function clanpress_the_match_result( $post = null ) {
  *
  * @param WP_Post $post
  *   The post.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_match_type( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
@@ -188,6 +204,8 @@ function clanpress_the_match_type( $post = null ) {
  *
  * @param int $term_id
  *   The term id.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_opponent_link( $term_id ) {
   $link = clanpress_get_opponent_link( $term_id );
@@ -203,6 +221,8 @@ function clanpress_the_opponent_link( $term_id ) {
  *   The term id.
  * @param string|array $size
  *   Display size, either wordpress format or dimensions array.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_opponent_image( $term_id, $size = 'thumbnail') {
   echo clanpress_get_opponent_image( $term_id, $size );
@@ -216,6 +236,8 @@ function clanpress_the_opponent_image( $term_id, $size = 'thumbnail') {
  *
  * @return string
  *   The opponent's website link.
+ *
+ * @subpackage Theme
  */
 function clanpress_get_opponent_link( $term_id ) {
   $meta = Clanpress_Opponent_Taxonomy::get_term_meta( $term_id );
@@ -236,6 +258,8 @@ function clanpress_get_opponent_link( $term_id ) {
  *
  * @return string
  *    The opponent's image as an image tag.
+ *
+ * @subpackage Theme
  */
 function clanpress_get_opponent_image( $term_id, $size = 'thumbnail' ) {
   $meta = Clanpress_Opponent_Taxonomy::get_term_meta( $term_id );

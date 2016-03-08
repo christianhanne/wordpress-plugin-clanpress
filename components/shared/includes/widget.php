@@ -6,13 +6,13 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Shared
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Widget
+ * TODO
  */
 class Clanpress_Widget extends WP_Widget {
   /**
@@ -178,7 +178,7 @@ class Clanpress_Widget extends WP_Widget {
     }
 
     $template_name = $this->template_name();
-    
+
     $template_names = array(
       $template_name,
       'clanpress/' . $template_name,

@@ -18,5 +18,7 @@
   <files>
     <file>./clanpress.php</file>
     <directory>./includes</directory>
+    <directory>./components</directory>
+    <directory>./modes</directory>
   </files>
 </phpdoc>

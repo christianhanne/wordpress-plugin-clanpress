@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Squads
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Squads_Component
+ * @{inheritdoc}
  */
 class Clanpress_Squads_Component extends Clanpress_Component {
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   public function __construct() {
     parent::__construct();
@@ -48,7 +48,7 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function admin_pages() {
     return array(
@@ -57,7 +57,7 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function group_extensions() {
     return array(
@@ -69,7 +69,7 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function includes() {
     return array(
@@ -79,7 +79,7 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function widgets() {
     return array(
@@ -89,7 +89,7 @@ class Clanpress_Squads_Component extends Clanpress_Component {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function settings() {
     return array(
@@ -101,9 +101,9 @@ class Clanpress_Squads_Component extends Clanpress_Component {
       ),
     );
   }
-  
+
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function name() {
     return __( 'Squads', 'clanpress' );

@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Shared
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
 if ( class_exists('BP_Group_Extension') ) {
 
   /**
-   * @class Clanpress_Group_Extension
+   * TODO
    */
   class Clanpress_Group_Extension extends BP_Group_Extension {
     /**
@@ -257,5 +257,5 @@ if ( class_exists('BP_Group_Extension') ) {
   		return str_replace( '_group_extension', '', strtolower( $class_name ) );
   	}
   }
-  
+
 }

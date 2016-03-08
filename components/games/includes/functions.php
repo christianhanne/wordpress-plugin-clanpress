@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Games
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  *   The term id.
  * @param string|array $size
  *   Display size, either wordpress format or dimensions array.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_game_image( $term_id, $size = 'thumbnail' ) {
   echo clanpress_get_game_image( $term_id, $size );
@@ -30,6 +32,8 @@ function clanpress_the_game_image( $term_id, $size = 'thumbnail' ) {
  *   The term id.
  * @param string|array $size
  *   Display size, either wordpress format or dimensions array.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_game_icon( $term_id, $size = null ) {
   echo clanpress_get_game_icon( $term_id, $size );
@@ -45,6 +49,8 @@ function clanpress_the_game_icon( $term_id, $size = null ) {
  *
  * @return string
  *    The game image as an image tag.
+ *
+ * @subpackage Theme
  */
 function clanpress_get_game_image( $term_id, $size = 'thumbnail' ) {
   $meta = Clanpress_Game_Taxonomy::get_term_meta( $term_id );
@@ -66,6 +72,8 @@ function clanpress_get_game_image( $term_id, $size = 'thumbnail' ) {
  *
  * @return string
  *    The game icon as an image tag.
+ *
+ * @subpackage Theme
  */
 function clanpress_get_game_icon( $term_id, $size = 'thumbnail' ) {
   $meta = Clanpress_Game_Taxonomy::get_term_meta( $term_id );

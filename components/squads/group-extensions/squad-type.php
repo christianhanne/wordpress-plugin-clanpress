@@ -6,13 +6,13 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Squads\Group Extensions
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Squad_Type_Group_Extension
+ * @{inheritdoc}
  */
 class Clanpress_Squad_Type_Group_Extension extends Clanpress_Group_Extension {
   /**
@@ -28,21 +28,21 @@ class Clanpress_Squad_Type_Group_Extension extends Clanpress_Group_Extension {
   const PLAYING = 'playing';
 
 	/**
-	 * @inheritdoc
+	 * @{inheritdoc}
 	 */
 	public function settings_screen( $group_id = NULL ) {
     parent::settings_screen( $group_id );
 	}
 
   /**
-	 * @inheritdoc
+	 * @{inheritdoc}
 	 */
 	public function settings_screen_save( $group_id = NULL ) {
     parent::settings_screen_save( $group_id );
 	}
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function settings() {
     return array(
@@ -52,7 +52,7 @@ class Clanpress_Squad_Type_Group_Extension extends Clanpress_Group_Extension {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function form_elements() {
     return array(

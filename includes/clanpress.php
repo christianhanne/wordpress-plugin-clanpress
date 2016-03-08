@@ -13,7 +13,7 @@
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress
+ * TODO
  */
 class Clanpress {
   /**

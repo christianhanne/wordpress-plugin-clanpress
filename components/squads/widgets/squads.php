@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Squads\Widgets
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Squads_Widget
+ * @{inheritdoc}
  */
 class Clanpress_Squads_Widget extends Clanpress_Widget {
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function template_elements( $instance = array() ) {
     return array(
@@ -25,7 +25,7 @@ class Clanpress_Squads_Widget extends Clanpress_Widget {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function form_elements() {
     return array(
@@ -49,14 +49,14 @@ class Clanpress_Squads_Widget extends Clanpress_Widget {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function name() {
     return __( 'Squads', 'clanpress' );
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function description() {
     return __( 'Displays a list of squads.', 'clanpress' );

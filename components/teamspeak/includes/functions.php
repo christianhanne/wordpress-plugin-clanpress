@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Teamspeak
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  *   Server address.
  * @param string|null $port
  *   Server port.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_ts3_connect_link($address = null, $port = null) {
   if ( !empty($address) && !empty($port) ) {

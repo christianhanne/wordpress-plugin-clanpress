@@ -6,13 +6,13 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Squads\Group Extensions
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Matches_Group_Extension
+ * @{inheritdoc}
  */
 class Clanpress_Matches_Group_Extension extends Clanpress_Group_Extension {
   /**
@@ -22,7 +22,7 @@ class Clanpress_Matches_Group_Extension extends Clanpress_Group_Extension {
   const POSTS_PER_PAGE = 5;
 
 	/**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function settings() {
     return array(

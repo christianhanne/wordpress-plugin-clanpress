@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Shared
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
   *
   * @param string $type
   *   Display type, either 'single' or 'archive'.
+  *
+  * @subpackage Theme
   */
 function clanpress_content_template( $type ) {
   $post_type = get_post_type();

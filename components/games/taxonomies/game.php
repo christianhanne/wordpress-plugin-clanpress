@@ -6,13 +6,13 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Games\Taxonomies
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Game_Taxonomy
+ * @{inheritdoc}
  */
 class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   /**
@@ -28,7 +28,7 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   const IMAGE_SIZE = 100;
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function labels() {
     return  array(
@@ -52,7 +52,7 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function settings() {
     return array(
@@ -66,7 +66,7 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function post_types() {
     return array(
@@ -77,7 +77,7 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function form_elements() {
     return array(
@@ -93,7 +93,7 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   public function admin_table_thead( $columns ) {
     $new_columns = array();
@@ -111,7 +111,7 @@ class Clanpress_Game_Taxonomy extends Clanpress_Taxonomy {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   public function admin_table_column( $output, $column, $term_id ) {
     switch ( $column ) {

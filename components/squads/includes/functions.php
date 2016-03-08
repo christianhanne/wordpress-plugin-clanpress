@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Squads
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -16,6 +16,8 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  *
  * @param int|null $group_id
  *   The group id.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_type($group_id = null) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
@@ -33,6 +35,8 @@ function clanpress_the_squad_type($group_id = null) {
  *
  * @param int|null $group_id
  *   The group id.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_games($group_id = null) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
@@ -58,6 +62,8 @@ function clanpress_the_squad_games($group_id = null) {
  *
  * @param int|null $group_id
  *   The group id.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_games_short($group_id = null) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
@@ -83,6 +89,8 @@ function clanpress_the_squad_games_short($group_id = null) {
  *
  * @param int|null $group_id
  *   The group id.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_members_count($group_id = null) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
@@ -95,6 +103,8 @@ function clanpress_the_squad_members_count($group_id = null) {
  *
  * @param BP_Groups_Group $group
  *   The group.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_awards_link($group = null) {
   vprintf('<a href="%s">%s</a>', array(
@@ -108,6 +118,8 @@ function clanpress_the_squad_awards_link($group = null) {
  *
  * @param BP_Groups_Group $group
  *   The group.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_matches_link($group = null) {
   vprintf('<a href="%s">%s</a>', array(
@@ -121,6 +133,8 @@ function clanpress_the_squad_matches_link($group = null) {
  *
  * @param object $member
  *   Buddypress group member object.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_member_avatar($member = null) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
@@ -135,6 +149,8 @@ function clanpress_the_squad_member_avatar($member = null) {
  *
  * @param object $member
  *   Buddypress group member object.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_member_link($member = null) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
@@ -146,6 +162,8 @@ function clanpress_the_squad_member_link($member = null) {
  *
  * @param object $member
  *   Buddypress group member object.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_member_role($member = null) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
@@ -165,7 +183,9 @@ function clanpress_the_squad_member_role($member = null) {
  *   Array with query arguments. Check linked function for details.
  *
  * @see groups_get_group_members()
-*/
+ *
+ * @subpackage Theme
+ */
 function clanpress_query_squad_members( $args = array() ) {
   global $_clanpress_squad_members, $_clanpress_squad_member;
 
@@ -200,6 +220,8 @@ function clanpress_query_squad_members( $args = array() ) {
  *
  * @return object
  *   Currently active squad member.
+ *
+ * @subpackage Theme
  */
 function clanpress_get_squad_member() {
   global $_clanpress_squad_member;
@@ -208,6 +230,8 @@ function clanpress_get_squad_member() {
 
 /**
  * Sets the next member in the globals members array as active.
+ *
+ * @subpackage Theme
  */
 function clanpress_the_squad_member() {
   global $_clanpress_squad_member, $_clanpress_squad_members;
@@ -219,6 +243,8 @@ function clanpress_the_squad_member() {
  *
  * @return bool
  *   True, if there are squad members to be displayed.
+ *
+ * @subpackage Theme
  */
 function clanpress_have_squad_members() {
   global $_clanpress_squad_members;

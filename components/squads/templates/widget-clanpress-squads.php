@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Squads\Templates
  */
 ?>
 <?php if ( bp_has_groups( 'type=alphabetical&max=' . $num_items ) ): ?>

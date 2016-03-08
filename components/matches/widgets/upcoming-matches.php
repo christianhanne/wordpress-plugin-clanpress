@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Matches\Widgets
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Upcoming_Matches_Widget
+ * @{inheritdoc}
  */
 class Clanpress_Upcoming_Matches_Widget extends Clanpress_Widget {
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function template_elements( $instance = array() ) {
     query_posts( array(
@@ -35,7 +35,7 @@ class Clanpress_Upcoming_Matches_Widget extends Clanpress_Widget {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function form_elements() {
     return array(
@@ -59,14 +59,14 @@ class Clanpress_Upcoming_Matches_Widget extends Clanpress_Widget {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function name() {
     return __( 'Upcoming Matches', 'clanpress' );
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function description() {
     return __( 'Displays a list of upcoming matches.', 'clanpress' );

@@ -6,13 +6,13 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress
+ * @package Clanpress\Matches\Post Types
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
 
 /**
- * @class Clanpress_Match_Post_Type
+ * @{inheritdoc}
  */
 class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
   /**
@@ -28,7 +28,7 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
   const MATCH_TYPE_OFFICIAL = 'official';
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function labels() {
     return array(
@@ -50,7 +50,7 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
   }
 
   /**
-   * @inheritdoc
+   * @{inheritdoc}
    */
   protected function settings() {
     return array(
@@ -73,8 +73,8 @@ class Clanpress_Match_Post_Type extends Clanpress_Post_Type {
   }
 
   /**
-  * @inheritdoc
-  */
+   * @{inheritdoc}
+   */
   protected static function meta_boxes() {
     $boxes['match'] = array(
       'title' => __( 'Match', 'clanpress' ),
