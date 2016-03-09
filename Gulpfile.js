@@ -14,6 +14,9 @@ var uglify = require('gulp-uglify');
 
 var zip = require('gulp-zip');
 
+var shell = require('gulp-shell');
+var ftp = require( 'vinyl-ftp' );
+
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
@@ -23,6 +26,7 @@ var bower = require('gulp-bower');
 var sequence = require('run-sequence');
 
 var settings = require('./package.json');
+var credentials = require('./credentials.json');
 
 gulp.task('clean', () => {
 	return del(['dist/css', 'dist/js', 'dist/vendor']);
@@ -77,6 +81,24 @@ gulp.task('minify:js', ['bower', 'compile:js'], () => {
 			extname: '.min.js'
 		}))
     .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('docs:create', shell.task([
+  `rm -rf documentation/${settings.version}`,
+  `apigen generate --config apigen.yml -d documentation/${settings.version} --title 'Clanpress ${settings.version}'`
+]));
+
+gulp.task('docs:publish', ['docs:create'], () => {
+  var remoteDir = '/';
+
+  var conn = ftp.create(credentials);
+
+  return gulp.src(`documentation/${settings.version}/**/*`, {
+      base: './documentation',
+      buffer: false
+    })
+    .pipe(conn.newer(remoteDir))
+    .pipe(conn.dest(remoteDir));
 });
 
 gulp.task('bower', () => {

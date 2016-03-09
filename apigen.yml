@@ -1,0 +1,17 @@
+templateTheme: 'default'
+source:
+  - components
+  - includes
+  - modes
+  - clanpress.php
+annotationGroups: ''
+accessLevels:
+  - public
+  - protected
+  - private
+internal: true
+tree: true
+download: true
+php: false
+todo: true
+deprecated: true

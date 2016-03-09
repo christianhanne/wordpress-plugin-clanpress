@@ -3,3 +3,4 @@ dist
 coverage
 documentation
 node_modules
+credentials.json
