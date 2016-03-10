@@ -27,13 +27,13 @@ class Clanpress_Widget extends WP_Widget {
   /**
    * Displays the widget's template.
    *
-   * @param array $args
-   *   Array of widget arguments.
+   * @param array $context
+   *   Array of widget context arguments.
    * @param array $instance
    *   Previously saved values from database.
    */
-  public function widget( $args, $instance ) {
-    extract ( $args );
+  public function widget( $context, $instance ) {
+    extract ( $context );
 
     echo $before_widget;
 
@@ -42,7 +42,7 @@ class Clanpress_Widget extends WP_Widget {
       echo $before_title . $title . $after_title;
     }
 
-    $this->load_template( $this->template_elements( $instance ) );
+    $this->load_template( $context, $this->template_elements( $instance ) );
 
     echo $after_widget;
 
@@ -167,30 +167,40 @@ class Clanpress_Widget extends WP_Widget {
   /**
    * Loads the widget's template either from the theme or from the plugin.
    *
+   * @param array $context
+   *   Array of widget context arguments.
    * @param array $params
    *   Array of template elements
    *
    * @see Clanpress_Widget::template_elements()
    */
-  final private function load_template($params = array()) {
+  final private function load_template( $context, $params = array()) {
+    $params['context'] = $context;
     foreach ($params as $key => $value) {
       set_query_var( $key, $value );
     }
 
-    $template_name = $this->template_name();
+    $id = Clanpress_Helper::normalize( $context['id'] );
 
-    $template_names = array(
-      $template_name,
-      'clanpress/' . $template_name,
+    $folder = 'clanpress/';
+
+    $template = $this->template_name();
+    $template_specific = str_replace( '.php', '-' . $id . '.php', $template );
+
+    $templates = array(
+      $folder . $template_specific,
+      $template_specific,
+      $folder . $template,
+      $template,
     );
 
-    if ( $overridden_template = locate_template( $template_names ) ) {
+    if ( $overridden_template = locate_template( $templates ) ) {
       load_template( $overridden_template );
     } else {
       $obj = new ReflectionObject($this);
       $component = Clanpress_Helper::get_component_by_path( $obj->getFileName() );
       $templates_path = Clanpress_Helper::get_templates_path( $component );
-      load_template( $templates_path . $template_name );
+      load_template( $templates_path . $template );
     }
   }
 
