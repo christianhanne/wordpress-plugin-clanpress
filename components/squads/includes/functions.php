@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_type($group_id = null) {
+function clanpress_the_squad_type( $group_id = null ) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
   $squad_type = Clanpress_Squad_Type_Group_Extension::get_meta_value( $group_id, 'squad_type' );
@@ -38,7 +38,7 @@ function clanpress_the_squad_type($group_id = null) {
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_games($group_id = null) {
+function clanpress_the_squad_games( $group_id = null ) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
   $games_selected = Clanpress_Games_Group_Extension::get_meta_value( $group_id, 'games' );
@@ -65,7 +65,7 @@ function clanpress_the_squad_games($group_id = null) {
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_games_short($group_id = null) {
+function clanpress_the_squad_games_short( $group_id = null ) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
   $games_selected = Clanpress_Games_Group_Extension::get_meta_value( $group_id, 'games' );
@@ -92,7 +92,7 @@ function clanpress_the_squad_games_short($group_id = null) {
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_members_count($group_id = null) {
+function clanpress_the_squad_members_count( $group_id = null ) {
   $group_id = isset( $group_id ) ? $group_id : bp_group_id();
 
   echo (int) groups_get_total_member_count( $group_id );
@@ -106,7 +106,7 @@ function clanpress_the_squad_members_count($group_id = null) {
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_awards_link($group = null) {
+function clanpress_the_squad_awards_link( $group = null ) {
   vprintf('<a href="%s">%s</a>', array(
     bp_get_group_permalink( $group ) . '/clanpress_awards/',
     __( 'Squad awards', 'clanpress' ),
@@ -121,7 +121,7 @@ function clanpress_the_squad_awards_link($group = null) {
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_matches_link($group = null) {
+function clanpress_the_squad_matches_link( $group = null ) {
   vprintf('<a href="%s">%s</a>', array(
     bp_get_group_permalink( $group ) . '/clanpress_awards/',
     __( 'Squad matches', 'clanpress' ),
@@ -136,7 +136,7 @@ function clanpress_the_squad_matches_link($group = null) {
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_member_avatar($member = null) {
+function clanpress_the_squad_member_avatar( $member = null ) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
   echo bp_core_fetch_avatar(array(
     'item_id' => $member->ID,
@@ -152,7 +152,7 @@ function clanpress_the_squad_member_avatar($member = null) {
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_member_link($member = null) {
+function clanpress_the_squad_member_link( $member = null ) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
   echo bp_core_get_userlink( $member->ID );
 }
@@ -165,7 +165,7 @@ function clanpress_the_squad_member_link($member = null) {
  *
  * @subpackage Theme
  */
-function clanpress_the_squad_member_role($member = null) {
+function clanpress_the_squad_member_role( $member = null ) {
   $member = isset( $member ) ? $member : clanpress_get_squad_member();
   if ( $member->is_admin || $member->is_mod ) {
     $role = __( 'Leader', 'clanpress' );
@@ -248,5 +248,5 @@ function clanpress_the_squad_member() {
  */
 function clanpress_have_squad_members() {
   global $_clanpress_squad_members;
-  return count($_clanpress_squad_members) > 0;
+  return count( $_clanpress_squad_members ) > 0;
 }
