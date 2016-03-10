@@ -11,7 +11,7 @@
   'use scrict';
 
   $(document).ready(() => {
-    $('.teamspeak-viewer').each(function _initViewer() {
+    $('.teamspeak-viewer__element').each(function _initViewer() {
       let $element = $(this);
 
       let ts3Address = $element.attr('data-ts3-address');

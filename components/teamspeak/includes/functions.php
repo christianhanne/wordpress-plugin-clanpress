@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2016, Aureola
  * @license https://github.com/aureolacodes/clanpress/blob/master/LICENSE
  *
- * @package Clanpress\Teamspeak
+ * @package Clanpress\Teamspeak\Theme
  */
 
 defined( 'ABSPATH' ) or die( 'Access restricted.' );
@@ -18,8 +18,6 @@ defined( 'ABSPATH' ) or die( 'Access restricted.' );
  *   Server address.
  * @param string|null $port
  *   Server port.
- *
- * @subpackage Theme
  */
 function clanpress_the_ts3_connect_link($address = null, $port = null) {
   if ( !empty($address) && !empty($port) ) {
@@ -27,6 +25,23 @@ function clanpress_the_ts3_connect_link($address = null, $port = null) {
       esc_attr($address),
       esc_attr($port),
       __( 'Connect', 'clanpress' ),
+    ) );
+  }
+}
+
+/**
+ * Displays the url of the TS3 connect link.
+ *
+ * @param string|null $address
+ *   Server address.
+ * @param string|null $port
+ *   Server port.
+ */
+function clanpress_the_ts3_connect_url($address = null, $port = null) {
+  if ( !empty($address) && !empty($port) ) {
+    vprintf('ts3server://%s/?port=%s', array(
+      esc_attr($address),
+      esc_attr($port),
     ) );
   }
 }

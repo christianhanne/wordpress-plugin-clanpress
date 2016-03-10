@@ -9,5 +9,9 @@
  * @package Clanpress\Teamspeak\Templates
  */
 ?>
-<div class="teamspeak-viewer" data-ts3-address="<?php echo $address; ?>" data-ts3-port="<?php echo $port; ?>"></div>
-<?php echo clanpress_the_ts3_connect_link($address, $port); ?>
+<div class="teamspeak-viewer">
+  <div class="teamspeak-viewer__element" data-ts3-address="<?php echo $address; ?>" data-ts3-port="<?php echo $port; ?>"></div>
+  <a href="<?php clanpress_the_ts3_connect_url($address, $port); ?>" class="teamspeak-viewer__link">
+    <?php _e( 'Connect', 'clanpress' ); ?>
+  </a>
+</div>

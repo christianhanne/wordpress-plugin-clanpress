@@ -9,6 +9,4 @@
  * @package Clanpress\Teamspeak\Templates
  */
 ?>
-<div class="teamspeak-status"
-  data-ts3-address="<?php echo $address; ?>"
-  data-ts3-port="<?php echo $port; ?>"></div>
+<div class="teamspeak-status" data-ts3-address="<?php echo $address; ?>" data-ts3-port="<?php echo $port; ?>"></div>
