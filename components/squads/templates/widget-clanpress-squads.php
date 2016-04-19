@@ -14,7 +14,9 @@
     <?php while(bp_groups()) : bp_the_group(); ?>
       <li class="clanpress_widget__item">
         <span class="clanpress_widget__thumbnail">
-          <?php bp_group_avatar( 'type=thumb&width=100&height=100' ) ?>
+          <a href="<?php bp_group_permalink(); ?>">
+            <?php bp_group_avatar( 'type=thumb&width=100&height=100' ) ?>
+          </a>
         </span>
         <h4 class="clanpress_widget__title">
           <?php bp_group_name(); ?>
