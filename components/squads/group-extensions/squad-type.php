@@ -71,7 +71,7 @@ class Clanpress_Squad_Type_Group_Extension extends Clanpress_Group_Extension {
    * @return array
    *   Array of squad types.
    */
-  protected function get_squad_types() {
+  public function get_squad_types() {
     return array(
       self::NOT_PLAYING => __( 'Not playing', 'clanpress' ),
       self::PLAYING     => __( 'Playing', 'clanpress' ),
