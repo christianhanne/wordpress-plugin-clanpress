@@ -14,7 +14,9 @@
     <?php while(have_posts()) : the_post(); ?>
       <li class="clanpress_widget__item">
         <span class="clanpress_widget__thumbnail">
-          <?php the_post_thumbnail( 'thumbnail' ); ?>
+          <a href="<?php the_permalink(); ?>">
+            <?php the_post_thumbnail( 'thumbnail' ); ?>
+          </a>
         </span>
         <div class="clanpress_widget__post">
           <h4 class="clanpress_widget__title">

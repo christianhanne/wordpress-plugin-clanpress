@@ -14,7 +14,9 @@
     <?php _e( 'Award:', 'clanpress' ); ?> <?php the_title(); ?>
   </h1>
   <div class="clanpress_post__image">
-    <?php the_post_thumbnail( 'medium' ); ?>
+    <a href="<?php the_permalink(); ?>">
+      <?php the_post_thumbnail( 'medium' ); ?>
+    </a>
   </div>
   <div class="clanpress_post__description">
     <div class="clanpress_post__ranking">

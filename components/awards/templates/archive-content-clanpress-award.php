@@ -11,7 +11,9 @@
 ?>
 <article class="clanpress_post clanpress_post--archive clanpress_post--award">
   <div class="clanpress_post__image">
-    <?php the_post_thumbnail( 'medium' ); ?>
+    <a href="<?php the_permalink(); ?>">
+      <?php the_post_thumbnail( 'medium' ); ?>
+    </a>
   </div>
   <div class="clanpress_post__description">
     <h2 class="clanpress_post__title">
