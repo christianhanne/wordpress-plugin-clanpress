@@ -151,11 +151,41 @@ function clanpress_the_match_game( $post = null ) {
   $terms = get_the_terms( $post, 'clanpress_game' );
   if ( is_array( $terms ) && count( $terms ) ) {
     foreach ( $terms as $term ) {
-      array_push( $games, esc_html( $term->name ) );
+      $game_name = '<span class="game">' . esc_html( $term->name ) . '</span>';
+      array_push( $games, $game_name );
     }
   }
 
   echo implode(', ', $games);
+}
+
+/**
+ * Displays the matches games' icons.
+ *
+ * @param WP_Post $post
+ *   The post.
+ *
+ * @subpackage Theme
+ */
+function clanpress_the_match_game_icon( $post = null ) {
+  $post = isset( $post ) ? $post : get_post();
+
+  $games = array();
+  $terms = get_the_terms( $post, 'clanpress_game' );
+  if ( is_array( $terms ) && count( $terms ) ) {
+    foreach ( $terms as $term ) {
+      $game_icon = clanpress_get_game_icon( $term->ID );
+      if ( !empty( $game_icon ) ) {
+        array_push( $games, $game_icon );
+      }
+      else {
+        $game_name = '<span class="game">' . esc_html( $term->name ) . '</span>';
+        array_push( $games, $game_name );
+      }
+    }
+  }
+
+  echo implode('', $games);
 }
 
 /**

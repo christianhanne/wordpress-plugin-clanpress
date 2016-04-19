@@ -18,8 +18,8 @@
           vs
           <?php clanpress_the_match_opponent_thumbnail( 'thumbnail' ); ?>
         </span>
-        <span class="clanpress_widget__date">
-          <?php clanpress_the_match_game(); ?>
+        <span class="clanpress_widget__game">
+          <?php clanpress_the_match_game_icon(); ?>
         </span>
         &ndash;
         <span class="clanpress_widget__date">
