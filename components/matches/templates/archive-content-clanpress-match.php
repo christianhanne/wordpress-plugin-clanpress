@@ -31,7 +31,7 @@
     <?php clanpress_the_match_result(); ?>
   </div>
   <div class="clanpress_post__date">
-    <?php the_date(); ?>
+    <?php echo get_the_date(); ?>
   </div>
   <ul class="clanpress_post__links">
     <li class="clanpress_post__link">

@@ -23,7 +23,7 @@
             </a>
           </h4>
           <div class="clanpress_widget__date">
-            <?php the_date(); ?>
+            <?php echo get_the_date(); ?>
           </div>
           <div class="clanpress_widget__comments">
             <a href="<?php comments_link(); ?>">

@@ -29,7 +29,7 @@
     </div>
     <div class="clanpress_post__date">
       <strong><?php _e( 'Date:', 'clanpress' ); ?></strong>
-      <?php the_date(); ?>
+      <?php echo get_the_date(); ?>
     </div>
     <ul class="clanpress_post__links">
       <li class="clanpress_post__link">

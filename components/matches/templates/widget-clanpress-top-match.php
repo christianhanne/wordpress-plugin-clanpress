@@ -23,7 +23,7 @@
         </span>
         &ndash;
         <span class="clanpress_widget__date">
-          <?php the_date(); ?>
+          <?php echo get_the_date(); ?>
         </span>
         <a class="clanpress_widget__result" href="<?php the_permalink(); ?>">
           <?php clanpress_the_match_result(); ?>
