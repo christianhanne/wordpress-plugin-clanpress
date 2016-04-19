@@ -127,8 +127,22 @@ function clanpress_the_match_squad_thumbnail( $size = 'post-thumbnail', $post = 
   if ( is_array( $squad_ids ) ) {
     foreach ( $squad_ids as $squad_id => $checked ) {
       if ( $checked ) {
-        $image = bp_core_fetch_avatar( array( 'item_id' => $squad_id, 'object' => 'group', 'type' => $size ) );
-        array_push( $images, $image );
+        // TODO: This seems to be a pretty bad idea, but you really
+        // have to load the whole group just to get a link.
+        $group = groups_get_group( array( 'group_id' => $squad_id ) );
+        
+        $group_image = bp_core_fetch_avatar( array(
+          'item_id' => $squad_id,
+          'object' => 'group',
+          'type' => $size
+        ) );
+
+        $group_link = bp_get_group_permalink( $group );
+
+        array_push( $images, vsprintf( '<a href="%s">%s</a>', array(
+          $group_link,
+          $group_image
+        ) ) );
       }
     }
   }
