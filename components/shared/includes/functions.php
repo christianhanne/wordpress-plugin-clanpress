@@ -45,7 +45,7 @@ function clanpress_content_template( $type ) {
  */
 function clanpress_get_image( $attachment_id, $size = 'thumbnail' ) {
   $attachment_url =  wp_get_attachment_url( $attachment_id );
-  if ( !is_empty( $attachment_url ) && substr( $attachment_url, -4 ) === '.svg' ) {
+  if ( !empty( $attachment_url ) && substr( $attachment_url, -4 ) === '.svg' ) {
     return '<img src="' . $attachment_url . '" alt="SVG" />';
   }
 
@@ -70,7 +70,7 @@ function clanpress_get_image( $attachment_id, $size = 'thumbnail' ) {
  */
 function clanpress_get_image_src( $attachment_id, $size = 'thumbnail' ) {
   $attachment_url =  wp_get_attachment_url( $attachment_id );
-  if ( !is_empty( $attachment_url ) && substr( $attachment_url, -4 ) === '.svg' ) {
+  if ( !empty( $attachment_url ) && substr( $attachment_url, -4 ) === '.svg' ) {
     return $attachment_url;
   }
 
