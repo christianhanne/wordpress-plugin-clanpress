@@ -107,7 +107,7 @@ function clanpress_the_squad_members_count( $group_id = null ) {
  * @subpackage Theme
  */
 function clanpress_the_squad_awards_link( $group = null ) {
-  vprintf('<a href="%s">%s</a>', array(
+  vprintf('<a href="%s" class="squad_link squad_link--awards">%s</a>', array(
     bp_get_group_permalink( $group ) . '/clanpress_awards/',
     __( 'Squad awards', 'clanpress' ),
   ));
@@ -122,7 +122,7 @@ function clanpress_the_squad_awards_link( $group = null ) {
  * @subpackage Theme
  */
 function clanpress_the_squad_matches_link( $group = null ) {
-  vprintf('<a href="%s">%s</a>', array(
+  vprintf('<a href="%s" class="squad_link squad_link--matches">%s</a>', array(
     bp_get_group_permalink( $group ) . '/clanpress_awards/',
     __( 'Squad matches', 'clanpress' ),
   ));
