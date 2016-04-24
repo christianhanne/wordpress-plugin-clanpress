@@ -55,6 +55,31 @@ function clanpress_the_match_opponent( $post = null ) {
 }
 
 /**
+ * Displays the url of the matches' opponent(s) website(s).
+ *
+ * @param WP_Post $post
+ *   The post.
+ *
+ * @subpackage Theme
+ */
+function clanpress_the_match_opponent_url( $post = null ) {
+  $post = isset( $post ) ? $post : get_post();
+
+  $opponents = array();
+
+  $terms = get_the_terms( $post, 'clanpress_opponent' );
+  if ( is_array( $terms ) && count( $terms ) ) {
+    foreach ( $terms as $term ) {
+      $opponent_url = clanpress_get_opponent_url( $term->ID );
+
+      array_push( $opponents, $opponent_url );
+    }
+  }
+
+  echo implode(', ', $opponents);
+}
+
+/**
  * Displays the thumbnail of the matches' opponent(s).
  *
  * @param array|string $size
@@ -252,7 +277,7 @@ function clanpress_the_match_type( $post = null ) {
  * @subpackage Theme
  */
 function clanpress_the_opponent_link( $term_id ) {
-  $link = clanpress_get_opponent_link( $term_id );
+  $link = clanpress_get_opponent_url( $term_id );
   if ( !empty( $link ) ) {
     printf( '<a href="%s">%s</a>', $link, __( 'Website', 'clanpress' ) );
   }
@@ -283,7 +308,7 @@ function clanpress_the_opponent_image( $term_id, $size = 'thumbnail') {
  *
  * @subpackage Theme
  */
-function clanpress_get_opponent_link( $term_id ) {
+function clanpress_get_opponent_url( $term_id ) {
   $meta = Clanpress_Opponent_Taxonomy::get_term_meta( $term_id );
   if ( !empty( $meta[ 'clanpress_opponent_link' ] ) ) {
     return esc_url( $meta[ 'clanpress_opponent_link' ] );
