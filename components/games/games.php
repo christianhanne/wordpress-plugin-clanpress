@@ -32,4 +32,13 @@ class Clanpress_Games_Component extends Clanpress_Component {
       'game',
     );
   }
+
+  /**
+   * @{inheritdoc}
+   */
+  protected function widgets() {
+    return array(
+      'games',
+    );
+  }
 }
