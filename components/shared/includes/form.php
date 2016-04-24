@@ -391,7 +391,7 @@ class Clanpress_Form {
 
     $attachment = '';
     if ( !empty( $element['value'] ) ) {
-      $attachment = wp_get_attachment_image( $element['value'], 'thumbnail' );
+      $attachment = clanpress_get_image( $element['value'], 'thumbnail' );
     }
 
     $output = self::input($element);

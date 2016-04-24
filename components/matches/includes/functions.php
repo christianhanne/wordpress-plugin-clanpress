@@ -479,7 +479,7 @@ function clanpress_get_opponent_image( $term_id, $size = 'thumbnail' ) {
   $meta = Clanpress_Opponent_Taxonomy::get_term_meta( $term_id );
   if ( !empty( $meta[ 'clanpress_opponent_image' ] ) ) {
     $attachment_id = (int) $meta[ 'clanpress_opponent_image' ];
-    return wp_get_attachment_image( $attachment_id, $size );
+    return clanpress_get_image( $attachment_id, $size );
   }
 
   return '';

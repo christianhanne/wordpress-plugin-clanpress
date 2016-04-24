@@ -47,7 +47,7 @@ function clanpress_the_subtitle() {
 function clanpress_the_header_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['header'] ) ) {
-    echo wp_get_attachment_image( $settings['header'], $size );
+    echo clanpress_get_image( $settings['header'], $size );
   }
 }
 
@@ -62,7 +62,7 @@ function clanpress_the_header_image( $size = 'thumbnail' ) {
 function clanpress_the_icon_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['icon'] ) ) {
-    echo wp_get_attachment_image( $settings['icon'], $size );
+    echo clanpress_get_image( $settings['icon'], $size );
   }
 }
 
@@ -77,7 +77,7 @@ function clanpress_the_icon_image( $size = 'thumbnail' ) {
 function clanpress_the_logo_image( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['logo'] ) ) {
-    echo wp_get_attachment_image( (int) $settings['logo'], $size );
+    echo clanpress_get_image( (int) $settings['logo'], $size );
   }
 }
 
@@ -95,7 +95,7 @@ function clanpress_the_logo_image( $size = 'thumbnail' ) {
 function clanpress_get_header_image_src( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['header'] ) ) {
-    return wp_get_attachment_image_src( $settings['header'], $size )[0];
+    return clanpress_get_image_src( $settings['header'], $size )[0];
   }
 }
 
@@ -113,7 +113,7 @@ function clanpress_get_header_image_src( $size = 'thumbnail' ) {
 function clanpress_get_icon_image_src( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['icon'] ) ) {
-    return wp_get_attachment_image_src( $settings['icon'], $size )[0];
+    return clanpress_get_image_src( $settings['icon'], $size )[0];
   }
 }
 
@@ -131,7 +131,7 @@ function clanpress_get_icon_image_src( $size = 'thumbnail' ) {
 function clanpress_get_logo_image_src( $size = 'thumbnail' ) {
   $settings = Clanpress_Settings::instance()->get_values( 'admin' );
   if ( !empty( $settings['logo'] ) ) {
-    return wp_get_attachment_image_src( (int) $settings['logo'], $size )[0];
+    return clanpress_get_image_src( (int) $settings['logo'], $size )[0];
   }
 }
 

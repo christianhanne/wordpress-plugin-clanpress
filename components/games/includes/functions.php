@@ -56,7 +56,7 @@ function clanpress_get_game_image( $term_id, $size = 'thumbnail' ) {
   $meta = Clanpress_Game_Taxonomy::get_term_meta( $term_id );
   if ( !empty( $meta[ 'clanpress_game_image' ] ) ) {
     $attachment_id = (int) $meta[ 'clanpress_game_image' ];
-    return wp_get_attachment_image( $attachment_id, $size );
+    return clanpress_get_image( $attachment_id, $size );
   }
 
   return '';
@@ -79,7 +79,7 @@ function clanpress_get_game_icon( $term_id, $size = 'thumbnail' ) {
   $meta = Clanpress_Game_Taxonomy::get_term_meta( $term_id );
   if ( !empty( $meta[ 'clanpress_game_icon' ] ) ) {
     $attachment_id = (int) $meta[ 'clanpress_game_icon' ];
-    return wp_get_attachment_image( $attachment_id, $size );
+    return clanpress_get_image( $attachment_id, $size );
   }
 
   return '';
@@ -102,7 +102,7 @@ function clanpress_get_game_image_src( $term_id, $size = 'thumbnail' ) {
   $meta = Clanpress_Game_Taxonomy::get_term_meta( $term_id );
   if ( !empty( $meta[ 'clanpress_game_image' ] ) ) {
     $attachment_id = (int) $meta[ 'clanpress_game_image' ];
-    return wp_get_attachment_image_src( $attachment_id, $size );
+    return clanpress_get_image_src( $attachment_id, $size );
   }
 
   return '';
@@ -125,7 +125,7 @@ function clanpress_get_game_icon_src( $term_id, $size = 'thumbnail' ) {
   $meta = Clanpress_Game_Taxonomy::get_term_meta( $term_id );
   if ( !empty( $meta[ 'clanpress_game_icon' ] ) ) {
     $attachment_id = (int) $meta[ 'clanpress_game_icon' ];
-    return wp_get_attachment_image_src( $attachment_id, $size );
+    return clanpress_get_image_src( $attachment_id, $size );
   }
 
   return '';
