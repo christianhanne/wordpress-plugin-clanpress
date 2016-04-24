@@ -307,7 +307,7 @@ function clanpress_the_match_game_image_src( $post = null ) {
 }
 
 /**
- * Displays the matches results.
+ * Displays the matches results only.
  *
  * @param WP_Post $post
  *   The post.
@@ -315,6 +315,42 @@ function clanpress_the_match_game_image_src( $post = null ) {
  * @subpackage Theme
  */
 function clanpress_the_match_result( $post = null ) {
+  $post = isset( $post ) ? $post : get_post();
+
+  $squad = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'squad');
+  $opponent = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'opponent');
+
+  vprintf( __( '%d:%d', 'clanpress' ), array(
+    esc_html( $squad ),
+    esc_html( $opponent ),
+  ) );
+}
+
+/**
+ * Displays the matches' map as defined in the results box.
+ *
+ * @param WP_Post $post
+ *   The post.
+ *
+ * @subpackage Theme
+ */
+function clanpress_the_match_result_map( $post = null ) {
+  $post = isset( $post ) ? $post : get_post();
+  $map = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'map');
+
+  print esc_html( $map );
+}
+
+
+/**
+ * Displays the matches results combined with the played map.
+ *
+ * @param WP_Post $post
+ *   The post.
+ *
+ * @subpackage Theme
+ */
+function clanpress_the_match_result_combined( $post = null ) {
   $post = isset( $post ) ? $post : get_post();
 
   $squad = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'result', 'squad');
@@ -327,6 +363,7 @@ function clanpress_the_match_result( $post = null ) {
     esc_html( $opponent ),
   ) );
 }
+
 
 /**
  * Displays the match type.
