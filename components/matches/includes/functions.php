@@ -228,6 +228,31 @@ function clanpress_the_match_game_icon( $post = null ) {
 }
 
 /**
+ * Displays the matches games' icons' urls.
+ *
+ * @param WP_Post $post
+ *   The post.
+ *
+ * @subpackage Theme
+ */
+function clanpress_the_match_game_icon_src( $post = null ) {
+  $post = isset( $post ) ? $post : get_post();
+
+  $games = array();
+  $terms = get_the_terms( $post, 'clanpress_game' );
+  if ( is_array( $terms ) && count( $terms ) ) {
+    foreach ( $terms as $term ) {
+      $game_icon_src = clanpress_get_game_icon_src( $term->ID );
+      if ( !empty( $game_icon_src ) ) {
+        array_push( $games, $game_icon_src );
+      }
+    }
+  }
+
+  echo implode('', $games);
+}
+
+/**
  * Displays the matches games' images.
  *
  * @param WP_Post $post
@@ -249,6 +274,31 @@ function clanpress_the_match_game_image( $post = null ) {
       else {
         $game_name = '<span class="game">' . esc_html( $term->name ) . '</span>';
         array_push( $games, $game_name );
+      }
+    }
+  }
+
+  echo implode('', $games);
+}
+
+/**
+ * Displays the matches games' images' urls.
+ *
+ * @param WP_Post $post
+ *   The post.
+ *
+ * @subpackage Theme
+ */
+function clanpress_the_match_game_image_src( $post = null ) {
+  $post = isset( $post ) ? $post : get_post();
+
+  $games = array();
+  $terms = get_the_terms( $post, 'clanpress_game' );
+  if ( is_array( $terms ) && count( $terms ) ) {
+    foreach ( $terms as $term ) {
+      $game_image_src = clanpress_get_game_image( $term->ID );
+      if ( !empty( $game_image_src ) ) {
+        array_push( $games, $game_image_src );
       }
     }
   }
