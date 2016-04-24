@@ -70,7 +70,7 @@ function clanpress_the_match_opponent_url( $post = null ) {
   $terms = get_the_terms( $post, 'clanpress_opponent' );
   if ( is_array( $terms ) && count( $terms ) ) {
     foreach ( $terms as $term ) {
-      $opponent_url = clanpress_get_opponent_url( $term->ID );
+      $opponent_url = clanpress_get_opponent_url( $term->term_id );
 
       array_push( $opponents, $opponent_url );
     }
@@ -213,7 +213,7 @@ function clanpress_the_match_game_icon( $post = null ) {
   $terms = get_the_terms( $post, 'clanpress_game' );
   if ( is_array( $terms ) && count( $terms ) ) {
     foreach ( $terms as $term ) {
-      $game_icon = clanpress_get_game_icon( $term->ID );
+      $game_icon = clanpress_get_game_icon( $term->term_id );
       if ( !empty( $game_icon ) ) {
         array_push( $games, $game_icon );
       }
@@ -242,7 +242,7 @@ function clanpress_the_match_game_icon_src( $post = null ) {
   $terms = get_the_terms( $post, 'clanpress_game' );
   if ( is_array( $terms ) && count( $terms ) ) {
     foreach ( $terms as $term ) {
-      $game_icon_src = clanpress_get_game_icon_src( $term->ID );
+      $game_icon_src = clanpress_get_game_icon_src( $term->term_id );
       if ( !empty( $game_icon_src ) ) {
         array_push( $games, $game_icon_src );
       }
@@ -267,7 +267,7 @@ function clanpress_the_match_game_image( $post = null ) {
   $terms = get_the_terms( $post, 'clanpress_game' );
   if ( is_array( $terms ) && count( $terms ) ) {
     foreach ( $terms as $term ) {
-      $game_image = clanpress_get_game_image( $term->ID );
+      $game_image = clanpress_get_game_image( $term->term_id );
       if ( !empty( $game_image ) ) {
         array_push( $games, $game_image );
       }
@@ -296,7 +296,7 @@ function clanpress_the_match_game_image_src( $post = null ) {
   $terms = get_the_terms( $post, 'clanpress_game' );
   if ( is_array( $terms ) && count( $terms ) ) {
     foreach ( $terms as $term ) {
-      $game_image_src = clanpress_get_game_image( $term->ID );
+      $game_image_src = clanpress_get_game_image( $term->term_id );
       if ( !empty( $game_image_src ) ) {
         array_push( $games, $game_image_src );
       }
