@@ -132,7 +132,7 @@ function clanpress_the_match_squad( $post = null ) {
 }
 
 /**
- * Displays the thumbnail of the matches' opponent(s).
+ * Displays the thumbnail of the matches' squad(s).
  *
  * @param array|string $size
  *   Image size to use. Accepts any valid image size, or an array of width
@@ -173,6 +173,35 @@ function clanpress_the_match_squad_thumbnail( $size = 'post-thumbnail', $post = 
   }
 
   echo implode('', $images);
+}
+
+/**
+ * Displays the url of the matches' opponent(s).
+ *
+ * @param WP_Post $post
+ *   The post.
+ *
+ * @subpackage Theme
+ */
+function clanpress_the_match_squad_url( $post = null ) {
+  $post = isset( $post ) ? $post : get_post();
+
+  $group_links = array();
+  $squad_ids = Clanpress_Match_Post_Type::get_post_value( $post->ID, 'squads', 'squads' );
+  if ( is_array( $squad_ids ) ) {
+    foreach ( $squad_ids as $squad_id => $checked ) {
+      if ( $checked ) {
+        // TODO: This seems to be a pretty bad idea, but you really
+        // have to load the whole group just to get a link.
+        $group = groups_get_group( array( 'group_id' => $squad_id ) );
+        $group_link = bp_get_group_permalink( $group );
+
+        array_push( $group_links, $group_link );
+      }
+    }
+  }
+
+  echo implode('', $group_links);
 }
 
 /**

@@ -16,7 +16,9 @@
         <span class="clanpress_widget__versus">
           <?php clanpress_the_match_squad_thumbnail( 'thumbnail' ); ?>
           vs
-          <?php clanpress_the_match_opponent_thumbnail( 'thumbnail' ); ?>
+          <a href="<?php clanpress_the_match_opponent_url(); ?>">
+            <?php clanpress_the_match_opponent_thumbnail( 'thumbnail' ); ?>
+          </a>
         </span>
         <span class="clanpress_widget__game">
           <?php clanpress_the_match_game_icon(); ?>
