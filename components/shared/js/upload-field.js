@@ -33,10 +33,16 @@
 
         uploader = wp.media(options);
         uploader.on('select', function _onSelect() {
+          let previewUrl;
           let attachment = uploader.state().get('selection').first().toJSON();
-          let previewUrl = attachment.sizes.thumbnail.url
-          $images.html('<img src="' + previewUrl + '" alt="Preview" />');
+          if (attachment.url.substr(-4) === '.svg') {
+            previewUrl = attachment.url;
+          }
+          else {
+            previewUrl = attachment.sizes.thumbnail.url;
+          }
 
+          $images.html('<img src="' + previewUrl + '" alt="Preview" />');
           $field.val(attachment.id);
         });
 
