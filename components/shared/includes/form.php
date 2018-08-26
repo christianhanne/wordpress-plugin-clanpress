@@ -182,7 +182,15 @@ class Clanpress_Form {
    *    True, if value is valid.
    */
   public static function is_valid($element, $value) {
-    $value = trim( strip_tags( $value ) );
+    if ( is_array( $value ) ) {
+      foreach ( $value as $key => $string ) {
+        $value[$key] = trim( strip_tags( $string ) );
+      }
+    }
+    else {
+      $value = trim( strip_tags( $value ) );
+    }
+
     if ( isset( $element['options'] ) ) {
       return isset( $value, $element['options'] );
     }
