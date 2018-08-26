@@ -1,5 +1,11 @@
 # Clanpress - Wordpress Plugin
 
+## Not maintained!
+
+This plugin is no longer maintained. It is currently used as a proof of concept.
+You may use it as a starting point for your own plugin or just take a look at
+it. The plugin is currently in a beta state.
+
 ## Introduction
 
 Clanpress is a full featured clan management plugin. Customers can manage games, squads, manages,
