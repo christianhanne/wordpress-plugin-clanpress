@@ -111,7 +111,7 @@ class Clanpress_Opponent_Taxonomy extends Clanpress_Taxonomy {
   public function admin_table_column( $output, $column, $term_id ) {
     switch ( $column ) {
       case 'link':
-        return clanpress_get_opponent_link( $term_id );
+        return clanpress_get_opponent_url( $term_id );
 
       case 'image':
         return clanpress_get_opponent_image( $term_id, array(
